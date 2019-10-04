@@ -1,7 +1,7 @@
-DSDmodel
-========
+lib
+===
 
 .. toctree::
    :maxdepth: 4
 
-   dsdpy
+   lib
