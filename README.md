@@ -34,7 +34,7 @@ in this documentation.
 
     [Networkx](https://networkx.github.io/) is a Python package for the
     creation, manipulation, and study of the structure, dynamics, and
-    functions of complex networks. This package is used in *dsdpy* for
+    functions of complex networks. This package is used in *lib* for
     output incidence matrix. The installation command with Anaconda is:
 
         conda install -c conda-forge networkx
@@ -42,7 +42,7 @@ in this documentation.
 4.  **Matplotlib**
 
     [Matplotlib](https://matplotlib.org) is a Python 2D plotting
-    library, used in *dsdpy* for visualization of the simulation
+    library, used in *lib* for visualization of the simulation
     results. The installation command with Anaconda is:
 
         conda install -c conda-forge matplotlib
