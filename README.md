@@ -311,5 +311,5 @@ Based on the example input1 :
 
 Based on the example input1
 
-![](simres.png)
+![alt text](https://github.com/ashleylst/DSDPy/blob/master/output/simres_scipy.png)
 
