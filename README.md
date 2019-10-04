@@ -4,9 +4,9 @@ Tutorial
 Prerequisities
 --------------
 
-DSDPy (scripts in *dsdpy* package) is written in
+DSDPy (scripts in *lib* package) is written in
 [Python3](https://www.python.org/download/releases/3.0/). The
-recommended way to install all the packages needed in *dsdpy* is through
+recommended way to install all the packages needed in *lib* is through
 [Anaconda](https://www.continuum.io/downloads). For those who are
 familiar with `pip` installation, note that the required packages can
 also be installed through standard way, but the details are not included
@@ -58,13 +58,13 @@ Start
 -----
 
 The entry point to the analysis of a DSD system is through
-[start\_processor] function. To
-get test inputs for DSDPy, you need to download the res package. After
+[start_processor] function. To
+get test inputs for DSDPy, you need to download the *res* package. After
 that, you can test if the DSDPy works by running the following command
 from a Python interpreter:
 
-    >>> from code import start\_processor as sp
-    >>> sp.start\_processor() 
+    >>> from code import start_processor as sp
+    >>> sp.start_processor() 
     RB: {(2, 0), (0, 3)} 
     R4: {(0, 2), (2, 1)} 
     R3: {(1, 0), (3, 1)} 
