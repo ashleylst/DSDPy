@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dsdpy.species package &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>dsdpy.species package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dsdpy.species.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dsdpy-species-package">
+<h1>dsdpy.species package<a class="headerlink" href="#dsdpy-species-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dsdpy.species.species">
+<span id="dsdpy-species-species-module"></span><h2>dsdpy.species.species module<a class="headerlink" href="#module-dsdpy.species.species" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dsdpy.species.species.Species">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.species.species.</code><code class="sig-name descname">Species</code><span class="sig-paren">(</span><em class="sig-param">nodes</em>, <em class="sig-param">colorset</em>, <em class="sig-param">colormap</em>, <em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Species (DNA Complexes) consists of one or more strands</p>
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.canonicalform">
+<code class="sig-name descname">canonicalform</code><em class="property"> = ''</em><a class="headerlink" href="#dsdpy.species.species.Species.canonicalform" title="Permalink to this definition">¶</a></dt>
+<dd><p>canonical form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.check_pendingbond">
+<em class="property">static </em><code class="sig-name descname">check_pendingbond</code><span class="sig-paren">(</span><em class="sig-param">b</em>, <em class="sig-param">pending</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.check_pendingbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.check_pendingbond" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if b is in pending bonds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>b</strong> – domain</p></li>
+<li><p><strong>pending</strong> – pending bonds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the bond number if b is in pending bond, -1 otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.colormap">
+<code class="sig-name descname">colormap</code><em class="property"> = {}</em><a class="headerlink" href="#dsdpy.species.species.Species.colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>map colors to nodes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.colorset">
+<code class="sig-name descname">colorset</code><em class="property"> = {}</em><a class="headerlink" href="#dsdpy.species.species.Species.colorset" title="Permalink to this definition">¶</a></dt>
+<dd><p>set of colors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.construct_strands">
+<code class="sig-name descname">construct_strands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.construct_strands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.construct_strands" title="Permalink to this definition">¶</a></dt>
+<dd><p>reverse construction of strands: canonical form -&gt; strands</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.derive_canonical_form">
+<code class="sig-name descname">derive_canonical_form</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.derive_canonical_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.derive_canonical_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>derive a canonical form for the species</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strandgraph</strong> – a StrandGraph object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.derive_rootmap">
+<em class="property">static </em><code class="sig-name descname">derive_rootmap</code><span class="sig-paren">(</span><em class="sig-param">nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.derive_rootmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.derive_rootmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.generate_output">
+<code class="sig-name descname">generate_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.generate_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.generate_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>supporting function for txt output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>string of canonical form</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.get_starting_vertex">
+<code class="sig-name descname">get_starting_vertex</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.get_starting_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.get_starting_vertex" title="Permalink to this definition">¶</a></dt>
+<dd><p>find the starting vertex to do derive canonical function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strandgraph</strong> – a StrandGraph object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>starting vertex id(strand id)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.id">
+<code class="sig-name descname">id</code><em class="property"> = -1</em><a class="headerlink" href="#dsdpy.species.species.Species.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>species id</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.nodes">
+<code class="sig-name descname">nodes</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.species.species.Species.nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>strand ids in the species</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.parsingseq">
+<code class="sig-name descname">parsingseq</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.species.species.Species.parsingseq" title="Permalink to this definition">¶</a></dt>
+<dd><p>parsing sequence for deriving canonical form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.prune_starting_vertices">
+<code class="sig-name descname">prune_starting_vertices</code><span class="sig-paren">(</span><em class="sig-param">rootv</em>, <em class="sig-param">prevnodes</em>, <em class="sig-param">nodes</em>, <em class="sig-param">bondgraph</em>, <em class="sig-param">notvisited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.prune_starting_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.prune_starting_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>prune starting vertices (strands) when there are more than one instances of one strand type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootv</strong> – rootmap for nodes (map current nodes to their root nodes)</p></li>
+<li><p><strong>prevnodes</strong> – previous layer of nodes</p></li>
+<li><p><strong>nodes</strong> – current layer of nodes</p></li>
+<li><p><strong>bondgraph</strong> – a BondGraph object</p></li>
+<li><p><strong>notvisited</strong> – list of not visited nodes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>starting vertex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.refresh_for_pruning">
+<em class="property">static </em><code class="sig-name descname">refresh_for_pruning</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">d</em>, <em class="sig-param">n2</em>, <em class="sig-param">c2</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.refresh_for_pruning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.refresh_for_pruning" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.set_id">
+<code class="sig-name descname">set_id</code><span class="sig-paren">(</span><em class="sig-param">id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.set_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.set_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.species.species.Species.strands">
+<code class="sig-name descname">strands</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.species.species.Species.strands" title="Permalink to this definition">¶</a></dt>
+<dd><p>strands</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.species.species.Species.traverse">
+<code class="sig-name descname">traverse</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">curv</em>, <em class="sig-param">q</em>, <em class="sig-param">bondnum</em>, <em class="sig-param">pendingbond</em>, <em class="sig-param">canonical</em>, <em class="sig-param">visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species.html#Species.traverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species.Species.traverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>traverse the strand and produce a canonical form</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strandgraph</strong> – a StrandGraph object</p></li>
+<li><p><strong>curv</strong> – current vertex in strandgraph</p></li>
+<li><p><strong>q</strong> – queue for determining if all nodes in species has been encountered</p></li>
+<li><p><strong>bondnum</strong> – number of bonds</p></li>
+<li><p><strong>pendingbond</strong> – list of bonds (in domain level) that are pending to add</p></li>
+<li><p><strong>canonical</strong> – canonical form</p></li>
+<li><p><strong>visited</strong> – boolean list for visiting vertices in species</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>canonical form for one strand</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.species.species_explore">
+<span id="dsdpy-species-species-explore-module"></span><h2>dsdpy.species.species_explore module<a class="headerlink" href="#module-dsdpy.species.species_explore" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="dsdpy.species.species_explore.bi">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">bi</code><span class="sig-paren">(</span><em class="sig-param">speciescomb</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reactionlist</em>, <em class="sig-param">kinetics</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#bi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.bi" title="Permalink to this definition">¶</a></dt>
+<dd><p>bi-molecule reaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reactionlist</strong> – </p></li>
+<li><p><strong>speciescomb</strong> – combinations of species ids</p></li>
+<li><p><strong>specieslist</strong> – </p></li>
+<li><p><strong>speciesidmap</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>specieslist, speciesidmap</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.check_existence">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">check_existence</code><span class="sig-paren">(</span><em class="sig-param">species</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#check_existence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.check_existence" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the produced species is new in the DSD system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>species</strong> – produced species</p></li>
+<li><p><strong>specieslist</strong> – list of species in the system</p></li>
+<li><p><strong>speciesidmap</strong> – bi-directional map of species id and species canonical form</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>specieslist, speciesidmap</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.check_hidden_prevbond">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">check_hidden_prevbond</code><span class="sig-paren">(</span><em class="sig-param">E</em>, <em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#check_hidden_prevbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.check_hidden_prevbond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.generate_colorinfo">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">generate_colorinfo</code><span class="sig-paren">(</span><em class="sig-param">color</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#generate_colorinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.generate_colorinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate color information based on strand graph’s color</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color</strong> – strand graph’s color</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>colorset: a set of color
+colormap: a map of color to id of the strand</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.generate_multiple_species">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">generate_multiple_species</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reaction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#generate_multiple_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.generate_multiple_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate multiple species (applies when unbinding and migrating)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> – </p></li>
+<li><p><strong>strandgraph</strong> – </p></li>
+<li><p><strong>specieslist</strong> – </p></li>
+<li><p><strong>speciesidmap</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.generate_species">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">generate_species</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reaction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#generate_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.generate_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate a species</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reaction</strong> – </p></li>
+<li><p><strong>strandgraph</strong> – </p></li>
+<li><p><strong>specieslist</strong> – </p></li>
+<li><p><strong>speciesidmap</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>specieslist, speciesidmap</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="dsdpy.species.species_explore.mono">
+<code class="sig-prename descclassname">dsdpy.species.species_explore.</code><code class="sig-name descname">mono</code><span class="sig-paren">(</span><em class="sig-param">species</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reactionlist</em>, <em class="sig-param">kinetics</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/species/species_explore.html#mono"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.species.species_explore.mono" title="Permalink to this definition">¶</a></dt>
+<dd><p>mono-molecule reaction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reactionlist</strong> – </p></li>
+<li><p><strong>species</strong> – </p></li>
+<li><p><strong>specieslist</strong> – </p></li>
+<li><p><strong>speciesidmap</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>specieslist, speciesidmap</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.species">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dsdpy.species" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

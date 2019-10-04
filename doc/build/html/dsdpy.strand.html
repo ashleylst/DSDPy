@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dsdpy.strand package &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>dsdpy.strand package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dsdpy.strand.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dsdpy-strand-package">
+<h1>dsdpy.strand package<a class="headerlink" href="#dsdpy-strand-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-dsdpy.strand.bond">
+<span id="dsdpy-strand-bond-module"></span><h2>dsdpy.strand.bond module<a class="headerlink" href="#module-dsdpy.strand.bond" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dsdpy.strand.bond.Bond">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.bond.</code><code class="sig-name descname">Bond</code><span class="sig-paren">(</span><em class="sig-param">node1</em>, <em class="sig-param">node2</em>, <em class="sig-param">dom</em>, <em class="sig-param">dom2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond.html#Bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond.Bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data structure of bonds between two domains</p>
+<dl class="method">
+<dt id="dsdpy.strand.bond.Bond.appenddom">
+<code class="sig-name descname">appenddom</code><span class="sig-paren">(</span><em class="sig-param">dom</em>, <em class="sig-param">dom2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond.html#Bond.appenddom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond.Bond.appenddom" title="Permalink to this definition">¶</a></dt>
+<dd><p>append domain numbers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dom</strong> – domain number on the start strand</p></li>
+<li><p><strong>dom2</strong> – domain number on the end strand</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond.Bond.dom">
+<code class="sig-name descname">dom</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond.Bond.dom" title="Permalink to this definition">¶</a></dt>
+<dd><p>domain of the startnode</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond.Bond.dom2">
+<code class="sig-name descname">dom2</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond.Bond.dom2" title="Permalink to this definition">¶</a></dt>
+<dd><p>domain of the endnode</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond.Bond.node1">
+<code class="sig-name descname">node1</code><em class="property"> = 0</em><a class="headerlink" href="#dsdpy.strand.bond.Bond.node1" title="Permalink to this definition">¶</a></dt>
+<dd><p>start node</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond.Bond.node2">
+<code class="sig-name descname">node2</code><em class="property"> = 0</em><a class="headerlink" href="#dsdpy.strand.bond.Bond.node2" title="Permalink to this definition">¶</a></dt>
+<dd><p>end node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond.Bond.transform_E">
+<code class="sig-name descname">transform_E</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond.html#Bond.transform_E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond.Bond.transform_E" title="Permalink to this definition">¶</a></dt>
+<dd><p>flatten the edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>edges in list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.strand.bond_graph">
+<span id="dsdpy-strand-bond-graph-module"></span><h2>dsdpy.strand.bond_graph module<a class="headerlink" href="#module-dsdpy.strand.bond_graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dsdpy.strand.bond_graph.BondGraph">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.bond_graph.</code><code class="sig-name descname">BondGraph</code><span class="sig-paren">(</span><em class="sig-param">V</em>, <em class="sig-param">color</em>, <em class="sig-param">E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data structure of the bond graph, undirected graph with loops</p>
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.E">
+<code class="sig-name descname">E</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>edges</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.V">
+<code class="sig-name descname">V</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.V" title="Permalink to this definition">¶</a></dt>
+<dd><p>vertices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.add_edges">
+<code class="sig-name descname">add_edges</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">d1</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.add_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>add edges to the bond graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v1</strong> – strand 1</p></li>
+<li><p><strong>v2</strong> – strand 2</p></li>
+<li><p><strong>d1</strong> – domain 1, corresponds to strand 1</p></li>
+<li><p><strong>d2</strong> – domain 2, corresponds to strand 2</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.adj">
+<code class="sig-name descname">adj</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>adjacency list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.call_spanning">
+<code class="sig-name descname">call_spanning</code><span class="sig-paren">(</span><em class="sig-param">mark</em>, <em class="sig-param">edge</em>, <em class="sig-param">times</em>, <em class="sig-param">depth</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.call_spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.call_spanning" title="Permalink to this definition">¶</a></dt>
+<dd><p>find all spanning trees of the bond graph and store the loops existing in it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mark</strong> – list of boolean numbers of vertices to show if they have been visited</p></li>
+<li><p><strong>edge</strong> – edges of a spanning tree of the bond graph</p></li>
+<li><p><strong>times</strong> – list of integers of vertices indicating the times of spanning() is called</p></li>
+<li><p><strong>depth</strong> – current cycle number of calling spanning()</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.check_bonded">
+<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the node is bonded to another node</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>node</strong> – a domain on a strand</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the domain it binds to if True, otherwise None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.check_in_loop">
+<code class="sig-name descname">check_in_loop</code><span class="sig-paren">(</span><em class="sig-param">startnode</em>, <em class="sig-param">endnode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.check_in_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.check_in_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the two vertices are in the same loop</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>startnode</strong> – start vertex</p></li>
+<li><p><strong>endnode</strong> – end vertex</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if in the same loop, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.check_strand_is_bonded">
+<code class="sig-name descname">check_strand_is_bonded</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.check_strand_is_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.check_strand_is_bonded" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the strand is bonded</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> – strand</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>domains on strand that is bonded</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.color">
+<code class="sig-name descname">color</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>inherit from StrandGraph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.create_bond">
+<code class="sig-name descname">create_bond</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">d1</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.create_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.create_bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>create bond</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v1</strong> – the strand to be examined</p></li>
+<li><p><strong>v2</strong> – the target strand to check</p></li>
+<li><p><strong>d1</strong> – the domain position on the examining strand of the bond</p></li>
+<li><p><strong>d2</strong> – the domain position on the target strand of the bond</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.find_loops">
+<code class="sig-name descname">find_loops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.find_loops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.find_loops" title="Permalink to this definition">¶</a></dt>
+<dd><p>find loops in the bond graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.get_bond">
+<code class="sig-name descname">get_bond</code><span class="sig-paren">(</span><em class="sig-param">startstrand</em>, <em class="sig-param">endstrand</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.get_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.get_bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the bond between the two vertices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>startstrand</strong> – start strand</p></li>
+<li><p><strong>endstrand</strong> – end strand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>get the bond between two strands</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.get_connection">
+<code class="sig-name descname">get_connection</code><span class="sig-paren">(</span><em class="sig-param">startnode</em>, <em class="sig-param">endstrand</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.get_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.get_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>get connection nodes from the startnode to the endstrand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>startnode</strong> – starting node</p></li>
+<li><p><strong>endstrand</strong> – end strand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path from startnode to end strand</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.get_species">
+<code class="sig-name descname">get_species</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.get_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.get_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all species in one bondgraph</p>
+<p>:return:all species</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.hidden">
+<code class="sig-name descname">hidden</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>hidden domains of strands</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.loop">
+<code class="sig-name descname">loop</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>loops in the graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes">
+<code class="sig-name descname">merge_bonds_ignoring_nodes</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.merge_bonds_ignoring_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>merge bonds on v ignoring bonds connected to nodes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – a strand</p></li>
+<li><p><strong>nodes</strong> – a set of strands</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bonds</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.search_path">
+<code class="sig-name descname">search_path</code><span class="sig-paren">(</span><em class="sig-param">startstrand</em>, <em class="sig-param">stack</em>, <em class="sig-param">endstrand</em>, <em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.search_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.search_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>search a path from the start node to the end node in the spanning tree</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.spanning">
+<code class="sig-name descname">spanning</code><span class="sig-paren">(</span><em class="sig-param">mark</em>, <em class="sig-param">edge</em>, <em class="sig-param">startstrand</em>, <em class="sig-param">times</em>, <em class="sig-param">depth</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.spanning" title="Permalink to this definition">¶</a></dt>
+<dd><p>building a spanning tree of the bond graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mark</strong> – list of boolean numbers of vertices to show if they have been visited</p></li>
+<li><p><strong>edge</strong> – edges of a spanning tree of the bond graph</p></li>
+<li><p><strong>startstrand</strong> – starting strand to find spanning tree</p></li>
+<li><p><strong>times</strong> – list of integers of vertices indicating the times of this function is called</p></li>
+<li><p><strong>depth</strong> – current cycle number of calling this function</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.species">
+<code class="sig-name descname">species</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.species" title="Permalink to this definition">¶</a></dt>
+<dd><p>species of the graph</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.BondGraph.speciesnum">
+<code class="sig-name descname">speciesnum</code><em class="property"> = 0</em><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.speciesnum" title="Permalink to this definition">¶</a></dt>
+<dd><p>species number</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.BondGraph.store_hidden">
+<code class="sig-name descname">store_hidden</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#BondGraph.store_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.BondGraph.store_hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>store all the hidden domains in hidden[]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.bond_graph.</code><code class="sig-name descname">SubBondGraph</code><span class="sig-paren">(</span><em class="sig-param">V</em>, <em class="sig-param">color</em>, <em class="sig-param">adj</em>, <em class="sig-param">Vp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#SubBondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dsdpy.strand.bond_graph.BondGraph" title="dsdpy.strand.bond_graph.BondGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">dsdpy.strand.bond_graph.BondGraph</span></code></a></p>
+<p>Subgraph of bondgraph</p>
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph.Vsub">
+<code class="sig-name descname">Vsub</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph.Vsub" title="Permalink to this definition">¶</a></dt>
+<dd><p>vertices</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph.adj">
+<code class="sig-name descname">adj</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph.adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>adjacency list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph.colormap">
+<code class="sig-name descname">colormap</code><em class="property"> = {}</em><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph.colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>map colors to vertices</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph.colorset">
+<code class="sig-name descname">colorset</code><em class="property"> = {}</em><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph.colorset" title="Permalink to this definition">¶</a></dt>
+<dd><p>set of colors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.bond_graph.SubBondGraph.map_colors">
+<code class="sig-name descname">map_colors</code><span class="sig-paren">(</span><em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/bond_graph.html#SubBondGraph.map_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.bond_graph.SubBondGraph.map_colors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.strand.strand">
+<span id="dsdpy-strand-strand-module"></span><h2>dsdpy.strand.strand module<a class="headerlink" href="#module-dsdpy.strand.strand" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dsdpy.strand.strand.Domain">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.strand.</code><code class="sig-name descname">Domain</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">toehold</em>, <em class="sig-param">comp</em>, <em class="sig-param">bond</em>, <em class="sig-param">bondname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data structure of the domain</p>
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Domain.bond">
+<code class="sig-name descname">bond</code><em class="property"> = False</em><a class="headerlink" href="#dsdpy.strand.strand.Domain.bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>boolean variable indicating if the domain is bonded</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Domain.bondname">
+<code class="sig-name descname">bondname</code><em class="property"> = ''</em><a class="headerlink" href="#dsdpy.strand.strand.Domain.bondname" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the bond, empty if not bonded</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand.Domain.check_same_domain">
+<code class="sig-name descname">check_same_domain</code><span class="sig-paren">(</span><em class="sig-param">domain1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Domain.check_same_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Domain.check_same_domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if domain1 is equivalent to the current domain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>domain1</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if equivalent, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Domain.comp">
+<code class="sig-name descname">comp</code><em class="property"> = False</em><a class="headerlink" href="#dsdpy.strand.strand.Domain.comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>boolean variable indicating if the domain is a complementary domain to some other domain</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Domain.name">
+<code class="sig-name descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#dsdpy.strand.strand.Domain.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name of the domain</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand.Domain.set_bond">
+<code class="sig-name descname">set_bond</code><span class="sig-paren">(</span><em class="sig-param">bondname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Domain.set_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Domain.set_bond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Domain.toehold">
+<code class="sig-name descname">toehold</code><em class="property"> = False</em><a class="headerlink" href="#dsdpy.strand.strand.Domain.toehold" title="Permalink to this definition">¶</a></dt>
+<dd><p>boolean variable indicating if the domain is a toehold</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dsdpy.strand.strand.Strand">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.strand.</code><code class="sig-name descname">Strand</code><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Strand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Strand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data structure of the strand</p>
+<dl class="method">
+<dt id="dsdpy.strand.strand.Strand.add_color">
+<code class="sig-name descname">add_color</code><span class="sig-paren">(</span><em class="sig-param">color</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Strand.add_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Strand.add_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand.Strand.add_domain">
+<code class="sig-name descname">add_domain</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Strand.add_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Strand.add_domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand.Strand.check_same_strand">
+<code class="sig-name descname">check_same_strand</code><span class="sig-paren">(</span><em class="sig-param">strand1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand.html#Strand.check_same_strand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand.Strand.check_same_strand" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if strand1 is equivalent to the current strand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strand1</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if equivalent, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Strand.color">
+<code class="sig-name descname">color</code><em class="property"> = 0</em><a class="headerlink" href="#dsdpy.strand.strand.Strand.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>color of the strand</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand.Strand.domains">
+<code class="sig-name descname">domains</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand.Strand.domains" title="Permalink to this definition">¶</a></dt>
+<dd><p>domains of the strand</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.strand.strand_graph">
+<span id="dsdpy-strand-strand-graph-module"></span><h2>dsdpy.strand.strand_graph module<a class="headerlink" href="#module-dsdpy.strand.strand_graph" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="dsdpy.strand.strand_graph.StrandGraph">
+<em class="property">class </em><code class="sig-prename descclassname">dsdpy.strand.strand_graph.</code><code class="sig-name descname">StrandGraph</code><span class="sig-paren">(</span><em class="sig-param">strands</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data structure of the strand graph</p>
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.A">
+<code class="sig-name descname">A</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.A" title="Permalink to this definition">¶</a></dt>
+<dd><p>admissible edges, edges that bonds can exist in</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.E">
+<code class="sig-name descname">E</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>actual edges, edges that already exist</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.V">
+<code class="sig-name descname">V</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.V" title="Permalink to this definition">¶</a></dt>
+<dd><p>vertices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.anchored">
+<code class="sig-name descname">anchored</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.anchored"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.anchored" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if e is anchored</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> – an edge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if anchored, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.anti_parallel">
+<code class="sig-name descname">anti_parallel</code><span class="sig-paren">(</span><em class="sig-param">node1</em>, <em class="sig-param">node2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.anti_parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.anti_parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the bond satisfies the anti-parallel schema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node1</strong> – </p></li>
+<li><p><strong>node2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if satisfy, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.available">
+<code class="sig-name descname">available</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.available"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.available" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if a binding is available for binding</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> – a bond</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if available, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.bondgraph">
+<code class="sig-name descname">bondgraph</code><em class="property"> = None</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.bondgraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>bond graph derived from this graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.build_bond_graph">
+<code class="sig-name descname">build_bond_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.build_bond_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.build_bond_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>build bond graph for the strand graph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_bonded">
+<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param">strand1</em>, <em class="sig-param">strand2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if strand1 is bonded to strand2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strand1</strong> – </p></li>
+<li><p><strong>strand2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bonded domains in format [{(strand1, dom1), (strand2, dom2)}, …]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_candidate">
+<code class="sig-name descname">check_candidate</code><span class="sig-paren">(</span><em class="sig-param">e1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_candidate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_candidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if e1 is a candidate for rule migration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e1</strong> – an admissible edge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_complementary">
+<code class="sig-name descname">check_complementary</code><span class="sig-paren">(</span><em class="sig-param">domain1</em>, <em class="sig-param">domain2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_complementary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_complementary" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain1</strong> – </p></li>
+<li><p><strong>domain2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_hidden_all">
+<code class="sig-name descname">check_hidden_all</code><span class="sig-paren">(</span><em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_hidden_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_hidden_all" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>edge</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_switchable">
+<code class="sig-name descname">check_switchable</code><span class="sig-paren">(</span><em class="sig-param">notbond</em>, <em class="sig-param">tbr</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_switchable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_switchable" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if it is possible to do 3-way migration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>notbond</strong> – notbond domain</p></li>
+<li><p><strong>r</strong> – replace domain</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if possible, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_switchable_2">
+<code class="sig-name descname">check_switchable_2</code><span class="sig-paren">(</span><em class="sig-param">r1</em>, <em class="sig-param">tbr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_switchable_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_switchable_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if it is possible for 4-way migration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r1</strong> – replacing bond</p></li>
+<li><p><strong>tbr</strong> – bond to be replaced</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if possible, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.check_toehold">
+<code class="sig-name descname">check_toehold</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.check_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.check_toehold" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the binding domains are toehold domains</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> – a bond</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if are toehold domains, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.color">
+<code class="sig-name descname">color</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>strand type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.delete_edge">
+<code class="sig-name descname">delete_edge</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">prevE</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.delete_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.delete_edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.delete_edges_regarding_v">
+<code class="sig-name descname">delete_edges_regarding_v</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">prevE</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.delete_edges_regarding_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.delete_edges_regarding_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete a vertex v and all edges link to it in strandgraph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>prevE</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.delete_vertex">
+<code class="sig-name descname">delete_vertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.delete_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.delete_vertex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.get_connect_toehold">
+<code class="sig-name descname">get_connect_toehold</code><span class="sig-paren">(</span><em class="sig-param">edge</em>, <em class="sig-param">notbond</em>, <em class="sig-param">potbondto</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.get_connect_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.get_connect_toehold" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e3</strong> – </p></li>
+<li><p><strong>edge</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.get_domain_comp">
+<code class="sig-name descname">get_domain_comp</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.get_domain_comp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.get_domain_comp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.get_domain_obj">
+<code class="sig-name descname">get_domain_obj</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.get_domain_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.get_domain_obj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>domain</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.hidden">
+<code class="sig-name descname">hidden</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.hidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if domains in the bond are hidden in a cycle of strands</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> – bond</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if hidden, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.length">
+<code class="sig-name descname">length</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>length of the vertices (in length of domains)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.reconstruct">
+<code class="sig-name descname">reconstruct</code><span class="sig-paren">(</span><em class="sig-param">E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.reconstruct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.reconstruct" title="Permalink to this definition">¶</a></dt>
+<dd><p>reconstruct the graph using the set of edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>E</strong> – edges</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.same_species">
+<code class="sig-name descname">same_species</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dsdpy/strand/strand_graph.html#StrandGraph.same_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.same_species" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the edge is from the same species</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> – edge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if it is, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.strands">
+<code class="sig-name descname">strands</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.strands" title="Permalink to this definition">¶</a></dt>
+<dd><p>strands in this graph</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dsdpy.strand.strand_graph.StrandGraph.toehold">
+<code class="sig-name descname">toehold</code><em class="property"> = []</em><a class="headerlink" href="#dsdpy.strand.strand_graph.StrandGraph.toehold" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list of dictionaries to store if toehold exist in an edge</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-dsdpy.strand">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dsdpy.strand" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

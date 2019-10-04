@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dsdpy.strand.bond_graph &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>dsdpy.strand.bond_graph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for dsdpy.strand.bond_graph</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dsdpy.strand</span> <span class="k">import</span> <span class="n">bond</span>
+<span class="kn">import</span> <span class="nn">queue</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
+
+<div class="viewcode-block" id="BondGraph"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph">[docs]</a><span class="k">class</span> <span class="nc">BondGraph</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Data structure of the bond graph, undirected graph with loops</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">V</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;vertices&#39;&#39;&#39;</span>
+
+    <span class="n">E</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;edges&#39;&#39;&#39;</span>
+
+    <span class="n">adj</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;adjacency list&#39;&#39;&#39;</span>
+
+    <span class="n">hidden</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;hidden domains of strands&#39;&#39;&#39;</span>
+
+    <span class="n">loop</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;loops in the graph&#39;&#39;&#39;</span>
+
+    <span class="n">species</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;species of the graph&#39;&#39;&#39;</span>
+
+    <span class="n">speciesnum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&#39;&#39;&#39;species number&#39;&#39;&#39;</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;inherit from StrandGraph&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">E</span> <span class="o">=</span> <span class="n">E</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="BondGraph.create_bond"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.create_bond">[docs]</a>    <span class="k">def</span> <span class="nf">create_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create bond</span>
+
+<span class="sd">        :param v1: the strand to be examined</span>
+<span class="sd">        :param v2: the target strand to check</span>
+<span class="sd">        :param d1: the domain position on the examining strand of the bond</span>
+<span class="sd">        :param d2: the domain position on the target strand of the bond</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v1</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v1</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">v2</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">:</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">break</span>
+            <span class="c1"># if there are bonds between two strands</span>
+            <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">i</span><span class="o">.</span><span class="n">appenddom</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+            <span class="c1"># new bond</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">Bond</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="p">[</span><span class="n">d1</span><span class="p">],</span> <span class="p">[</span><span class="n">d2</span><span class="p">]))</span>
+        <span class="c1"># new bond</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">Bond</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="p">[</span><span class="n">d1</span><span class="p">],</span> <span class="p">[</span><span class="n">d2</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="BondGraph.add_edges"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.add_edges">[docs]</a>    <span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add edges to the bond graph</span>
+
+<span class="sd">        :param v1: strand 1</span>
+<span class="sd">        :param v2: strand 2</span>
+<span class="sd">        :param d1: domain 1, corresponds to strand 1</span>
+<span class="sd">        :param d2: domain 2, corresponds to strand 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_bond</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_bond</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span></div>
+        <span class="c1">#self.map_colors({(v1, d1), (v2, d2)})</span>
+
+<div class="viewcode-block" id="BondGraph.check_in_loop"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.check_in_loop">[docs]</a>    <span class="k">def</span> <span class="nf">check_in_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startnode</span><span class="p">,</span> <span class="n">endnode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the two vertices are in the same loop</span>
+
+<span class="sd">        :param startnode: start vertex</span>
+<span class="sd">        :param endnode: end vertex</span>
+<span class="sd">        :return: True if in the same loop, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">startnode</span> <span class="ow">in</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">endnode</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="BondGraph.get_bond"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.get_bond">[docs]</a>    <span class="k">def</span> <span class="nf">get_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startstrand</span><span class="p">,</span> <span class="n">endstrand</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get the bond between the two vertices</span>
+
+<span class="sd">        :param startstrand: start strand</span>
+<span class="sd">        :param endstrand: end strand</span>
+<span class="sd">        :return: get the bond between two strands</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">startstrand</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">node2</span> <span class="o">==</span> <span class="n">endstrand</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span></div>
+
+<div class="viewcode-block" id="BondGraph.search_path"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.search_path">[docs]</a>    <span class="k">def</span> <span class="nf">search_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startstrand</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">endstrand</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        search a path from the start node to the end node in the spanning tree</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">startstrand</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">endstrand</span> <span class="o">==</span> <span class="n">stack</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">startstrand</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">edge</span> <span class="ow">and</span> <span class="n">bond</span><span class="o">.</span><span class="n">node2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stack</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_path</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">endstrand</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="BondGraph.spanning"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.spanning">[docs]</a>    <span class="k">def</span> <span class="nf">spanning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">startstrand</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        building a spanning tree of the bond graph</span>
+
+<span class="sd">        :param mark: list of boolean numbers of vertices to show if they have been visited</span>
+<span class="sd">        :param edge: edges of a spanning tree of the bond graph</span>
+<span class="sd">        :param startstrand: starting strand to find spanning tree</span>
+<span class="sd">        :param times: list of integers of vertices indicating the times of this function is called</span>
+<span class="sd">        :param depth: current cycle number of calling this function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">startstrand</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">mark</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">edge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">node2</span> <span class="o">==</span> <span class="n">bond</span><span class="o">.</span><span class="n">node1</span><span class="p">:</span>
+                        <span class="n">edge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                        <span class="k">continue</span>
+                <span class="n">mark</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">times</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">]</span> <span class="o">=</span> <span class="n">depth</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">spanning</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BondGraph.call_spanning"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.call_spanning">[docs]</a>    <span class="k">def</span> <span class="nf">call_spanning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mark</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find all spanning trees of the bond graph and store the loops existing in it</span>
+
+<span class="sd">        :param mark: list of boolean numbers of vertices to show if they have been visited</span>
+<span class="sd">        :param edge: edges of a spanning tree of the bond graph</span>
+<span class="sd">        :param times: list of integers of vertices indicating the times of spanning() is called</span>
+<span class="sd">        :param depth: current cycle number of calling spanning()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">depth</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">spanning</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">mark</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">and</span> <span class="n">times</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">depth</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">mark</span><span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">]:</span>
+                                <span class="k">if</span> <span class="n">bond</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+                                    <span class="c1"># there is a loop</span>
+                                    <span class="c1"># no need to store the loop in cycle if the loop is already found</span>
+                                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_in_loop</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">):</span>
+                                        <span class="k">continue</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">search_path</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">[],</span> <span class="n">bond</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span>
+                <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speciesnum</span> <span class="o">=</span> <span class="n">depth</span></div>
+
+<div class="viewcode-block" id="BondGraph.find_loops"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.find_loops">[docs]</a>    <span class="k">def</span> <span class="nf">find_loops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find loops in the bond graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mark</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">]</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">]</span>
+        <span class="c1"># find loops in bond graph and store them in cycle[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call_spanning</span><span class="p">(</span><span class="n">mark</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BondGraph.store_hidden"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.store_hidden">[docs]</a>    <span class="k">def</span> <span class="nf">store_hidden</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        store all the hidden domains in hidden[]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">:</span>
+            <span class="c1"># the case of harpin loop and the case multiple bonds exist between two strands</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">node2</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">node1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">minn</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+                    <span class="n">maxn</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxn</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">b</span><span class="o">.</span><span class="n">node1</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">:</span>
+            <span class="n">loopedge</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+                    <span class="n">loopedge</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_bond</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="p">)):</span>
+                <span class="n">minn</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">loopedge</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+                <span class="n">maxn</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">loopedge</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">minn</span> <span class="o">&gt;</span> <span class="n">maxn</span><span class="p">:</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">minn</span>
+                    <span class="n">minn</span> <span class="o">=</span> <span class="n">maxn</span>
+                    <span class="n">maxn</span> <span class="o">=</span> <span class="n">b</span>
+
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxn</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">loopedge</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">node1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">loopedge</span><span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">node1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="BondGraph.check_bonded"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.check_bonded">[docs]</a>    <span class="k">def</span> <span class="nf">check_bonded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the node is bonded to another node</span>
+
+<span class="sd">        :param node: a domain on a strand</span>
+<span class="sd">        :return: the domain it binds to if True, otherwise None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">dom2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="BondGraph.check_strand_is_bonded"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.check_strand_is_bonded">[docs]</a>    <span class="k">def</span> <span class="nf">check_strand_is_bonded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the strand is bonded</span>
+
+<span class="sd">        :param v: strand</span>
+<span class="sd">        :return: domains on strand that is bonded</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bonddomains</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="n">bonddomains</span> <span class="o">+=</span> <span class="n">i</span><span class="o">.</span><span class="n">dom</span>
+        <span class="k">return</span> <span class="n">bonddomains</span></div>
+
+<div class="viewcode-block" id="BondGraph.get_species"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.get_species">[docs]</a>    <span class="k">def</span> <span class="nf">get_species</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get all species in one bondgraph</span>
+
+<span class="sd">        :return:all species</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">speciesnodes</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">speciesnum</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">)):</span>
+            <span class="n">speciesnodes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">species</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">speciesnodes</span></div>
+
+<div class="viewcode-block" id="BondGraph.get_connection"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.get_connection">[docs]</a>    <span class="k">def</span> <span class="nf">get_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">startnode</span><span class="p">,</span> <span class="n">endstrand</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get connection nodes from the startnode to the endstrand</span>
+
+<span class="sd">        :param startnode: starting node</span>
+<span class="sd">        :param endstrand: end strand</span>
+<span class="sd">        :return: path from startnode to end strand</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">]</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">connect</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">startnode</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="n">curstrand</span><span class="p">,</span> <span class="n">curdomain</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">curstrand</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">if</span> <span class="n">curstrand</span> <span class="o">==</span> <span class="n">endstrand</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">curstrand</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">]:</span>
+                    <span class="n">d2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom2</span><span class="p">)</span>
+                    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">d2</span><span class="p">))</span>
+                    <span class="n">prev</span><span class="p">[(</span><span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">d2</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">curstrand</span><span class="p">,</span> <span class="n">curdomain</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">curstrand</span><span class="p">,</span> <span class="n">curdomain</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">prev</span><span class="p">:</span>
+            <span class="n">connect</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">connect</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">connect</span></div>
+
+<div class="viewcode-block" id="BondGraph.merge_bonds_ignoring_nodes"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">merge_bonds_ignoring_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">nodes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        merge bonds on v ignoring bonds connected to nodes</span>
+
+<span class="sd">        :param v: a strand</span>
+<span class="sd">        :param nodes: a set of strands</span>
+<span class="sd">        :return: bonds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+        <span class="n">bonds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">node2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                    <span class="n">bonds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bonds</span></div></div>
+
+
+<div class="viewcode-block" id="SubBondGraph"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.SubBondGraph">[docs]</a><span class="k">class</span> <span class="nc">SubBondGraph</span><span class="p">(</span><span class="n">BondGraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subgraph of bondgraph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Vsub</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;vertices&#39;&#39;&#39;</span>
+
+    <span class="n">adj</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;adjacency list&#39;&#39;&#39;</span>
+
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+    <span class="sd">&#39;&#39;&#39;map colors to vertices&#39;&#39;&#39;</span>
+
+    <span class="n">colorset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="sd">&#39;&#39;&#39;set of colors&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="n">Vp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Vsub</span> <span class="o">=</span> <span class="n">V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+        <span class="n">BondGraph</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vp</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Vsub</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Vsub</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Vsub</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">Vsub</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
+
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">V</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">visited</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Vp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">])):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">node2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">node2</span><span class="p">]:</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">map_colors</span><span class="p">({(</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dom</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">dom2</span><span class="p">[</span><span class="mi">0</span><span class="p">])})</span>
+                        <span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="SubBondGraph.map_colors"><a class="viewcode-back" href="../../../dsdpy.strand.html#dsdpy.strand.bond_graph.SubBondGraph.map_colors">[docs]</a>    <span class="k">def</span> <span class="nf">map_colors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
