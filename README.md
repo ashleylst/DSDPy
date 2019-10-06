@@ -4,9 +4,9 @@ Tutorial
 Prerequisities
 --------------
 
-DSDPy (scripts in *lib* package) is written in
+DSDPy (scripts in *src* package) is written in
 [Python3](https://www.python.org/download/releases/3.0/). The
-recommended way to install all the packages needed in *lib* is through
+recommended way to install all the packages needed in *src* is through
 [Anaconda](https://www.continuum.io/downloads). For those who are
 familiar with `pip` installation, note that the required packages can
 also be installed through standard way, but the details are not included
@@ -34,7 +34,7 @@ in this documentation.
 
     [Networkx](https://networkx.github.io/) is a Python package for the
     creation, manipulation, and study of the structure, dynamics, and
-    functions of complex networks. This package is used in *lib* for
+    functions of complex networks. This package is used in *src* for
     output incidence matrix. The installation command with Anaconda is:
 
         conda install -c conda-forge networkx
@@ -42,14 +42,14 @@ in this documentation.
 4.  **Matplotlib**
 
     [Matplotlib](https://matplotlib.org) is a Python 2D plotting
-    library, used in *lib* for visualization of the simulation
+    library, used in *src* for visualization of the simulation
     results. The installation command with Anaconda is:
 
         conda install -c conda-forge matplotlib
 
 ### Installation
 
-The core is a Python package (*lib*) that includes scripts to run
+The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
 required packages above have been installed to the current Python
 environment.
