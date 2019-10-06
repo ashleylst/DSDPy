@@ -313,5 +313,5 @@ Based on the example input1 :
 
 Based on the example input1
 
-![alt text](https://github.com/ashleylst/DSDPy/blob/master/output/simres_scipy.png)
+![alt text](https://github.com/ashleylst/DSDPy/blob/master/output/simres.png)
 
