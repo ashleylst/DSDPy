@@ -1,4 +1,11 @@
-Tutorial
+DSDPy
+======
+
+DSDPy is a processor for DNA strand displacement systems. DSDPy generates the whole reaction network given the initial species and supports the simulation of such reaction network.
+
+The full documentation of DSDPy can be found at https://dsdpy.readthedocs.io/en/latest/.
+
+Quick Start
 ========
 
 Prerequisities
