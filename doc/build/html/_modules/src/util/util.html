@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>src.util.util &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>src.util.util</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for src.util.util</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+
+<div class="viewcode-block" id="get_reverse"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_reverse">[docs]</a><span class="k">def</span> <span class="nf">get_reverse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="get_edge_info"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_edge_info">[docs]</a><span class="k">def</span> <span class="nf">get_edge_info</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span></div>
+
+
+<div class="viewcode-block" id="sort_e_by_domain"><a class="viewcode-back" href="../../../src.util.html#src.util.util.sort_e_by_domain">[docs]</a><span class="k">def</span> <span class="nf">sort_e_by_domain</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="sort_by_strand"><a class="viewcode-back" href="../../../src.util.html#src.util.util.sort_by_strand">[docs]</a><span class="k">def</span> <span class="nf">sort_by_strand</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="check_edge_in_tuplelist"><a class="viewcode-back" href="../../../src.util.html#src.util.util.check_edge_in_tuplelist">[docs]</a><span class="k">def</span> <span class="nf">check_edge_in_tuplelist</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">tpl</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tpl</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="compare"><a class="viewcode-back" href="../../../src.util.html#src.util.util.compare">[docs]</a><span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_free_domains"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_free_domains">[docs]</a><span class="k">def</span> <span class="nf">get_free_domains</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span>
+    <span class="n">interval</span> <span class="o">=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">bound</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">interval</span><span class="p">:</span>
+                <span class="n">interval</span> <span class="o">=</span> <span class="n">tmp</span>
+    <span class="k">return</span> <span class="n">interval</span></div>
+
+
+<div class="viewcode-block" id="get_combinations"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_combinations">[docs]</a><span class="k">def</span> <span class="nf">get_combinations</span><span class="p">(</span><span class="n">oldlen</span><span class="p">,</span> <span class="n">newlen</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">indexlist</span><span class="p">):</span>
+    <span class="n">combold</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">indexlist</span><span class="p">[</span><span class="n">cursor</span><span class="p">:</span><span class="n">oldlen</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">combself</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oldlen</span><span class="p">)]</span>
+    <span class="n">combnew</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">oldlen</span> <span class="o">!=</span> <span class="n">newlen</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">oldlen</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">oldlen</span><span class="p">,</span> <span class="n">newlen</span><span class="p">):</span>
+                <span class="n">combnew</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">combold</span> <span class="o">+</span> <span class="n">combnew</span> <span class="o">+</span> <span class="n">combself</span></div>
+
+
+<div class="viewcode-block" id="check_following_migration"><a class="viewcode-back" href="../../../src.util.html#src.util.util.check_following_migration">[docs]</a><span class="k">def</span> <span class="nf">check_following_migration</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param e:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]</span>
+    <span class="n">miggroup</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">miggroup</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">t2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="k">continue</span>
+                <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">miggroup</span><span class="p">[</span><span class="n">cnt</span><span class="p">])):</span>
+                    <span class="n">t1</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">miggroup</span><span class="p">[</span><span class="n">cnt</span><span class="p">][</span><span class="n">num</span><span class="p">]][</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> \
+                            <span class="ow">or</span> <span class="p">(</span><span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">miggroup</span><span class="p">[</span><span class="n">cnt</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                        <span class="k">break</span>
+    <span class="k">return</span> <span class="n">miggroup</span></div>
+
+
+<div class="viewcode-block" id="get_absdist"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_absdist">[docs]</a><span class="k">def</span> <span class="nf">get_absdist</span><span class="p">(</span><span class="n">domain1</span><span class="p">,</span> <span class="n">domain2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param domain1:</span>
+<span class="sd">    :param domain2:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">domain1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">domain2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="get_closet_domain_to_target"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_closet_domain_to_target">[docs]</a><span class="k">def</span> <span class="nf">get_closet_domain_to_target</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">domains</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param target:</span>
+<span class="sd">    :param domains:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">closet</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">closetd</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">:</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">get_absdist</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">closet</span><span class="p">:</span>
+            <span class="n">closet</span> <span class="o">=</span> <span class="n">dist</span>
+            <span class="n">closetd</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">closetd</span></div>
+
+
+<div class="viewcode-block" id="get_domains_on_2sides"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_domains_on_2sides">[docs]</a><span class="k">def</span> <span class="nf">get_domains_on_2sides</span><span class="p">(</span><span class="n">target1</span><span class="p">,</span> <span class="n">target2</span><span class="p">,</span> <span class="n">domains1</span><span class="p">,</span> <span class="n">domains2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param target1:</span>
+<span class="sd">    :param target2:</span>
+<span class="sd">    :param domains1:</span>
+<span class="sd">    :param domains2:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">target1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">domains1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">closetd1</span> <span class="o">=</span> <span class="n">get_closet_domain_to_target</span><span class="p">(</span><span class="n">target1</span><span class="p">,</span> <span class="n">domains1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">target2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">domains1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">closetd1</span> <span class="o">=</span> <span class="n">get_closet_domain_to_target</span><span class="p">(</span><span class="n">target2</span><span class="p">,</span> <span class="n">domains1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">target1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">domains2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">closetd2</span> <span class="o">=</span> <span class="n">get_closet_domain_to_target</span><span class="p">(</span><span class="n">target1</span><span class="p">,</span> <span class="n">domains2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">target2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">domains2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">closetd2</span> <span class="o">=</span> <span class="n">get_closet_domain_to_target</span><span class="p">(</span><span class="n">target2</span><span class="p">,</span> <span class="n">domains2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">closetd1</span><span class="p">,</span> <span class="n">closetd2</span></div>
+
+
+<div class="viewcode-block" id="get_closest_target"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_closest_target">[docs]</a><span class="k">def</span> <span class="nf">get_closest_target</span><span class="p">(</span><span class="n">domains</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">domains</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">domains</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">tup</span><span class="p">:</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">mindist</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">mint</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">get_absdist</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">domains</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">get_absdist</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">domains</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">domains</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">mindist</span><span class="p">:</span>
+            <span class="n">mint</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">mint</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

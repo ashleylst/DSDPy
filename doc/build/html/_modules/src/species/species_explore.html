@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>src.species.species_explore &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>src.species.species_explore</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for src.species.species_explore</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">src.strand</span> <span class="k">import</span> <span class="n">strand_graph</span> <span class="k">as</span> <span class="n">sg</span><span class="p">,</span> <span class="n">bond_graph</span> <span class="k">as</span> <span class="n">bg</span>
+<span class="kn">from</span> <span class="nn">src.basics</span> <span class="k">import</span> <span class="n">check_rules</span> <span class="k">as</span> <span class="n">cr</span>
+<span class="kn">from</span> <span class="nn">src.species</span> <span class="k">import</span> <span class="n">species</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="kn">from</span> <span class="nn">src.util</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">src.reaction</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">ra</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+
+<div class="viewcode-block" id="check_existence"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.check_existence">[docs]</a><span class="k">def</span> <span class="nf">check_existence</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    check if the produced species is new in the DSD system</span>
+
+<span class="sd">    :param species: produced species</span>
+<span class="sd">    :param specieslist: list of species in the system</span>
+<span class="sd">    :param speciesidmap: bi-directional map of species id and species canonical form</span>
+<span class="sd">    :return: specieslist, speciesidmap</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">speciesidmap</span><span class="o">.</span><span class="n">inverse</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="n">species</span><span class="o">.</span><span class="n">canonicalform</span><span class="p">):</span>
+        <span class="n">species</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">specieslist</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">specieslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+        <span class="n">speciesidmap</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">species</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">species</span><span class="o">.</span><span class="n">canonicalform</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">species</span><span class="o">.</span><span class="n">id</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">speciesidmap</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">canonicalform</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">pos</span></div>
+
+
+<div class="viewcode-block" id="generate_colorinfo"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.generate_colorinfo">[docs]</a><span class="k">def</span> <span class="nf">generate_colorinfo</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate color information based on strand graph&#39;s color</span>
+
+<span class="sd">    :param color: strand graph&#39;s color</span>
+<span class="sd">    :return: colorset: a set of color</span>
+<span class="sd">             colormap: a map of color to id of the strand</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">colorset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">color</span><span class="p">)):</span>
+        <span class="n">colorset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">colormap</span><span class="p">[</span><span class="n">color</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span></div>
+
+
+<div class="viewcode-block" id="generate_species"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.generate_species">[docs]</a><span class="k">def</span> <span class="nf">generate_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate a species</span>
+
+<span class="sd">    :param reaction:</span>
+<span class="sd">    :param strandgraph:</span>
+<span class="sd">    :param specieslist:</span>
+<span class="sd">    :param speciesidmap:</span>
+<span class="sd">    :return: specieslist, speciesidmap</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span> <span class="o">=</span> <span class="n">generate_colorinfo</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">newspecies</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">,</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">)</span>
+    <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">check_existence</span><span class="p">(</span><span class="n">newspecies</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">)</span>
+    <span class="n">reaction</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="n">specieslist</span><span class="p">[</span><span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span></div>
+
+
+<div class="viewcode-block" id="generate_multiple_species"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.generate_multiple_species">[docs]</a><span class="k">def</span> <span class="nf">generate_multiple_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate multiple species (applies when unbinding and migrating)</span>
+
+<span class="sd">    :param reaction:</span>
+<span class="sd">    :param strandgraph:</span>
+<span class="sd">    :param specieslist:</span>
+<span class="sd">    :param speciesidmap:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">speciesnum</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">speciesnodes</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">get_species</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">speciesnodes</span><span class="p">:</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">bg</span><span class="o">.</span><span class="n">SubBondGraph</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">adj</span><span class="p">,</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">)</span>
+            <span class="n">newspecies</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">colorset</span><span class="p">,</span> <span class="n">sub</span><span class="o">.</span><span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">)</span>
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">check_existence</span><span class="p">(</span><span class="n">newspecies</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">)</span>
+            <span class="n">reaction</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="n">specieslist</span><span class="p">[</span><span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span> <span class="o">=</span> <span class="n">generate_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span></div>
+
+
+<div class="viewcode-block" id="check_hidden_prevbond"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.check_hidden_prevbond">[docs]</a><span class="k">def</span> <span class="nf">check_hidden_prevbond</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+    <span class="n">hiddenset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">hidden</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hiddenset</span> <span class="o">&amp;</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="mono"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.mono">[docs]</a><span class="k">def</span> <span class="nf">mono</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">,</span> <span class="n">kinetics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    mono-molecule reaction</span>
+
+<span class="sd">    :param reactionlist:</span>
+<span class="sd">    :param species:</span>
+<span class="sd">    :param specieslist:</span>
+<span class="sd">    :param speciesidmap:</span>
+<span class="sd">    :return: specieslist, speciesidmap</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">strandgraph</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">StrandGraph</span><span class="p">(</span><span class="n">species</span><span class="o">.</span><span class="n">strands</span><span class="p">)</span>
+
+    <span class="n">prevE</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">E</span>
+    <span class="n">prevSG</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">)</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">check_migration</span><span class="p">(</span><span class="n">prevSG</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">miggroup</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_following_migration</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">miggroup</span><span class="p">:</span>
+            <span class="n">reaction</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+            <span class="n">notbond</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">potbondto</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">check_hidden_all</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]]):</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">E</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">notbond</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">potbondto</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="n">target1</span><span class="p">,</span> <span class="n">target2</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">get_connect_toehold</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">],</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">target1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">target2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">closest1</span><span class="p">,</span> <span class="n">closest2</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_domains_on_2sides</span><span class="p">(</span><span class="n">target1</span><span class="p">,</span> <span class="n">target2</span><span class="p">,</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">check_complementary</span><span class="p">(</span><span class="n">closest1</span><span class="p">,</span> <span class="n">closest2</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span> <span class="o">=</span> \
+                <span class="n">generate_multiple_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">)</span>
+            <span class="n">reaction</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="s1">&#39;R3&#39;</span><span class="p">)</span>
+            <span class="n">reaction</span><span class="o">.</span><span class="n">add_rate</span><span class="p">(</span><span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;R3&#39;</span><span class="p">])</span>
+            <span class="n">reactionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e4</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e4</span><span class="p">:</span>
+            <span class="n">reaction1</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction1</span> <span class="o">=</span> \
+                <span class="n">generate_multiple_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction1</span><span class="p">)</span>
+            <span class="n">reaction1</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="s1">&#39;R4&#39;</span><span class="p">)</span>
+            <span class="n">reaction1</span><span class="o">.</span><span class="n">add_rate</span><span class="p">(</span><span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;R4&#39;</span><span class="p">])</span>
+            <span class="n">reactionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction1</span><span class="p">)</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">check_binding</span><span class="p">(</span><span class="n">prevSG</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">reaction2</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="c1"># check if there is a previous bond hidden</span>
+            <span class="c1">#if check_hidden_prevbond(prevE, strandgraph):</span>
+            <span class="c1">#   continue</span>
+
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction2</span> <span class="o">=</span> \
+                <span class="n">generate_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction2</span><span class="p">)</span>
+            <span class="n">reaction2</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="s1">&#39;RB&#39;</span><span class="p">)</span>
+            <span class="n">reaction2</span><span class="o">.</span><span class="n">add_rate</span><span class="p">(</span><span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;RB&#39;</span><span class="p">])</span>
+            <span class="n">reactionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction2</span><span class="p">)</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">check_unbinding</span><span class="p">(</span><span class="n">prevSG</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">reaction3</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction3</span> <span class="o">=</span> \
+                <span class="n">generate_multiple_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction3</span><span class="p">)</span>
+            <span class="n">reaction3</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="s1">&#39;RU&#39;</span><span class="p">)</span>
+            <span class="n">reaction3</span><span class="o">.</span><span class="n">add_rate</span><span class="p">(</span><span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;RU&#39;</span><span class="p">])</span>
+            <span class="n">reactionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction3</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reactionlist</span></div>
+
+
+<div class="viewcode-block" id="bi"><a class="viewcode-back" href="../../../src.species.html#src.species.species_explore.bi">[docs]</a><span class="k">def</span> <span class="nf">bi</span><span class="p">(</span><span class="n">speciescomb</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">,</span> <span class="n">kinetics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    bi-molecule reaction</span>
+
+<span class="sd">    :param reactionlist:</span>
+<span class="sd">    :param speciescomb: combinations of species ids</span>
+<span class="sd">    :param specieslist:</span>
+<span class="sd">    :param speciesidmap:</span>
+<span class="sd">    :return: specieslist, speciesidmap</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index1</span><span class="p">,</span> <span class="n">index2</span> <span class="o">=</span> <span class="n">speciescomb</span>
+    <span class="n">species1</span> <span class="o">=</span> <span class="n">specieslist</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="n">species2</span> <span class="o">=</span> <span class="n">specieslist</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
+    <span class="n">len1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">species1</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+    <span class="n">strandgraph</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">StrandGraph</span><span class="p">(</span><span class="n">species1</span><span class="o">.</span><span class="n">strands</span> <span class="o">+</span> <span class="n">species2</span><span class="o">.</span><span class="n">strands</span><span class="p">)</span>
+
+    <span class="n">prevE</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">E</span>
+    <span class="n">prevSG</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">)</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">check_binding</span><span class="p">(</span><span class="n">prevSG</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">reaction</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species1</span><span class="p">,</span> <span class="n">species2</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="c1"># check if the bond is between two species</span>
+            <span class="n">v</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_edge_info</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">len1</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">len1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">len1</span> <span class="ow">and</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">len1</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="c1"># if check_hidden_prevbond(prevE, strandgraph):</span>
+            <span class="c1">#    continue</span>
+
+            <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span> <span class="o">=</span> <span class="n">generate_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">)</span>
+            <span class="n">reaction</span><span class="o">.</span><span class="n">add_rule</span><span class="p">(</span><span class="s1">&#39;RB&#39;</span><span class="p">)</span>
+            <span class="n">reaction</span><span class="o">.</span><span class="n">add_rate</span><span class="p">(</span><span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;RB&#39;</span><span class="p">])</span>
+            <span class="n">reactionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reaction</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reactionlist</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

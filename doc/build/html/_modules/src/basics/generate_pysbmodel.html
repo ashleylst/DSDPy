@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>src.basics.generate_pysbmodel &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>src.basics.generate_pysbmodel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for src.basics.generate_pysbmodel</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pysb</span> <span class="k">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="generate_monomer"><a class="viewcode-back" href="../../../src.basics.html#src.basics.generate_pysbmodel.generate_monomer">[docs]</a><span class="k">def</span> <span class="nf">generate_monomer</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">monomerdict</span><span class="p">,</span> <span class="n">initlen</span><span class="p">,</span> <span class="n">initnames</span><span class="p">,</span> <span class="n">tbobs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate a PySB monomer based on species</span>
+
+<span class="sd">    :param species: a Species object</span>
+<span class="sd">    :param monomerdict: a dictionary with all monomers linked to their species id</span>
+<span class="sd">    :param initlen: number of the initial species</span>
+<span class="sd">    :param initnames: names of the initial species</span>
+<span class="sd">    :return: monomer, observable, and updated monomerdict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">species</span><span class="o">.</span><span class="n">id</span> <span class="o">&lt;=</span> <span class="n">initlen</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">initnames</span><span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;sp_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">species</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">sites</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;init&#39;</span><span class="p">]</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">Monomer</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sites</span><span class="p">)</span>
+    <span class="n">monomerdict</span><span class="p">[</span><span class="n">species</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span>
+    <span class="k">if</span> <span class="n">species</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="n">tbobs</span><span class="p">:</span>
+        <span class="n">Observable</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">,</span> <span class="n">m</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">monomerdict</span></div>
+
+
+<div class="viewcode-block" id="generate_rule"><a class="viewcode-back" href="../../../src.basics.html#src.basics.generate_pysbmodel.generate_rule">[docs]</a><span class="k">def</span> <span class="nf">generate_rule</span><span class="p">(</span><span class="n">reaction</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">monomerdict</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate a PySB rule based on reaction</span>
+
+<span class="sd">    :param reaction: a Reaction object</span>
+<span class="sd">    :param i: ordered position of reaction in reactionlist</span>
+<span class="sd">    :param monomerdict: a dictionary with all monomers linked to their species id</span>
+<span class="sd">    :param rate: reaction rate, a Parameter object</span>
+<span class="sd">    :return: PySB rule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">reaction</span><span class="o">.</span><span class="n">rule</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">reactants</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">reactants</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">monomerdict</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+        <span class="n">reactants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="n">products</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reaction</span><span class="o">.</span><span class="n">products</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">monomerdict</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+        <span class="n">products</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reactants</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&gt;&gt;</span>
+                        <span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">rate</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&gt;&gt;</span>
+                        <span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="n">products</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">rate</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&gt;&gt;</span>
+                        <span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">rate</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="n">reactants</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">&gt;&gt;</span>
+                        <span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="n">products</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">rate</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rule</span></div>
+
+
+<div class="viewcode-block" id="generate_concentrations"><a class="viewcode-back" href="../../../src.basics.html#src.basics.generate_pysbmodel.generate_concentrations">[docs]</a><span class="k">def</span> <span class="nf">generate_concentrations</span><span class="p">(</span><span class="n">initlen</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate concentrations of the initial species</span>
+
+<span class="sd">    :param initlen: number of the initial species</span>
+<span class="sd">    :param concentrations: concentrations of the initial species</span>
+<span class="sd">    :return: PySB parameters for concentrations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">para</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">initlen</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ic&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">para</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">para</span></div>
+
+
+<div class="viewcode-block" id="generate_model"><a class="viewcode-back" href="../../../src.basics.html#src.basics.generate_pysbmodel.generate_model">[docs]</a><span class="k">def</span> <span class="nf">generate_model</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">,</span> <span class="n">initlen</span><span class="p">,</span> <span class="n">initnames</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">,</span> <span class="n">defobs</span><span class="o">=</span><span class="nb">list</span><span class="p">()):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate a PySB model for the DSD reaction network</span>
+
+<span class="sd">    :param specieslist: list of species that can be synthesized in the DSD system</span>
+<span class="sd">    :param reactionlist: list of reactions that can happen in the DSD system</span>
+<span class="sd">    :param initlen: number of the initial species</span>
+<span class="sd">    :param initnames: names of the initial species</span>
+<span class="sd">    :param concentrations: concentrations of the initial species</span>
+<span class="sd">    :param defobs: a debug argument for defining observables</span>
+<span class="sd">    :return: a PySB model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+
+    <span class="n">monomerdict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">defobs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tbobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">specieslist</span><span class="p">))]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tbobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">initlen</span><span class="p">)]</span> <span class="o">+</span> <span class="n">defobs</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">specieslist</span><span class="p">:</span>
+        <span class="n">monomerdict</span> <span class="o">=</span> <span class="n">generate_monomer</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">monomerdict</span><span class="p">,</span> <span class="n">initlen</span><span class="p">,</span> <span class="n">initnames</span><span class="p">,</span> <span class="n">tbobs</span><span class="p">)</span>
+        <span class="c1"># model.monomers.add(monomer)</span>
+        <span class="c1"># model.observables.add(obs)</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reactionlist</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;k_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">),</span> <span class="n">i</span><span class="o">.</span><span class="n">rate</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">generate_rule</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">monomerdict</span><span class="p">,</span> <span class="n">rate</span><span class="p">))</span>
+
+    <span class="c1"># Parameter(&#39;ic&#39;, 10000)</span>
+    <span class="n">para</span> <span class="o">=</span> <span class="n">generate_concentrations</span><span class="p">(</span><span class="n">initlen</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">initlen</span><span class="p">):</span>
+        <span class="n">Initial</span><span class="p">(</span><span class="n">monomerdict</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">](</span><span class="n">init</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="n">para</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">model</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

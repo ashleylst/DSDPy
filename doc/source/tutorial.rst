@@ -4,8 +4,8 @@ Tutorial
 Prerequisities
 --------------
 
-DSDPy (scripts in *dsdpy* package) is written in `Python3`_. The recommended way to install
-all the packages needed in *dsdpy* is through `Anaconda`_. For those who are familiar with
+DSDPy (scripts in *src* package) is written in `Python3`_. The recommended way to install
+all the packages needed in *src* is through `Anaconda`_. For those who are familiar with
 ``pip`` installation, note that the required packages can also be installed through standard 
 way, but the details are not included in this documentation.
 
@@ -30,7 +30,7 @@ Required Packages
 
    `Networkx`_ is a Python package for the creation, manipulation, and study of the 
    structure, dynamics, and functions of complex networks. This package is used in 
-   *dsdpy* for output incidence matrix.
+   *src* for output incidence matrix.
    The installation command with Anaconda is::
    
       conda install -c conda-forge networkx
@@ -38,7 +38,7 @@ Required Packages
    
 4. **Matplotlib**
 
-   `Matplotlib`_ is a Python 2D plotting library, used in *dsdpy* for visualization of the 
+   `Matplotlib`_ is a Python 2D plotting library, used in *src* for visualization of the 
    simulation results.
    The installation command with Anaconda is::
    
@@ -47,7 +47,7 @@ Required Packages
 Installation
 ^^^^^^^^^^^^
 
-The software is a Python package (*dsdpy*) that includes scripts to run a DSD system analysis.
+The software is a Python package (*src*) that includes scripts to run a DSD system analysis.
 One should be able to run the scripts if the required packages above have been installed to the 
 current Python environment.
 
@@ -55,7 +55,7 @@ current Python environment.
 Start
 -------
 
-The entry point to the analysis of a DSD system is through `start_processor <dsdpy.html#module-dsdpy.start_processor>`_ function.
+The entry point to the analysis of a DSD system is through `start_processor <src.html#module-src.start_processor>`_ function.
 To get test inputs for DSDPy, you need to download the `res` package. After that, you can test
 if the DSDPy works by running the following command from a Python interpreter::
    >>> from code import start_processor as sp
@@ -72,229 +72,6 @@ if the DSDPy works by running the following command from a Python interpreter::
    RB: {(0, 1), (2, 2)}
    RB: {(0, 1), (2, 2)}
 
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from lib import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from dsdpy import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from code import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from lib import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from dsdpy import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from lib import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from code import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from dsdpy import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from lib import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from code import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from dsdpy import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from code import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from code import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
-
-Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter::
-   >>> from dsdpy import start_processor as sp
-   >>> sp.start_processor()
-   RB: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(2, 0), (0, 3)}
-   R4: {(0, 2), (2, 1)}
-   R3: {(1, 0), (3, 1)}
-   RU: {(0, 1), (1, 2)}
-   R4: {(1, 1), (0, 2)}
-   RU: {(0, 1), (1, 2)}
-   RB: {(0, 1), (2, 2)}
-   RB: {(0, 1), (2, 2)}
    
 Note: This test input is `res/input.txt`.
 

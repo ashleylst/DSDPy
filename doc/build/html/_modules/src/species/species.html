@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>src.species.species &mdash; DSDPy  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> DSDPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DSDPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>src.species.species</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for src.species.species</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">src.util</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">src.basics</span> <span class="k">import</span> <span class="n">lexical_analyzer</span> <span class="k">as</span> <span class="n">lex</span>
+<span class="kn">import</span> <span class="nn">queue</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+
+<div class="viewcode-block" id="Species"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species">[docs]</a><span class="k">class</span> <span class="nc">Species</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Species (DNA Complexes) consists of one or more strands</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="sd">&#39;&#39;&#39;species id&#39;&#39;&#39;</span>
+
+    <span class="n">colormap</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&#39;&#39;&#39;map colors to nodes&#39;&#39;&#39;</span>
+
+    <span class="n">colorset</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="sd">&#39;&#39;&#39;set of colors&#39;&#39;&#39;</span>
+
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;strand ids in the species&#39;&#39;&#39;</span>
+
+    <span class="n">canonicalform</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;canonical form&#39;&#39;&#39;</span>
+
+    <span class="n">strands</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39;strands&#39;&#39;&#39;</span>
+
+    <span class="n">parsingseq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="sd">&#39;&#39;&#39; parsing sequence for deriving canonical form&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="n">colormap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span> <span class="o">=</span> <span class="n">colorset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">derive_canonical_form</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construct_strands</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Species.set_id"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.set_id">[docs]</a>    <span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span></div>
+
+<div class="viewcode-block" id="Species.derive_rootmap"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.derive_rootmap">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">derive_rootmap</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="n">rootmap</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="n">rootmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">rootmap</span></div>
+
+<div class="viewcode-block" id="Species.get_starting_vertex"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.get_starting_vertex">[docs]</a>    <span class="k">def</span> <span class="nf">get_starting_vertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find the starting vertex to do derive canonical function</span>
+
+<span class="sd">        :param strandgraph: a StrandGraph object</span>
+<span class="sd">        :return: starting vertex id(strand id)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">minlen</span> <span class="o">=</span> <span class="mi">100000</span>
+        <span class="n">minc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span><span class="p">:</span>
+            <span class="n">curlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">curlen</span> <span class="o">&lt;</span> <span class="n">minlen</span><span class="p">:</span>
+                <span class="n">minlen</span> <span class="o">=</span> <span class="n">curlen</span>
+                <span class="n">minc</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        minlen = 100000</span>
+<span class="sd">        minv = -1</span>
+<span class="sd">        for v in self.colormap[minc]:</span>
+<span class="sd">            curlen = len(strandgraph.bondgraph.adj[v])</span>
+<span class="sd">            if curlen &lt; minlen:</span>
+<span class="sd">                minlen = curlen</span>
+<span class="sd">                minv = v</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">startingvertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prune_starting_vertices</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">derive_rootmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">]),</span>
+            <span class="nb">set</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">],</span>
+            <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="p">,</span>
+            <span class="nb">set</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">startingvertex</span></div>
+
+<div class="viewcode-block" id="Species.refresh_for_pruning"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.refresh_for_pruning">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="p">[</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="n">c2</span><span class="p">],</span> <span class="p">[</span><span class="n">d2</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Species.prune_starting_vertices"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.prune_starting_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">prune_starting_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rootv</span><span class="p">,</span> <span class="n">prevnodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">bondgraph</span><span class="p">,</span> <span class="n">notvisited</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prune starting vertices (strands) when there are more than one instances of one strand type</span>
+
+<span class="sd">        :param rootv: rootmap for nodes (map current nodes to their root nodes)</span>
+<span class="sd">        :param prevnodes: previous layer of nodes</span>
+<span class="sd">        :param nodes: current layer of nodes</span>
+<span class="sd">        :param bondgraph: a BondGraph object</span>
+<span class="sd">        :param notvisited: list of not visited nodes</span>
+<span class="sd">        :return: starting vertex</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notvisited</span> <span class="o">=</span> <span class="n">notvisited</span> <span class="o">-</span> <span class="n">prevnodes</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">notvisited</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rootv</span><span class="p">[</span><span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="n">minc</span> <span class="o">=</span> <span class="mi">10000</span>
+        <span class="n">curv</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nextc</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nextv</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">curd</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nextd</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="n">bondlen</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="n">bonds</span> <span class="o">=</span> <span class="n">bondgraph</span><span class="o">.</span><span class="n">merge_bonds_ignoring_nodes</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">prevnodes</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bonds</span><span class="p">:</span>
+                <span class="n">bondlen</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">)):</span>
+                    <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">,</span> <span class="n">bondgraph</span><span class="o">.</span><span class="n">color</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">node2</span><span class="p">],</span> <span class="n">i</span><span class="o">.</span><span class="n">dom2</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+
+            <span class="n">info</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">info</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">bondlen</span> <span class="o">&lt;</span> <span class="n">minc</span><span class="p">:</span>
+                <span class="n">minc</span> <span class="o">=</span> <span class="n">bondlen</span>
+                <span class="n">curv</span><span class="p">,</span> <span class="n">curd</span><span class="p">,</span> <span class="n">nextv</span><span class="p">,</span> <span class="n">nextc</span><span class="p">,</span> <span class="n">nextd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">bondlen</span> <span class="o">==</span> <span class="n">minc</span><span class="p">:</span>
+                <span class="n">res1</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">curd</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">res2</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">nextc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">res3</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="n">nextd</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">res1</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">curv</span><span class="p">,</span> <span class="n">curd</span><span class="p">,</span> <span class="n">nextv</span><span class="p">,</span> <span class="n">nextc</span><span class="p">,</span> <span class="n">nextd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">res1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">res2</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">curv</span><span class="p">,</span> <span class="n">curd</span><span class="p">,</span> <span class="n">nextv</span><span class="p">,</span> <span class="n">nextc</span><span class="p">,</span> <span class="n">nextd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">res2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">res3</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="n">curv</span><span class="p">,</span> <span class="n">curd</span><span class="p">,</span> <span class="n">nextv</span><span class="p">,</span> <span class="n">nextc</span><span class="p">,</span> <span class="n">nextd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">res3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">curv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                            <span class="n">curd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                            <span class="n">nextc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+                            <span class="n">nextv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+                            <span class="n">nextd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+
+        <span class="n">rootmap</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nextv</span><span class="p">)):</span>
+            <span class="n">rootmap</span><span class="p">[</span><span class="n">nextv</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rootv</span><span class="p">[</span><span class="n">curv</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+            <span class="n">tmpset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+                <span class="n">tmpset</span> <span class="o">=</span> <span class="n">tmpset</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="n">tmpset</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prune_starting_vertices</span><span class="p">(</span><span class="n">rootmap</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">nextv</span><span class="p">,</span> <span class="n">bondgraph</span><span class="p">,</span> <span class="n">notvisited</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Species.check_pendingbond"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.check_pendingbond">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">check_pendingbond</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">pending</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if b is in pending bonds</span>
+
+<span class="sd">        :param b: domain</span>
+<span class="sd">        :param pending: pending bonds</span>
+<span class="sd">        :return: the bond number if b is in pending bond, -1 otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">pending</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+
+<div class="viewcode-block" id="Species.traverse"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.traverse">[docs]</a>    <span class="k">def</span> <span class="nf">traverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">,</span> <span class="n">curv</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">bondnum</span><span class="p">,</span> <span class="n">pendingbond</span><span class="p">,</span> <span class="n">canonical</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        traverse the strand and produce a canonical form</span>
+
+<span class="sd">        :param strandgraph: a StrandGraph object</span>
+<span class="sd">        :param curv: current vertex in strandgraph</span>
+<span class="sd">        :param q: queue for determining if all nodes in species has been encountered</span>
+<span class="sd">        :param bondnum: number of bonds</span>
+<span class="sd">        :param pendingbond: list of bonds (in domain level) that are pending to add</span>
+<span class="sd">        :param canonical: canonical form</span>
+<span class="sd">        :param visited: boolean list for visiting vertices in species</span>
+<span class="sd">        :return: canonical form for one strand</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;&lt;&#39;</span>
+        <span class="n">bondgraph</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span>
+
+        <span class="n">E</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">domlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">strands</span><span class="p">[</span><span class="n">curv</span><span class="p">]</span><span class="o">.</span><span class="n">domains</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bondgraph</span><span class="o">.</span><span class="n">adj</span><span class="p">[</span><span class="n">curv</span><span class="p">]:</span>
+            <span class="n">E</span> <span class="o">+=</span> <span class="n">i</span><span class="o">.</span><span class="n">transform_E</span><span class="p">()</span>
+        <span class="n">E</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">sort_e_by_domain</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">domlen</span><span class="p">):</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">strands</span><span class="p">[</span><span class="n">curv</span><span class="p">]</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="n">string</span> <span class="o">+=</span> <span class="n">domain</span><span class="o">.</span><span class="n">name</span>
+
+            <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">toehold</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;^&#39;</span>
+
+            <span class="k">if</span> <span class="n">domain</span><span class="o">.</span><span class="n">comp</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;*&#39;</span>
+
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">domlen</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_pendingbond</span><span class="p">((</span><span class="n">curv</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">pendingbond</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;!&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pendingbond</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">pendingbond</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                    <span class="n">E</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">cursor</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+                        <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="n">flag</span> <span class="ow">and</span> <span class="p">(</span><span class="n">curv</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">E</span><span class="p">[</span><span class="n">cursor</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">bondnum</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;!&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">bondnum</span><span class="p">)</span>
+                    <span class="n">pendingbond</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">E</span><span class="p">[</span><span class="n">cursor</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">bondnum</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">E</span><span class="p">[</span><span class="n">cursor</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">E</span><span class="p">[</span><span class="n">cursor</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">queue</span><span class="p">:</span>
+                        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="n">cursor</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">cursor</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">cursor</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+                        <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">domlen</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span>
+
+        <span class="n">string</span> <span class="o">+=</span> <span class="s1">&#39;&gt;&#39;</span>
+        <span class="n">canonical</span> <span class="o">+=</span> <span class="n">string</span>
+        <span class="k">return</span> <span class="n">canonical</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">bondnum</span><span class="p">,</span> <span class="n">pendingbond</span></div>
+
+<div class="viewcode-block" id="Species.derive_canonical_form"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.derive_canonical_form">[docs]</a>    <span class="k">def</span> <span class="nf">derive_canonical_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        derive a canonical form for the species</span>
+
+<span class="sd">        :param strandgraph: a StrandGraph object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">startingv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_starting_vertex</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">)</span>
+        <span class="n">bondnum</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">parsingseq</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">canonical</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">pendingbond</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">))]</span>
+
+        <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">startingv</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="n">curv</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">parsingseq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curv</span><span class="p">)</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">curv</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">canonical</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">bondnum</span><span class="p">,</span> <span class="n">pendingbond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">curv</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">bondnum</span><span class="p">,</span> <span class="n">pendingbond</span><span class="p">,</span> <span class="n">canonical</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                <span class="n">canonical</span> <span class="o">+=</span> <span class="s1">&#39;|&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">canonicalform</span> <span class="o">=</span> <span class="n">canonical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parsingseq</span> <span class="o">=</span> <span class="n">parsingseq</span></div>
+
+<div class="viewcode-block" id="Species.construct_strands"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.construct_strands">[docs]</a>    <span class="k">def</span> <span class="nf">construct_strands</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reverse construction of strands: canonical form -&gt; strands</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">recolormap</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
+                <span class="n">recolormap</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+
+        <span class="n">strands</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canonicalform</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+            <span class="n">strand</span> <span class="o">=</span> <span class="n">lex</span><span class="o">.</span><span class="n">lexer_strand</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">strand</span><span class="o">.</span><span class="n">add_color</span><span class="p">(</span><span class="n">recolormap</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parsingseq</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="n">strands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strand</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strands</span> <span class="o">=</span> <span class="n">strands</span></div>
+
+<div class="viewcode-block" id="Species.generate_output"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.generate_output">[docs]</a>    <span class="k">def</span> <span class="nf">generate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        supporting function for txt output</span>
+
+<span class="sd">        :return: string of canonical form</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canonicalform</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">string</span></div>
+
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    def generate_sites(self):</span>
+<span class="sd">        sites = []</span>
+<span class="sd">        </span>
+<span class="sd">        l = self.canonicalform.split(&#39;|&#39;)</span>
+<span class="sd">        for i in range(0, len(l)):</span>
+<span class="sd">            sites += lex.lexer_site(l[i])</span>
+<span class="sd">        </span>
+<span class="sd">        return sites</span>
+<span class="sd">    &#39;&#39;&#39;</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Shiting Long
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

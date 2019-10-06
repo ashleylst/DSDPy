@@ -178,8 +178,8 @@
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="prerequisities">
 <h2>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this headline">¶</a></h2>
-<p>DSDPy (scripts in <em>dsdpy</em> package) is written in <a class="reference external" href="https://www.python.org/download/releases/3.0/">Python3</a>. The recommended way to install
-all the packages needed in <em>dsdpy</em> is through <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a>. For those who are familiar with
+<p>DSDPy (scripts in <em>src</em> package) is written in <a class="reference external" href="https://www.python.org/download/releases/3.0/">Python3</a>. The recommended way to install
+all the packages needed in <em>src</em> is through <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a>. For those who are familiar with
 <code class="docutils literal notranslate"><span class="pre">pip</span></code> installation, note that the required packages can also be installed through standard
 way, but the details are not included in this documentation.</p>
 <div class="section" id="required-packages">
@@ -202,14 +202,14 @@ The installation command with Anaconda is:</p>
 <li><p><strong>Networkx</strong></p>
 <p><a class="reference external" href="https://networkx.github.io/">Networkx</a> is a Python package for the creation, manipulation, and study of the
 structure, dynamics, and functions of complex networks. This package is used in
-<em>dsdpy</em> for output incidence matrix.
+<em>src</em> for output incidence matrix.
 The installation command with Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">networkx</span>
 </pre></div>
 </div>
 </li>
 <li><p><strong>Matplotlib</strong></p>
-<p><a class="reference external" href="https://matplotlib.org">Matplotlib</a> is a Python 2D plotting library, used in <em>dsdpy</em> for visualization of the
+<p><a class="reference external" href="https://matplotlib.org">Matplotlib</a> is a Python 2D plotting library, used in <em>src</em> for visualization of the
 simulation results.
 The installation command with Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">matplotlib</span>
@@ -220,255 +220,17 @@ The installation command with Anaconda is:</p>
 </div>
 <div class="section" id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p>The software is a Python package (<em>dsdpy</em>) that includes scripts to run a DSD system analysis.
+<p>The software is a Python package (<em>src</em>) that includes scripts to run a DSD system analysis.
 One should be able to run the scripts if the required packages above have been installed to the
 current Python environment.</p>
 </div>
 </div>
 <div class="section" id="start">
 <h2>Start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h2>
-<p>The entry point to the analysis of a DSD system is through <a class="reference external" href="dsdpy.html#module-dsdpy.start_processor">start_processor</a> function.
+<p>The entry point to the analysis of a DSD system is through <a class="reference external" href="src.html#module-src.start_processor">start_processor</a> function.
 To get test inputs for DSDPy, you need to download the <cite>res</cite> package. After that, you can test
 if the DSDPy works by running the following command from a Python interpreter:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dsdpy</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dsdpy</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dsdpy</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dsdpy</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">code</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
-<span class="go">RB: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(2, 0), (0, 3)}</span>
-<span class="go">R4: {(0, 2), (2, 1)}</span>
-<span class="go">R3: {(1, 0), (3, 1)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">R4: {(1, 1), (0, 2)}</span>
-<span class="go">RU: {(0, 1), (1, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-<span class="go">RB: {(0, 1), (2, 2)}</span>
-</pre></div>
-</div>
-<p>Note: This test input is
-if the DSDPy works by running the following command from a Python interpreter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dsdpy</span> <span class="k">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
 <span class="go">RB: {(2, 0), (0, 3)}</span>
 <span class="go">R4: {(0, 2), (2, 1)}</span>

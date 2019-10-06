@@ -12,8 +12,7 @@
 #
 import os
 import sys
-#sys.path.insert(0, "E:\\NC\\group_file\\nano\\ncgit\\lib\\strands\\DSDmodel\\lib")
-#sys.path.append('..')
+
 sys.path.insert(0, os.path.abspath('../..'))
 
 
