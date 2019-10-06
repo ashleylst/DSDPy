@@ -5,11 +5,9 @@ DSDPy is a processor for DNA strand displacement systems. DSDPy generates the wh
 
 The full documentation of DSDPy can be found at https://dsdpy.readthedocs.io/en/latest/.
 
-Quick Start
-========
+## Quick Start
 
-Prerequisities
---------------
+### Prerequisities
 
 DSDPy (scripts in *src* package) is written in
 [Python3](https://www.python.org/download/releases/3.0/). The
@@ -19,7 +17,7 @@ familiar with `pip` installation, note that the required packages can
 also be installed through standard way, but the details are not included
 in this documentation.
 
-### Required Packages
+#### Required Packages
 
 1.  **PySB**
 
@@ -54,15 +52,14 @@ in this documentation.
 
         conda install -c conda-forge matplotlib
 
-### Installation
+#### Installation
 
 The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
 required packages above have been installed to the current Python
 environment.
 
-Start
------
+### Start
 
 The entry point to the analysis of a DSD system is through
 [start_processor] function. To
@@ -87,8 +84,7 @@ from a Python interpreter:
 
 Note: This test input is res/input.txt.
 
-Creating Your Own Input
------------------------
+### Creating Your Own Input
 
 The ideal way to generate the input to DSDPy is through a GUI interface
 which enables a quickstart for people with DSD systems to test. However,
@@ -155,7 +151,7 @@ Additionally, the input can include the following sections:
 
 Note that the sections are all seperated by --.
 
-### Example input1
+#### Example input1
 
     <L T2^!i2 X*!i1 T1^>
     <A X!i1 T2^*!i2>
@@ -172,7 +168,7 @@ Note that the sections are all seperated by --.
     R3 78.12
     R4 5.6e-3
 
-### Example input2
+#### Example input2
 
     <f1^ x!1>
     <to^* x*!1>
@@ -199,8 +195,7 @@ Note that the sections are all seperated by --.
     --
     1000 100
 
-Obtaining the Output
---------------------
+### Obtaining the Output
 
 The output files includes a text file containing the information of the
 reaction network and a png file visualizing the
@@ -208,7 +203,7 @@ reaction network and a png file visualizing the
 results. These files can be found under the output directory or an user
 defined output directory.
 
-### Text File on the Reaction Network
+#### Text File on the Reaction Network
 
 The file contains three parts of information:
 
@@ -220,7 +215,7 @@ The file contains three parts of information:
 >     denotes species and its column denotes the edge from one species
 >     to another)
 
-#### An example output:
+##### An example output:
 
 Based on the example input1 :
 
@@ -312,9 +307,9 @@ Based on the example input1 :
       9 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  1.  0.]]
      10 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  1.]]
 
-### PNG File Visualizing the BNG Simulation Results
+#### PNG File Visualizing the BNG Simulation Results
 
-#### An example output:
+##### An example output:
 
 Based on the example input1
 
