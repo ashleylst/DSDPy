@@ -63,7 +63,7 @@ get test inputs for DSDPy, you need to download the *res* package. After
 that, you can test if the DSDPy works by running the following command
 from a Python interpreter:
 
-    >>> from code import start_processor as sp
+    >>> from src import start_processor as sp
     >>> sp.start_processor() 
     RB: {(2, 0), (0, 3)} 
     R4: {(0, 2), (2, 1)} 
