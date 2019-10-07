@@ -52,6 +52,5 @@ dependencies:
     - sphinx-glpi-theme==0.3
     - sphinx-rtd-theme==0.4.3
     - numpy==1.16.4
-    - numpy-base==1.16.4
 prefix: D:\Anaconda\envs\env1
 
