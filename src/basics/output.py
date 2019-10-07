@@ -55,7 +55,7 @@ def visualize_simulation_results(x, y, obs, filedir, option='bng', colormap='Pai
     plt.ylabel("Complexes")
     plt.legend(bbox_to_anchor=(1.04, 1))
 
-    plt.savefig(filedir + '/simres.png', bbox_inches='tight', pad_inches=0.5)
+    plt.savefig(filedir + '/simres', bbox_inches='tight', pad_inches=0.5)
 
 
 def output_network_txt(specieslist, reactionlist, filedir='../output'):

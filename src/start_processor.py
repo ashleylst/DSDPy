@@ -17,7 +17,7 @@ def start_processor(filedir='res/input', threshold=100):
     if outdir == '':
         outdir = '../output'
     if len(simupara) == 0:
-        simupara = [1000, 100]
+        simupara = [100, 100]
 
     reactionlist = []
     initlen = len(specieslist)
@@ -74,7 +74,7 @@ def start_processor(filedir='res/input', threshold=100):
                         filedir=outdir,
                         time=simupara[0],
                         steps=simupara[1],
-                        colormap='tab10')
+                        colormap='tab20c')
 
     # output for GUI interface
     on.output_network_txt(specieslist,
@@ -82,4 +82,9 @@ def start_processor(filedir='res/input', threshold=100):
                           filedir=outdir)
 
 
-start_processor(filedir='../res/input')
+# start_processor(filedir='../res/catalytic_kotani', threshold=4)
+
+start_processor(filedir='../res/input_catalysis')
+
+# start_processor(filedir='../res/input')
+
