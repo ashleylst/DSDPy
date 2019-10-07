@@ -21,7 +21,6 @@ dependencies:
   - docutils
   - fastcache
   - freetype
-  - icc_rt
   - icu
   - idna
   - imagesize
@@ -72,11 +71,7 @@ dependencies:
   - sympy
   - tornado
   - urllib3
-  - vc
-  - vs2015_runtime
   - wheel
-  - win_inet_pton
-  - wincertstore
   - zlib
   - pip:
     - attrs
