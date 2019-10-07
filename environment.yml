@@ -51,7 +51,6 @@ dependencies:
     - guzzle-sphinx-theme==0.7.11
     - sphinx-glpi-theme==0.3
     - sphinx-rtd-theme==0.4.3
-    - python==3.7.4
     - numpy==1.16.4
     - numpy-base==1.16.4
 prefix: D:\Anaconda\envs\env1
