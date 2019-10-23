@@ -105,14 +105,15 @@ def simulate_bng(model, time=1000, steps=100, bngnetwork=False, filedir='../outp
     if bngnetwork:
         network = generate_network(model=model)
 
-    obslen = len(model.observables)
+    monomerlen = len(model.monomers)
 
     output = run_ssa(model=model, t_end=time, n_steps=steps)
     output = output.tolist()
     output = np.array(output)
+    row, column = output.shape
 
     visualize_simulation_results(output[:, 0],
-                                 output[:, obslen + 1: obslen * 2 + 1],
+                                 output[:, monomerlen + 1: column],
                                  model.observables, filedir,
                                  option='bng',
                                  colormap=colormap)

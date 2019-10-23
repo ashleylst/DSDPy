@@ -509,6 +509,8 @@ class StrandGraph:
 
         if strand1 == strand2:
             return pottoehold, pottoehold
+        elif connect is None:
+            return None, None
         elif len(connect) == 0:
             return None, None
 

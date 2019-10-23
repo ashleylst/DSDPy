@@ -74,7 +74,7 @@ def start_processor(filedir='res/input', threshold=100):
                         filedir=outdir,
                         time=simupara[0],
                         steps=simupara[1],
-                        colormap='tab20c')
+                        colormap='tab10')
 
     # output for GUI interface
     on.output_network_txt(specieslist,
@@ -83,8 +83,6 @@ def start_processor(filedir='res/input', threshold=100):
 
 
 # start_processor(filedir='../res/catalytic_kotani', threshold=4)
-
-# start_processor(filedir='../res/input_catalysis')
 
 start_processor(filedir='../res/input')
 
