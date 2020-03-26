@@ -110,6 +110,19 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
     if len(e3) != 0:
         miggroup = util.check_following_migration(e3)
         for x in miggroup:
+
+            startv = list(e3[x[0]][0] - e3[x[0]][1])
+            endv = list(e3[x[0]][0] & e3[x[0]][1])
+            sortdom = util.get_migrate_nodes(e3, x, startv[0][0])
+            p = prevSG.have_anchor(startv[0][0], endv[0][0], sortdom[0], sortdom[len(sortdom)-1])
+            if p != -1:
+                if p == -2:
+                    continue
+                elif p >= 0:
+                    con = prevSG.bondgraph.get_connection((p, 0), endv[0][0])
+                    if len(con) == 0:
+                        continue
+
             reaction = ra.Reaction([species], [])
             E = copy.copy(prevE)
             notbond = []
@@ -165,7 +178,7 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
             strandgraph.reconstruct(E)
 
             # check if there is a previous bond hidden
-            #if check_hidden_prevbond(prevE, strandgraph):
+            # if check_hidden_prevbond(prevE, strandgraph):
             #   continue
 
             specieslist, speciesidmap, reaction2 = \

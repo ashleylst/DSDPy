@@ -1,4 +1,5 @@
 from src.util import util
+from src.util import cexception as ex
 from src.strand import bond_graph
 import copy
 
@@ -63,11 +64,17 @@ class StrandGraph:
 
         for i in range(0, len(tableS)):
             cur = tableS[i]
+            if cur[1]:
+                bondexist = True
+            else:
+                bondexist = False
+
             for j in range(i + 1, len(tableS)):
                 if tableS[j][0][0] == cur[0][0] and comp(tableS[j][0], cur[0]):
                     A.append({cur[0][1], tableS[j][0][1]})
                     if tableS[j][0][3] == cur[0][3] == 1 and tableS[j][0][4] == cur[0][4] and not tableS[j][1] and not cur[1]:
                         E.append({cur[0][1], tableS[j][0][1]})
+                        bondexist = True
                         tableS[j][1] = True
                         cur[1] = True
                     if tableS[j][0][5] == cur[0][5] == True:
@@ -76,6 +83,8 @@ class StrandGraph:
                     else:
                         toehold[frozenset({cur[0][1], tableS[j][0][1]})] = False
                         # toehold.append({'e': {cur[0][1], tableS[j][0][1]}, 't': False})
+            if not bondexist and cur[0][3]:
+                raise ex.SpeciesError("species text representation error in domain " + cur[0][0])
 
         self.V = V
         self.length = length
@@ -130,6 +139,7 @@ class StrandGraph:
         :param e: an edge
         :return: True if anchored, False otherwise
         """
+        # TODO: CHECK DEFINITION OF ANCHOR
         v, n = util.get_edge_info(e)
 
         for i in self.bondgraph.adj[v[0]]:
@@ -137,7 +147,7 @@ class StrandGraph:
                 if i.node2 == v[1]:
                     return True
 
-        if self.bondgraph.check_in_loop(v[0], v[1]):
+        if self.bondgraph.check_junction(v[0], v[1]):
             return True
 
         return False
@@ -190,6 +200,8 @@ class StrandGraph:
                     node2bdomains = self.bondgraph.check_strand_is_bonded(node2[0])
                     if util.get_free_domains([node1[1], i], node1bdomains, node1[1]) > 1 \
                             or util.get_free_domains([node2[1], connect[0][1]], node2bdomains, node2[1]) > 1:
+                        return True
+                    elif self.bondgraph.get_direction(node1[0], node2[0]):
                         return True
                     return False
 
@@ -516,6 +528,16 @@ class StrandGraph:
 
         return pottoehold, connect[0]
 
+    def have_anchor(self, startstrand, endstrand, domlow, domhigh):
+        d1 = domlow - 1
+        d2 = domhigh + 1
+        for b in self.bondgraph.adj[startstrand]:
+            if (d1 in b.dom) or (d2 in b.dom):
+                if b.node2 == endstrand:
+                    return -1
+                else:
+                    return b.node2
+        return -2
     '''
         def check_adjacent_bond(self, v, n):
         """

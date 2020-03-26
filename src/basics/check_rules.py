@@ -64,12 +64,10 @@ def check_migration(graph):
                 if len(tbr) != 0 and len(r) != 0:
                     if notbond is None:
                         if graph.check_switchable_2(i, tbr):
-                            # TODO: fix three-way migration
                             print("R4: " + str(i.copy()))
                             changeedge4.append((i, set(r), tbr[0], tbr[1]))
                     else:
                         if graph.check_switchable(notbond, tbr[0], i):
-                            # TODO: fix four-way migration
                             print("R3: " + str(i.copy()))
                             changeedge3.append((i, tbr[0]))
     return changeedge3, changeedge4

@@ -1,4 +1,5 @@
 from src.strand import bond
+from src.util import util
 import queue
 import copy
 from collections import defaultdict
@@ -94,6 +95,36 @@ class BondGraph:
                 return True
         return False
 
+    def check_junction(self, startnode, endnode):
+        """
+        check if the bond between startnode and endnode is a part of junction
+
+        :param startnode:
+        :param endnode:
+        :return:
+        """
+        for i in self.loop:
+            if startnode in i and endnode in i:
+                for j in range(len(i)):
+                    if j == 0:
+                        pre = len(i) - 1
+                        suc = j + 1
+                    elif j == len(i) - 1:
+                        pre = j - 1
+                        suc = 0
+                    else:
+                        pre = j - 1
+                        suc = j + 1
+                    n = []
+
+                    for b in self.adj[i[j]]:
+                        if b.node2 == i[pre] or b.node2 == i[suc]:
+                            n.append(b.dom)
+                    if not util.check_continuity(n[0], n[1]):
+                        return False
+                return True
+        return False
+
     def get_bond(self, startstrand, endstrand):
         """
         get the bond between the two vertices
@@ -146,7 +177,7 @@ class BondGraph:
 
     def call_spanning(self, mark, edge, times, depth):
         """
-        find all spanning trees of the bond graph and store the loops existing in it
+        find a spanning forest of the bond graph and store the loops existing in it
 
         :param mark: list of boolean numbers of vertices to show if they have been visited
         :param edge: edges of a spanning tree of the bond graph
@@ -299,6 +330,43 @@ class BondGraph:
             key = prev[key]
 
         return connect
+
+    def get_direction(self, startstrand, endstrand):
+        """
+        Note that we don't consider loops here.
+        :param endstrand:
+        :param startstrand:
+        :return:
+        """
+
+        if len(self.V) <= 2:
+            return False
+
+        q = queue.Queue()
+        visited = [False for _ in range(len(self.V))]
+        direction = [0 for _ in range(len(self.V))]
+        cnt = 0
+
+        q.put(startstrand)
+        while not q.empty():
+            cnt += 1
+            curstrand = q.get()
+
+            if curstrand == endstrand:
+                break
+
+            # Exception occurs
+            if len(self.adj[curstrand]) == 0:
+                continue
+
+            for i in self.adj[curstrand]:
+                if not visited[i.node2]:
+                    q.put(i.node2)
+                    direction[i.node2] = util.flip(direction[i.node1])
+
+        if direction[startstrand] != direction[endstrand] and cnt > 2:
+            return True
+        return False
 
     def merge_bonds_ignoring_nodes(self, v, nodes):
         """

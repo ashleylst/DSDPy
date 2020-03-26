@@ -1,4 +1,5 @@
 from src.strand import strand as sta
+from src.util import cexception as ex
 
 
 def lexer_strand(str, cnt):
@@ -11,11 +12,16 @@ def lexer_strand(str, cnt):
     """
     state = 0
 
+    if len(str) < 3:
+        raise ex.SpeciesError("illegal species text representation.")
+
     strand = sta.Strand()
     for i in range(0, len(str)):
         ch = str[i]
 
-        if ch == '<':
+        if i == 0:
+            if ch != '<':
+                raise ex.SpeciesError("illegal species text representation.")
             name = ''
             toehold = False
             comp = False
@@ -66,6 +72,8 @@ def lexer_strand(str, cnt):
             state = 4
 
         if ch == '\n':
+            if str[i-1] != '>':
+                raise ex.SpeciesError("illegal species text representation.")
             strand.add_color(cnt)
             state = 0
 

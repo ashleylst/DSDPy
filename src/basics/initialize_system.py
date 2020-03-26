@@ -2,6 +2,7 @@ from src.basics import lexical_analyzer as lex
 from src.strand import strand_graph as sg, bond_graph as bg
 from src.species import species as sp
 from src.species import species_explore as se
+from src.util import cexception as ex
 from bidict import bidict
 
 
@@ -19,15 +20,24 @@ def get_additional_info(fp, line):
     """
     names = []
     concentrations = []
+    flag = False
+
     while line:
         line = fp.readline()
         if line == '--\n':
+            flag = True
             kinetics, outdir, simupara = get_kinetics(fp, line)
+            break
+        if not line:
             break
         line = line.strip('\n')
         line = line.split(' ')
         names.append(line[0])
         concentrations.append(int(line[1]))
+
+    if not flag:
+        raise ex.KineticsError("kinetics not defined.")
+
     return names, concentrations, kinetics, outdir, simupara
 
 
@@ -78,7 +88,7 @@ def get_outdir_simupara(fp, line):
         line = line.strip('\n')
         line = line.split(' ')
         if len(line) == 1:
-            outdir = line
+            outdir = str(line[0])
         else:
             simupara = line
     return outdir, simupara
@@ -100,6 +110,8 @@ def initialize(filedir):
     kinetics = {}
     strands = []
     speciesbreak = []
+    splabelling = []
+    speciesnum = 0
 
     with open(filedir) as fp:
         line = fp.readline()
@@ -107,21 +119,31 @@ def initialize(filedir):
 
         strand = lex.lexer_strand(line, cnt)
         strands.append(strand)
+        speciesnum += 1
+        cursplabel = line[0:len(line)-1]
         cnt += 1
 
         while line:
             # print("Line {}: {}".format(cnt, line.strip()))
             line = fp.readline()
+            if cursplabel == '':
+                cursplabel += line[0:len(line)-1]
+            else:
+                cursplabel += '|' + line[0:len(line)-1]
 
             if not line:
                 break
 
             if line == '--\n':
+                splabelling.append(cursplabel[0:len(cursplabel)-3])
                 names, concentrations, kinetics, outdir, simupara = get_additional_info(fp, line)
                 break
 
             if line == '//\n':
                 speciesbreak.append(len(strands))
+                splabelling.append(cursplabel[0:len(cursplabel)-3])
+                cursplabel = ''
+                speciesnum += 1
                 continue
 
             strand = lex.lexer_strand(line, cnt)
@@ -132,6 +154,9 @@ def initialize(filedir):
                     break
             strands.append(strand)
             cnt += 1
+
+    if speciesnum == len(splabelling) + 1:
+        splabelling.append(cursplabel)
 
     specieslist = []
     speciesidmap = bidict()
@@ -150,8 +175,39 @@ def initialize(filedir):
 
         species = sp.Species(strandgraph.V, colorset, colormap, strandgraph)
         species.set_id(i + 1)
+
         speciesidmap.put(species.id, species.canonicalform)
         specieslist.append(species)
+
+    # error handling
+    try:
+        if len(kinetics) != 4:
+            raise ex.KineticsError("not sufficient types of reaction rates defined.")
+    except NameError:
+        raise ex.KineticsError("reaction rates undefined.")
+
+    try:
+        if kinetics['RB'] == 0.:
+            print("binding rate is set to 0.")
+    except KeyError:
+        raise ex.KineticsError("binding rate undefined.")
+    try:
+        if kinetics['RU'] == 0.:
+            print("unbinding rate is set to 0.")
+    except KeyError:
+        raise ex.KineticsError("unbinding rate undefined")
+    try:
+        if kinetics['R3'] == 0.:
+            print("3-way migration rate is set to 0.")
+    except KeyError:
+        raise ex.KineticsError("3-way migration rate undefined.")
+    try:
+        if kinetics['R4'] == 0.:
+            print("4-way migration rate is set to 0.")
+    except KeyError:
+        raise ex.KineticsError("4-way migration rate undefined.")
+
+
 
     '''
     strandgraph = sg.StrandGraph(strands)

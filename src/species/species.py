@@ -74,21 +74,86 @@ class Species:
         if len(self.colormap[minc]) == 1:
             return list(self.colormap[minc])[0]
 
+        startingvertex = self.prune(list(self.colormap[minc]), strandgraph)
+        '''
         startingvertex = self.prune_starting_vertices(
             self.derive_rootmap(self.colormap[minc]),
             set(),
             self.colormap[minc],
             strandgraph.bondgraph,
             set(strandgraph.V))
-
+        '''
         return startingvertex
+
+    def prune(self, nodes, strandgraph):
+        """
+        Pruning algorithm for selecting starting vertex
+        :param nodes: candidate nodes
+        :param strandgraph:
+        :return:
+        """
+        q = [queue.Queue() for _ in range(len(nodes))]
+        visited = [[False for i in range(len(strandgraph.V))] for j in range(len(nodes))]
+        labelling = ['' for _ in range(len(nodes))]
+        bondnum = [0 for _ in range(len(nodes))]
+        pendingbond = [[] for _ in range(len(nodes))]
+
+        for i in range(len(nodes)):
+            q[i].put(nodes[i])
+
+        while len(nodes) != 1 and not q[0].empty():
+            minv = 0
+            labelling = ['' for _ in range(len(nodes))]
+            delete = []
+            kept = [0]
+            for i in range(len(nodes)):
+                curv = q[i].get()
+                visited[i][curv] = True
+                labelling[i], q[i], bondnum[i], pendingbond[i] = self.traverse(strandgraph,
+                                                                            curv,
+                                                                            q[i],
+                                                                            bondnum[i],
+                                                                            pendingbond[i],
+                                                                            '',
+                                                                            visited[i])
+                if i == minv:
+                    continue
+                else:
+                    if labelling[i] < labelling[minv]:
+                        delete = kept
+                        kept = [i]
+                        minv = i
+                    elif labelling[i] == labelling[minv]:
+                        kept.append(i)
+                        continue
+                    else:
+                        delete.append(i)
+            delete.sort(reverse=True)
+            for i in delete:
+                nodes.pop(i)
+                q.pop(i)
+                bondnum.pop(i)
+                pendingbond.pop(i)
+                visited.pop(i)
+
+        return nodes[0]
 
     @staticmethod
     def refresh_for_pruning(v, d, n2, c2, d2):
+        """
+        deprecated
+        :param v:
+        :param d:
+        :param n2:
+        :param c2:
+        :param d2:
+        :return:
+        """
         return [v], [d], [n2], [c2], [d2]
 
     def prune_starting_vertices(self, rootv, prevnodes, nodes, bondgraph, notvisited):
         """
+        deprecated
         prune starting vertices (strands) when there are more than one instances of one strand type
 
         :param rootv: rootmap for nodes (map current nodes to their root nodes)
@@ -115,6 +180,7 @@ class Species:
             info = []
 
             bonds = bondgraph.merge_bonds_ignoring_nodes(v, prevnodes)
+            # TODO: if len(bond)=0
             for i in bonds:
                 bondlen += len(i.dom)
                 for j in range(0, len(i.dom)):

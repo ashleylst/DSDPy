@@ -39,6 +39,14 @@ def compare(a, b):
     return (a > b) - (a < b)
 
 
+def flip(i):
+    if i == 0:
+        i = 1
+    elif i == 1:
+        i = 0
+    return i
+
+
 def get_free_domains(limits, blocks, bound):
     limits = sorted(limits)
     interval = limits[1] - limits[0]
@@ -62,10 +70,22 @@ def get_combinations(oldlen, newlen, cursor, indexlist):
     return combold + combnew + combself
 
 
+def get_migrate_nodes(edges, indices, startstrand):
+    d = []
+    for i in indices:
+        vi, ni = get_edge_info(edges[i][0])
+        if vi[0] == startstrand:
+            d.append(ni[0])
+        else:
+            d.append(ni[1])
+    d.sort()
+    return d
+
+
 def check_following_migration(edges):
     """
 
-    :param e:
+    :param edges:
     :return:
     """
     e = copy.copy(edges)
@@ -161,3 +181,12 @@ def get_closest_target(domains, targets):
         if dist < mindist:
             mint = t
     return mint
+
+
+def check_continuity(a, b):
+    for i in a:
+        for j in b:
+            if i + 1 == j or i - 1 == j:
+                return True
+    return False
+

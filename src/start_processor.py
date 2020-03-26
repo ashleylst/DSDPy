@@ -3,7 +3,7 @@ from src.util import util
 from src.basics import output as on, generate_pysbmodel as gp, initialize_system
 
 
-def start_processor(filedir='res/input', threshold=100):
+def start_processor(filedir='res/input', threshold=10):
     """
     the entry point to DSDPy
 
@@ -18,10 +18,13 @@ def start_processor(filedir='res/input', threshold=100):
         outdir = '../output'
     if len(simupara) == 0:
         simupara = [100, 100]
+    initlen = len(specieslist)
+    if len(initnames) != initlen:
+        for i in range(len(initnames), len(initlen)):
+            initnames.append('ss_'+str(i+1))
 
     reactionlist = []
-    initlen = len(specieslist)
-    visited = [False for i in range(0, len(specieslist))]
+    visited = [False for _ in range(0, len(specieslist))]
     indexlist = []
     cursor = 0
     iteration = 0
@@ -84,5 +87,5 @@ def start_processor(filedir='res/input', threshold=100):
 
 # start_processor(filedir='../res/catalytic_kotani', threshold=4)
 
-start_processor(filedir='../res/input')
+start_processor(filedir='../res/catalytic_kotani', threshold=2)
 
