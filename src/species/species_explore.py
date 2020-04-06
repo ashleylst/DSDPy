@@ -112,8 +112,9 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
         for x in miggroup:
 
             startv = list(e3[x[0]][0] - e3[x[0]][1])
-            endv = list(e3[x[0]][0] & e3[x[0]][1])
             sortdom = util.get_migrate_nodes(e3, x, startv[0][0])
+            '''
+            endv = list(e3[x[0]][0] & e3[x[0]][1])
             p = prevSG.have_anchor(startv[0][0], endv[0][0], sortdom[0], sortdom[len(sortdom)-1])
             if p != -1:
                 if p == -2:
@@ -122,7 +123,7 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
                     con = prevSG.bondgraph.get_connection((p, 0), endv[0][0])
                     if len(con) == 0:
                         continue
-
+            '''
             reaction = ra.Reaction([species], [])
             E = copy.copy(prevE)
             notbond = []
@@ -145,7 +146,17 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
 
             if not flag:
                 continue
+
             strandgraph.reconstruct(E)
+
+            anchor = False
+            for j in range(len(x)):
+                if (startv[0][0], sortdom[0]) in e3[x[j]][0] or (startv[0][0], sortdom[len(sortdom)-1]) in e3[x[j]][0]:
+                    if strandgraph.anchored(e3[x[j]][0]):
+                        anchor = True
+                        break
+            if not anchor:
+                continue
 
             specieslist, speciesidmap, reaction = \
                 generate_multiple_species(strandgraph, specieslist, speciesidmap, reaction)

@@ -139,15 +139,15 @@ class StrandGraph:
         :param e: an edge
         :return: True if anchored, False otherwise
         """
-        # TODO: CHECK DEFINITION OF ANCHOR
         v, n = util.get_edge_info(e)
 
         for i in self.bondgraph.adj[v[0]]:
-            if n[0] + 1 in i.dom or n[0] - 1 in i.dom:
-                if i.node2 == v[1]:
+            if i.node2 == v[1]:
+                if util.check_bond_existence(n[0] + 1, n[1] - 1, i.dom, i.dom2) \
+                        or util.check_bond_existence(n[0] - 1, n[1] + 1, i.dom, i.dom2):
                     return True
 
-        if self.bondgraph.check_junction(v[0], v[1]):
+        if self.bondgraph.check_junction(v[0], v[1], self.toehold):
             return True
 
         return False
@@ -373,6 +373,9 @@ class StrandGraph:
 
         self.reconstruct(prevE)
 
+        if self.anti_parallel(notbond, potbondto):
+            return True
+        '''
         nbbondto = []
         for i in self.bondgraph.adj[notbond[0]]:
             for j in range(0, len(i.dom)):
@@ -406,6 +409,27 @@ class StrandGraph:
                     else:
                         continue
 
+        # add toehold check
+        visited = [False for _ in self.V]
+        if self.find_mediated_toehold(notbond, 0, visited):
+            return True
+            
+        '''
+        return False
+
+    def find_mediated_toehold(self, node, depth, visited):
+        if visited[node[0]]:
+            return False
+
+        visited[node[0]] = True
+        for i in self.bondgraph.adj[node[0]]:
+            for j in range(len(i.dom)):
+                if node[1] + 1 or node[1] - 1 in i.dom:
+                    if self.check_toehold({(i.node1, i.dom[j]), (i.node2, i.dom2[j])}):
+                        return True
+                    else:
+                        if self.find_mediated_toehold((i.node2, i.dom2[j]), depth+1, visited):
+                            return True
         return False
 
     def delete_edge(self, e, prevE):
@@ -459,8 +483,9 @@ class StrandGraph:
 
         else:
             if self.check_switchable(bdomain, tbr[1], r1):
-                self.reconstruct(prevE)
-                return True
+                if self.anchored(r1):
+                    self.reconstruct(prevE)
+                    return True
 
         self.reconstruct(prevE)
         return False

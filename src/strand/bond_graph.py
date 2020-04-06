@@ -95,7 +95,7 @@ class BondGraph:
                 return True
         return False
 
-    def check_junction(self, startnode, endnode):
+    def check_junction(self, startnode, endnode, toehold):
         """
         check if the bond between startnode and endnode is a part of junction
 
@@ -103,6 +103,7 @@ class BondGraph:
         :param endnode:
         :return:
         """
+        toeholdcnt = 0
         for i in self.loop:
             if startnode in i and endnode in i:
                 for j in range(len(i)):
@@ -116,11 +117,26 @@ class BondGraph:
                         pre = j - 1
                         suc = j + 1
                     n = []
+                    toeholddom = {}
 
                     for b in self.adj[i[j]]:
                         if b.node2 == i[pre] or b.node2 == i[suc]:
+                            for k in range(len(b.dom)):
+                                if toehold[frozenset({(b.node1, b.dom[k]), (b.node2, b.dom2[k])})]:
+                                    toeholddom[b.dom[k]] = True
+                                else:
+                                    toeholddom[b.dom[k]] = False
                             n.append(b.dom)
-                    if not util.check_continuity(n[0], n[1]):
+
+                    cont = util.check_continuity(n[0], n[1])
+                    if cont is None:
+                        return False
+                    else:
+                        if toeholddom[cont[0]]:
+                            toeholdcnt += 1
+                        if toeholddom[cont[1]]:
+                            toeholdcnt += 1
+                    if toeholdcnt/2 > 1:
                         return False
                 return True
         return False

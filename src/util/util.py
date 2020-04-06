@@ -187,6 +187,13 @@ def check_continuity(a, b):
     for i in a:
         for j in b:
             if i + 1 == j or i - 1 == j:
-                return True
+                return i, j
+    return None
+
+
+def check_bond_existence(d1, d2, l1, l2):
+    for i in range(len(l1)):
+        if d1 == l1[i] and d2 == l2[i]:
+            return True
     return False
 

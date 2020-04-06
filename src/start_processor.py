@@ -1,12 +1,14 @@
 from src.species import species_explore as se
-from src.util import util
+from src.util import util, cexception
 from src.basics import output as on, generate_pysbmodel as gp, initialize_system
+from src import interface
 
 
-def start_processor(filedir='res/input', threshold=10):
+def start_processor(filedir='../res/input', threshold=10, window=None):
     """
     the entry point to DSDPy
 
+    :param window:
     :param threshold:
     :param filedir: file directory to the input file
     """
@@ -19,9 +21,11 @@ def start_processor(filedir='res/input', threshold=10):
     if len(simupara) == 0:
         simupara = [100, 100]
     initlen = len(specieslist)
-    if len(initnames) != initlen:
-        for i in range(len(initnames), len(initlen)):
+    if len(initnames) < initlen:
+        for i in range(len(initnames), initlen):
             initnames.append('ss_'+str(i+1))
+    elif len(initnames) > initlen:
+        raise cexception.SpeciesError("there are more initial species names than the number of initial species")
 
     reactionlist = []
     visited = [False for _ in range(0, len(specieslist))]
@@ -85,7 +89,6 @@ def start_processor(filedir='res/input', threshold=10):
                           filedir=outdir)
 
 
-# start_processor(filedir='../res/catalytic_kotani', threshold=4)
+start_processor(filedir='../res/input')
 
-start_processor(filedir='../res/catalytic_kotani', threshold=2)
 
