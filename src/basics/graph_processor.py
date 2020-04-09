@@ -72,18 +72,21 @@ def post_enumeration(specieslist, reactionlist, initlen, initnames, concentratio
     if len(md.rules) != 0:
         # example use for using Scipy ODE simulator:
         # on.simulate_scipy(md, filedir=outdir, time=simupara[0], steps=simupara[1])
-        on.simulate_bng(md,
-                        filedir=outdir,
-                        time=simupara[0],
-                        steps=simupara[1],
-                        colormap='tab10')
+        x, y, obs = on.simulate_bng(md, time=simupara[0], steps=simupara[1])
+    else:
+        return
 
-    on.output_network_txt(specieslist,
-                          reactionlist,
-                          filedir=outdir)
+    text = on.generate_text(specieslist, reactionlist)
+
+    return x, y, obs, text
 
 
 def entry(filedir):
+    """
+    For debugging use.
+    :param filedir: input file directory
+    :return:
+    """
     info, initnames, concentrations, outdir, simupara, initlen = initiation(filedir)
     while not info[6][info[5]]:
         info = one_iteration(*info)

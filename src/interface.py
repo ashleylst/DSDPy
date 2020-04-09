@@ -1,9 +1,12 @@
 import sys
 import os
+import threading
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtGui import QPixmap
-from src import model, graph_processor, processorthread, uiwindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+import matplotlib.pyplot as plt
+from src.util import processorthread, model, uiwindow
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from src.basics import output, graph_processor
 
 
 class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
@@ -14,6 +17,7 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.lock = None
         self.simuarg = None
         self.paused = False
+        self.canvas = None
         self.setupUi(self)
 
     def refresh(self):
@@ -37,16 +41,28 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
             self.refresh()
 
     def browseSlot(self):
-        options = QtWidgets.QFileDialog.Options()
-        options |= QtWidgets.QFileDialog.DontUseNativeDialog
-        fname, filetype = QtWidgets.QFileDialog.getOpenFileName(self,
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fname, filetype = QFileDialog.getOpenFileName(self,
                                                           "Select File",
                                                           "./",
                                                           "All Files (*);;Text Files (*.txt)")
         if fname:
-            self.debugPrint("setting file name: " + fname)
+            self.debugPrint("setting file directory: " + fname)
             self.model.set_filename(fname)
             self.refresh()
+
+    def runSlot(self):
+        self.pushButton_4.setEnabled(True)
+        self.pushButton_5.setEnabled(True)
+        self.pushButton_2.setEnabled(False)
+
+    def my_event(self):
+        self.debugPrint("Simulation Finished.")
+        self.pushButton_2.setEnabled(True)
+        self.pushButton_4.setEnabled(False)
+        self.pushButton_5.setEnabled(False)
+        self.showSlot()
 
     def submitSlot(self):
         # Take care of submitting more than once
@@ -100,18 +116,30 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.debugPrint("Submitted File")
         info, initnames, concentrations, outdir, simupara, initlen = graph_processor.initiation(text=text)
         self.simuarg = (initnames, concentrations, outdir, simupara, initlen)
-        self.procthread = processorthread.ProcessorThread(args=info)
+
+        event = threading.Event()
+        self.procthread = processorthread.ProcessorThread(event, args=info)
         self.procthread.setDaemon(True)
         self.lock = self.procthread.get_lock()
         self.paused = False
+
         self.procthread.start()
 
+        # show results when finished
+        self.procthread.pp.my_signal.connect(self.my_event)
+
     def pauseSlot(self):
-        if not self.procthread or self.paused:
+        if not self.procthread:
             return
+        if self.paused:
+            self.resumeSlot()
+            return
+
         print("need to pause")
         self.lock.acquire()
         self.procthread.pause()
+        self.pushButton_4.setText('Resume')
+        self.pushButton_6.setEnabled(True)
         self.paused = True
 
     def resumeSlot(self):
@@ -122,12 +150,19 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
             self.lock.release()
         self.procthread.resume()
         self.paused = False
+        self.pushButton_4.setText("Pause")
+        self.pushButton_6.setEnabled(False)
 
     def stopSlot(self):
         if not self.procthread:
             return
         if not self.paused:
             self.lock.acquire()
+        self.pushButton_4.setText("Pause")
+        self.pushButton_4.setEnabled(False)
+        self.pushButton_5.setEnabled(False)
+        self.pushButton_6.setEnabled(True)
+        self.pushButton_2.setEnabled(True)
         self.procthread.stop()
 
     def showSlot(self):
@@ -135,20 +170,66 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
             return
         specieslist, speciesidmap, reactionlist, kinetics, indexlist, cursor, visited = self.procthread.get_arg_info()
         initnames, concentrations, outdir, simupara, initlen = self.simuarg
-        graph_processor.post_enumeration(specieslist, reactionlist, initlen, initnames, concentrations, outdir, simupara)
-        self.display_output_txt(outdir+'/output.txt')
-        self.display_output_img(outdir + '/simres.png')
+        x, y, obs, text = graph_processor.post_enumeration(specieslist, reactionlist, initlen, initnames, concentrations, outdir, simupara)
+        self.display_output_txt(text)
+        self.display_output_img(x, y, obs)
+        self.pushButton_3.setEnabled(True)
+
+    def saveSlot(self):
+        text = self.debugTextBrowser.toPlainText()
+        if len(text) == 0:
+            return
+
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fname, _ = QFileDialog.getSaveFileName(self, "QFileDialog.getSaveFileName()", "",
+                                                  "All Files (*);;Text Files (*.txt)", options=options)
+        if fname:
+            file = open(fname, 'w+')
+            file.write(text)
+            file.close()
 
     def debugPrint(self, msg):
         self.debugTextBrowser.append(msg)
 
-    def display_output_txt(self, fname):
-        self.reneTextBrowser.setText(open(fname, 'r').read())
+    def display_output_txt(self, text):
+        self.reneTextBrowser.setText(text)
         # self.textBrowser.append(open(fname, 'r').read())
 
-    def display_output_img(self, fname):
-        pixmap = QPixmap(fname)
-        self.imageLabel.setPixmap(pixmap)
+    def display_output_img(self, x, y, obs, colormap='tab10', option='bng'):
+        obslen = len(obs)
+        if self.canvas is None:
+            sc = output.Canvas(self, width=5, height=6, dpi=100)
+            self.canvas = sc
+            toolbar = NavigationToolbar(sc, self)
+
+            layout = QtWidgets.QVBoxLayout()
+            layout.addWidget(toolbar)
+            layout.addWidget(sc)
+
+            # Create a placeholder widget to hold our toolbar and canvas.
+            widget = QtWidgets.QWidget(self.frame_4)
+            widget.setLayout(layout)
+            self.verticalLayout_3.addWidget(widget)
+        else:
+            sc = self.canvas
+            sc.axes.cla()
+
+        cmap = plt.cm.get_cmap(colormap, obslen)
+
+        for i in range(0, obslen):
+            label = obs[i].name[3:]
+            if option == 'bng':
+                sc.axes.plot(x, y[:, i], label=label, c=cmap(i))
+            elif option == 'scipy':
+                sc.axes.plot(x, y[obs[i].name], label=label, c=cmap(i))
+
+        sc.axes.set_xlabel("Time (s)")
+        sc.axes.set_ylabel("Complexes")
+        sc.axes.legend(bbox_to_anchor=(1.01, 1))
+        sc.axes.set_xmargin(0.5)
+
+        sc.draw()
 
 
 if __name__ == '__main__':

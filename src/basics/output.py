@@ -3,6 +3,14 @@ import numpy as np
 from pysb.simulator import ScipyOdeSimulator
 import matplotlib.pyplot as plt
 from pysb.bng import *
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+
+
+class Canvas(FigureCanvasQTAgg):
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = plt.Figure(figsize=(width, height), dpi=dpi, tight_layout=True)
+        self.axes = fig.add_subplot(111, xmargin=0.01)
+        super(Canvas, self).__init__(fig)
 
 
 def generate_incidence_matrix(specieslist, reactionlist):
@@ -28,7 +36,7 @@ def generate_incidence_matrix(specieslist, reactionlist):
     return nodes, edges, matrix
 
 
-def visualize_simulation_results(x, y, obs, filedir, option='bng', colormap='Paired'):
+def visualize_simulation_results(x, y, obs, filedir='../output', option='bng', colormap='Paired'):
     """
 
     :param colormap: colormap setting
@@ -67,6 +75,7 @@ def output_network_txt(specieslist, reactionlist, filedir='../output'):
     :param filedir: file directory to write the txt file
     """
     file = open(filedir + '/output.txt', 'w+')
+    '''
     file.write('-----Species-----\n')
     for i in specieslist:
         file.write(i.generate_output())
@@ -86,11 +95,32 @@ def output_network_txt(specieslist, reactionlist, filedir='../output'):
 
     for rowlabel, row in zip(rowlabels, incidencematrix):
         print('%s %s' % ('%03s' % rowlabel, ' '.join('%s' % i for i in row)), file=file)
-
+    '''
+    file.write(generate_text(specieslist, reactionlist))
     file.close()
 
 
-def simulate_bng(model, time=1000, steps=100, bngnetwork=False, filedir='../output', colormap='Paired'):
+def generate_text(specieslist, reactionlist):
+    text = '-----Species-----\n'
+    for i in specieslist:
+        text += i.generate_output() + '\n'
+
+    text += '-----Reactions-----\n'
+    for i in reactionlist:
+        text += i.generate_output() + '\n'
+
+    text += '-----Incidence Matrix-----\n'
+    rowlabels, collabels, incidencematrix = generate_incidence_matrix(specieslist, reactionlist)
+    incidencematrix = incidencematrix.todense()
+
+    text += ' '.join([str(elem) for elem in collabels]) + '\n'
+    for rowlabel, row in zip(rowlabels, incidencematrix):
+        text += '%s %s' % ('%03s' % rowlabel, ' '.join('%s' % i for i in row)) + '\n'
+
+    return text
+
+
+def simulate_bng(model, time=1000, steps=100, bngnetwork=False):
     """
     simulate the reaction network using BNG
 
@@ -112,11 +142,15 @@ def simulate_bng(model, time=1000, steps=100, bngnetwork=False, filedir='../outp
     output = np.array(output)
     row, column = output.shape
 
+    '''
     visualize_simulation_results(output[:, 0],
                                  output[:, monomerlen + 1: column],
                                  model.observables, filedir,
                                  option='bng',
                                  colormap=colormap)
+    '''
+
+    return output[:, 0], output[:, monomerlen + 1: column], model.observables
 
 
 def simulate_scipy(model, time=1000, steps=100, filedir='../output', colormap='Paired'):

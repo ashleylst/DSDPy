@@ -77,11 +77,10 @@ def start_processor(filedir='../res/input', threshold=10, window=None):
     if len(md.rules) != 0:
         # example use for using Scipy ODE simulator:
         # on.simulate_scipy(md, filedir=outdir, time=simupara[0], steps=simupara[1])
-        on.simulate_bng(md,
-                        filedir=outdir,
+        x, y, obs = on.simulate_bng(md,
                         time=simupara[0],
-                        steps=simupara[1],
-                        colormap='tab10')
+                        steps=simupara[1])
+        on.visualize_simulation_results(x, y, obs)
 
     # output for GUI interface
     on.output_network_txt(specieslist,
