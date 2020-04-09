@@ -1,7 +1,6 @@
 from src.species import species_explore as se
 from src.util import util, cexception
 from src.basics import output as on, generate_pysbmodel as gp, initialize_system
-from src import interface
 
 
 def start_processor(filedir='../res/input', threshold=10, window=None):
