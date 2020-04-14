@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -144,11 +144,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for src.basics.initialize_system</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">src.basics</span> <span class="k">import</span> <span class="n">lexical_analyzer</span> <span class="k">as</span> <span class="n">lex</span>
-<span class="kn">from</span> <span class="nn">src.strand</span> <span class="k">import</span> <span class="n">strand_graph</span> <span class="k">as</span> <span class="n">sg</span><span class="p">,</span> <span class="n">bond_graph</span> <span class="k">as</span> <span class="n">bg</span>
-<span class="kn">from</span> <span class="nn">src.species</span> <span class="k">import</span> <span class="n">species</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="kn">from</span> <span class="nn">src.species</span> <span class="k">import</span> <span class="n">species_explore</span> <span class="k">as</span> <span class="n">se</span>
-<span class="kn">from</span> <span class="nn">bidict</span> <span class="k">import</span> <span class="n">bidict</span>
+<span></span><span class="kn">from</span> <span class="nn">src.basics</span> <span class="kn">import</span> <span class="n">lexical_analyzer</span> <span class="k">as</span> <span class="n">lex</span>
+<span class="kn">from</span> <span class="nn">src.strand</span> <span class="kn">import</span> <span class="n">strand_graph</span> <span class="k">as</span> <span class="n">sg</span><span class="p">,</span> <span class="n">bond_graph</span> <span class="k">as</span> <span class="n">bg</span>
+<span class="kn">from</span> <span class="nn">src.species</span> <span class="kn">import</span> <span class="n">species</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="kn">from</span> <span class="nn">src.species</span> <span class="kn">import</span> <span class="n">species_explore</span> <span class="k">as</span> <span class="n">se</span>
+<span class="kn">from</span> <span class="nn">src.util</span> <span class="kn">import</span> <span class="n">cexception</span> <span class="k">as</span> <span class="n">ex</span>
+<span class="kn">from</span> <span class="nn">bidict</span> <span class="kn">import</span> <span class="n">bidict</span>
 
 
 <div class="viewcode-block" id="get_additional_info"><a class="viewcode-back" href="../../../src.basics.html#src.basics.initialize_system.get_additional_info">[docs]</a><span class="k">def</span> <span class="nf">get_additional_info</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
@@ -165,15 +166,24 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">concentrations</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+
     <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;--</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">kinetics</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">simupara</span> <span class="o">=</span> <span class="n">get_kinetics</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
             <span class="k">break</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">concentrations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;kinetics not defined.&quot;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">names</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">,</span> <span class="n">kinetics</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">simupara</span></div>
 
 
@@ -224,7 +234,7 @@
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">outdir</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="n">outdir</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">simupara</span> <span class="o">=</span> <span class="n">line</span>
     <span class="k">return</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">simupara</span></div>
@@ -246,6 +256,8 @@
     <span class="n">kinetics</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">strands</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">speciesbreak</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">splabelling</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">speciesnum</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filedir</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -253,21 +265,31 @@
 
         <span class="n">strand</span> <span class="o">=</span> <span class="n">lex</span><span class="o">.</span><span class="n">lexer_strand</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
         <span class="n">strands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strand</span><span class="p">)</span>
+        <span class="n">speciesnum</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cursplabel</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
             <span class="c1"># print(&quot;Line {}: {}&quot;.format(cnt, line.strip()))</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cursplabel</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">cursplabel</span> <span class="o">+=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cursplabel</span> <span class="o">+=</span> <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
                 <span class="k">break</span>
 
             <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;--</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+                <span class="n">splabelling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cursplabel</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">cursplabel</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
                 <span class="n">names</span><span class="p">,</span> <span class="n">concentrations</span><span class="p">,</span> <span class="n">kinetics</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">simupara</span> <span class="o">=</span> <span class="n">get_additional_info</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
                 <span class="k">break</span>
 
             <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;//</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
                 <span class="n">speciesbreak</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strands</span><span class="p">))</span>
+                <span class="n">splabelling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cursplabel</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">cursplabel</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">cursplabel</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">speciesnum</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">continue</span>
 
             <span class="n">strand</span> <span class="o">=</span> <span class="n">lex</span><span class="o">.</span><span class="n">lexer_strand</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
@@ -278,6 +300,9 @@
                     <span class="k">break</span>
             <span class="n">strands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strand</span><span class="p">)</span>
             <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">speciesnum</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">splabelling</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">splabelling</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cursplabel</span><span class="p">)</span>
 
     <span class="n">specieslist</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">speciesidmap</span> <span class="o">=</span> <span class="n">bidict</span><span class="p">()</span>
@@ -296,8 +321,39 @@
 
         <span class="n">species</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Species</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">,</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">)</span>
         <span class="n">species</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
         <span class="n">speciesidmap</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">species</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">species</span><span class="o">.</span><span class="n">canonicalform</span><span class="p">)</span>
         <span class="n">specieslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">species</span><span class="p">)</span>
+
+    <span class="c1"># error handling</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kinetics</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;not sufficient types of reaction rates defined.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;reaction rates undefined.&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;RB&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;binding rate is set to 0.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;binding rate undefined.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;RU&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unbinding rate is set to 0.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;unbinding rate undefined&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;R3&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3-way migration rate is set to 0.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;3-way migration rate undefined.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kinetics</span><span class="p">[</span><span class="s1">&#39;R4&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4-way migration rate is set to 0.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">KineticsError</span><span class="p">(</span><span class="s2">&quot;4-way migration rate undefined.&quot;</span><span class="p">)</span>
+
+
 
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    strandgraph = sg.StrandGraph(strands)</span>

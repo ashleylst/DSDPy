@@ -694,7 +694,7 @@
       case '[object Date]':
       case '[object Boolean]':
         // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-        // millisecond representations. Note that illegal dates with millisecond representations
+        // millisecond representations. Note that invalid dates with millisecond representations
         // of `NaN` are not equivalent.
         return +a == +b;
       // RegExps are compared by their source patterns and flags.

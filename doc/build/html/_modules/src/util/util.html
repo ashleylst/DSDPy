@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -144,7 +144,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for src.util.util</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">combinations</span>
+<span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 
 
@@ -185,6 +185,14 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="flip"><a class="viewcode-back" href="../../../src.util.html#src.util.util.flip">[docs]</a><span class="k">def</span> <span class="nf">flip</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">i</span></div>
+
+
 <div class="viewcode-block" id="get_free_domains"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_free_domains">[docs]</a><span class="k">def</span> <span class="nf">get_free_domains</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="n">blocks</span><span class="p">,</span> <span class="n">bound</span><span class="p">):</span>
     <span class="n">limits</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span>
     <span class="n">interval</span> <span class="o">=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -208,10 +216,22 @@
     <span class="k">return</span> <span class="n">combold</span> <span class="o">+</span> <span class="n">combnew</span> <span class="o">+</span> <span class="n">combself</span></div>
 
 
+<div class="viewcode-block" id="get_migrate_nodes"><a class="viewcode-back" href="../../../src.util.html#src.util.util.get_migrate_nodes">[docs]</a><span class="k">def</span> <span class="nf">get_migrate_nodes</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">startstrand</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="n">vi</span><span class="p">,</span> <span class="n">ni</span> <span class="o">=</span> <span class="n">get_edge_info</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">vi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">startstrand</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ni</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ni</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
 <div class="viewcode-block" id="check_following_migration"><a class="viewcode-back" href="../../../src.util.html#src.util.util.check_following_migration">[docs]</a><span class="k">def</span> <span class="nf">check_following_migration</span><span class="p">(</span><span class="n">edges</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    :param e:</span>
+<span class="sd">    :param edges:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
@@ -307,6 +327,22 @@
         <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">mindist</span><span class="p">:</span>
             <span class="n">mint</span> <span class="o">=</span> <span class="n">t</span>
     <span class="k">return</span> <span class="n">mint</span></div>
+
+
+<div class="viewcode-block" id="check_continuity"><a class="viewcode-back" href="../../../src.util.html#src.util.util.check_continuity">[docs]</a><span class="k">def</span> <span class="nf">check_continuity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">j</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="check_bond_existence"><a class="viewcode-back" href="../../../src.util.html#src.util.util.check_bond_existence">[docs]</a><span class="k">def</span> <span class="nf">check_bond_existence</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l1</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">l1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="n">d2</span> <span class="o">==</span> <span class="n">l2</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
 </pre></div>
 
            </div>

@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -144,8 +144,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for src.species.species</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">src.util</span> <span class="k">import</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">src.basics</span> <span class="k">import</span> <span class="n">lexical_analyzer</span> <span class="k">as</span> <span class="n">lex</span>
+<span></span><span class="kn">from</span> <span class="nn">src.util</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">src.basics</span> <span class="kn">import</span> <span class="n">lexical_analyzer</span> <span class="k">as</span> <span class="n">lex</span>
 <span class="kn">import</span> <span class="nn">queue</span>
 <span class="kn">import</span> <span class="nn">operator</span>
 
@@ -176,7 +176,7 @@
     <span class="n">parsingseq</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="sd">&#39;&#39;&#39; parsing sequence for deriving canonical form&#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">colorset</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">nodes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span> <span class="o">=</span> <span class="n">colormap</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colorset</span> <span class="o">=</span> <span class="n">colorset</span>
@@ -220,21 +220,86 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">startingvertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prune_starting_vertices</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">derive_rootmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">]),</span>
-            <span class="nb">set</span><span class="p">(),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">],</span>
-            <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="p">,</span>
-            <span class="nb">set</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">))</span>
-
+        <span class="n">startingvertex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prune</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colormap</span><span class="p">[</span><span class="n">minc</span><span class="p">]),</span> <span class="n">strandgraph</span><span class="p">)</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        startingvertex = self.prune_starting_vertices(</span>
+<span class="sd">            self.derive_rootmap(self.colormap[minc]),</span>
+<span class="sd">            set(),</span>
+<span class="sd">            self.colormap[minc],</span>
+<span class="sd">            strandgraph.bondgraph,</span>
+<span class="sd">            set(strandgraph.V))</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">startingvertex</span></div>
+
+<div class="viewcode-block" id="Species.prune"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.prune">[docs]</a>    <span class="k">def</span> <span class="nf">prune</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">strandgraph</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pruning algorithm for selecting starting vertex</span>
+<span class="sd">        :param nodes: candidate nodes</span>
+<span class="sd">        :param strandgraph:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strandgraph</span><span class="o">.</span><span class="n">V</span><span class="p">))]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+        <span class="n">labelling</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+        <span class="n">bondnum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+        <span class="n">pendingbond</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)):</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+            <span class="n">minv</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">labelling</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))]</span>
+            <span class="n">delete</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">kept</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)):</span>
+                <span class="n">curv</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">curv</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">labelling</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bondnum</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">pendingbond</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span>
+                                                                            <span class="n">curv</span><span class="p">,</span>
+                                                                            <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                                            <span class="n">bondnum</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                                            <span class="n">pendingbond</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                                            <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                                                                            <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">minv</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">labelling</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">labelling</span><span class="p">[</span><span class="n">minv</span><span class="p">]:</span>
+                        <span class="n">delete</span> <span class="o">=</span> <span class="n">kept</span>
+                        <span class="n">kept</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">minv</span> <span class="o">=</span> <span class="n">i</span>
+                    <span class="k">elif</span> <span class="n">labelling</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">labelling</span><span class="p">[</span><span class="n">minv</span><span class="p">]:</span>
+                        <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">delete</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">delete</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">delete</span><span class="p">:</span>
+                <span class="n">nodes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">bondnum</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">pendingbond</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">visited</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Species.refresh_for_pruning"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.refresh_for_pruning">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">refresh_for_pruning</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        deprecated</span>
+<span class="sd">        :param v:</span>
+<span class="sd">        :param d:</span>
+<span class="sd">        :param n2:</span>
+<span class="sd">        :param c2:</span>
+<span class="sd">        :param d2:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="p">[</span><span class="n">n2</span><span class="p">],</span> <span class="p">[</span><span class="n">c2</span><span class="p">],</span> <span class="p">[</span><span class="n">d2</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Species.prune_starting_vertices"><a class="viewcode-back" href="../../../src.species.html#src.species.species.Species.prune_starting_vertices">[docs]</a>    <span class="k">def</span> <span class="nf">prune_starting_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rootv</span><span class="p">,</span> <span class="n">prevnodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">bondgraph</span><span class="p">,</span> <span class="n">notvisited</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        deprecated</span>
 <span class="sd">        prune starting vertices (strands) when there are more than one instances of one strand type</span>
 
 <span class="sd">        :param rootv: rootmap for nodes (map current nodes to their root nodes)</span>
@@ -261,6 +326,7 @@
             <span class="n">info</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="n">bonds</span> <span class="o">=</span> <span class="n">bondgraph</span><span class="o">.</span><span class="n">merge_bonds_ignoring_nodes</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">prevnodes</span><span class="p">)</span>
+            <span class="c1"># TODO: if len(bond)=0</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bonds</span><span class="p">:</span>
                 <span class="n">bondlen</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">dom</span><span class="p">)):</span>

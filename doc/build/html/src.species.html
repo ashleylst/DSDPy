@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -152,20 +152,20 @@
 </div>
 <div class="section" id="module-src.species.species">
 <span id="src-species-species-module"></span><h2>src.species.species module<a class="headerlink" href="#module-src.species.species" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.species.species.Species">
-<em class="property">class </em><code class="sig-prename descclassname">src.species.species.</code><code class="sig-name descname">Species</code><span class="sig-paren">(</span><em class="sig-param">nodes</em>, <em class="sig-param">colorset</em>, <em class="sig-param">colormap</em>, <em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.species.species.</code><code class="sig-name descname">Species</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nodes</span></em>, <em class="sig-param"><span class="n">colorset</span></em>, <em class="sig-param"><span class="n">colormap</span></em>, <em class="sig-param"><span class="n">strandgraph</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Species (DNA Complexes) consists of one or more strands</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.canonicalform">
 <code class="sig-name descname">canonicalform</code><em class="property"> = ''</em><a class="headerlink" href="#src.species.species.Species.canonicalform" title="Permalink to this definition">¶</a></dt>
 <dd><p>canonical form</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.check_pendingbond">
-<em class="property">static </em><code class="sig-name descname">check_pendingbond</code><span class="sig-paren">(</span><em class="sig-param">b</em>, <em class="sig-param">pending</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.check_pendingbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.check_pendingbond" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">check_pendingbond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">pending</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.check_pendingbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.check_pendingbond" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if b is in pending bonds</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -180,27 +180,27 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.colormap">
 <code class="sig-name descname">colormap</code><em class="property"> = {}</em><a class="headerlink" href="#src.species.species.Species.colormap" title="Permalink to this definition">¶</a></dt>
 <dd><p>map colors to nodes</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.colorset">
 <code class="sig-name descname">colorset</code><em class="property"> = {}</em><a class="headerlink" href="#src.species.species.Species.colorset" title="Permalink to this definition">¶</a></dt>
 <dd><p>set of colors</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.construct_strands">
 <code class="sig-name descname">construct_strands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.construct_strands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.construct_strands" title="Permalink to this definition">¶</a></dt>
 <dd><p>reverse construction of strands: canonical form -&gt; strands</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.derive_canonical_form">
-<code class="sig-name descname">derive_canonical_form</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.derive_canonical_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.derive_canonical_form" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">derive_canonical_form</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strandgraph</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.derive_canonical_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.derive_canonical_form" title="Permalink to this definition">¶</a></dt>
 <dd><p>derive a canonical form for the species</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -209,12 +209,12 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.derive_rootmap">
-<em class="property">static </em><code class="sig-name descname">derive_rootmap</code><span class="sig-paren">(</span><em class="sig-param">nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.derive_rootmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.derive_rootmap" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">derive_rootmap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nodes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.derive_rootmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.derive_rootmap" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.generate_output">
 <code class="sig-name descname">generate_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.generate_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.generate_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>supporting function for txt output</p>
@@ -225,9 +225,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.get_starting_vertex">
-<code class="sig-name descname">get_starting_vertex</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.get_starting_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.get_starting_vertex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_starting_vertex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strandgraph</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.get_starting_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.get_starting_vertex" title="Permalink to this definition">¶</a></dt>
 <dd><p>find the starting vertex to do derive canonical function</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -239,28 +239,38 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.id">
 <code class="sig-name descname">id</code><em class="property"> = -1</em><a class="headerlink" href="#src.species.species.Species.id" title="Permalink to this definition">¶</a></dt>
 <dd><p>species id</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.nodes">
 <code class="sig-name descname">nodes</code><em class="property"> = []</em><a class="headerlink" href="#src.species.species.Species.nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>strand ids in the species</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.parsingseq">
 <code class="sig-name descname">parsingseq</code><em class="property"> = []</em><a class="headerlink" href="#src.species.species.Species.parsingseq" title="Permalink to this definition">¶</a></dt>
 <dd><p>parsing sequence for deriving canonical form</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="src.species.species.Species.prune">
+<code class="sig-name descname">prune</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nodes</span></em>, <em class="sig-param"><span class="n">strandgraph</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.prune"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.prune" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pruning algorithm for selecting starting vertex
+:param nodes: candidate nodes
+:param strandgraph:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.species.species.Species.prune_starting_vertices">
-<code class="sig-name descname">prune_starting_vertices</code><span class="sig-paren">(</span><em class="sig-param">rootv</em>, <em class="sig-param">prevnodes</em>, <em class="sig-param">nodes</em>, <em class="sig-param">bondgraph</em>, <em class="sig-param">notvisited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.prune_starting_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.prune_starting_vertices" title="Permalink to this definition">¶</a></dt>
-<dd><p>prune starting vertices (strands) when there are more than one instances of one strand type</p>
+<code class="sig-name descname">prune_starting_vertices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rootv</span></em>, <em class="sig-param"><span class="n">prevnodes</span></em>, <em class="sig-param"><span class="n">nodes</span></em>, <em class="sig-param"><span class="n">bondgraph</span></em>, <em class="sig-param"><span class="n">notvisited</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.prune_starting_vertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.prune_starting_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>deprecated
+prune starting vertices (strands) when there are more than one instances of one strand type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -277,25 +287,32 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.refresh_for_pruning">
-<em class="property">static </em><code class="sig-name descname">refresh_for_pruning</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">d</em>, <em class="sig-param">n2</em>, <em class="sig-param">c2</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.refresh_for_pruning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.refresh_for_pruning" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property">static </em><code class="sig-name descname">refresh_for_pruning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n2</span></em>, <em class="sig-param"><span class="n">c2</span></em>, <em class="sig-param"><span class="n">d2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.refresh_for_pruning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.refresh_for_pruning" title="Permalink to this definition">¶</a></dt>
+<dd><p>deprecated
+:param v:
+:param d:
+:param n2:
+:param c2:
+:param d2:
+:return:</p>
+</dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.set_id">
-<code class="sig-name descname">set_id</code><span class="sig-paren">(</span><em class="sig-param">id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.set_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.set_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.set_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.set_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.species.species.Species.strands">
 <code class="sig-name descname">strands</code><em class="property"> = []</em><a class="headerlink" href="#src.species.species.Species.strands" title="Permalink to this definition">¶</a></dt>
 <dd><p>strands</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.species.species.Species.traverse">
-<code class="sig-name descname">traverse</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">curv</em>, <em class="sig-param">q</em>, <em class="sig-param">bondnum</em>, <em class="sig-param">pendingbond</em>, <em class="sig-param">canonical</em>, <em class="sig-param">visited</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.traverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.traverse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">traverse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strandgraph</span></em>, <em class="sig-param"><span class="n">curv</span></em>, <em class="sig-param"><span class="n">q</span></em>, <em class="sig-param"><span class="n">bondnum</span></em>, <em class="sig-param"><span class="n">pendingbond</span></em>, <em class="sig-param"><span class="n">canonical</span></em>, <em class="sig-param"><span class="n">visited</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species.html#Species.traverse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species.Species.traverse" title="Permalink to this definition">¶</a></dt>
 <dd><p>traverse the strand and produce a canonical form</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -320,9 +337,9 @@
 </div>
 <div class="section" id="module-src.species.species_explore">
 <span id="src-species-species-explore-module"></span><h2>src.species.species_explore module<a class="headerlink" href="#module-src.species.species_explore" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.bi">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">bi</code><span class="sig-paren">(</span><em class="sig-param">speciescomb</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reactionlist</em>, <em class="sig-param">kinetics</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#bi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.bi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">bi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">speciescomb</span></em>, <em class="sig-param"><span class="n">specieslist</span></em>, <em class="sig-param"><span class="n">speciesidmap</span></em>, <em class="sig-param"><span class="n">reactionlist</span></em>, <em class="sig-param"><span class="n">kinetics</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#bi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.bi" title="Permalink to this definition">¶</a></dt>
 <dd><p>bi-molecule reaction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -339,9 +356,9 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.check_existence">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">check_existence</code><span class="sig-paren">(</span><em class="sig-param">species</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#check_existence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.check_existence" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">check_existence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">species</span></em>, <em class="sig-param"><span class="n">specieslist</span></em>, <em class="sig-param"><span class="n">speciesidmap</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#check_existence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.check_existence" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the produced species is new in the DSD system</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -357,14 +374,14 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.check_hidden_prevbond">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">check_hidden_prevbond</code><span class="sig-paren">(</span><em class="sig-param">E</em>, <em class="sig-param">strandgraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#check_hidden_prevbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.check_hidden_prevbond" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">check_hidden_prevbond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">strandgraph</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#check_hidden_prevbond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.check_hidden_prevbond" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.generate_colorinfo">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_colorinfo</code><span class="sig-paren">(</span><em class="sig-param">color</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_colorinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_colorinfo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_colorinfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_colorinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_colorinfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate color information based on strand graph’s color</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -377,9 +394,9 @@ colormap: a map of color to id of the strand</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.generate_multiple_species">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_multiple_species</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reaction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_multiple_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_multiple_species" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_multiple_species</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strandgraph</span></em>, <em class="sig-param"><span class="n">specieslist</span></em>, <em class="sig-param"><span class="n">speciesidmap</span></em>, <em class="sig-param"><span class="n">reaction</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_multiple_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_multiple_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate multiple species (applies when unbinding and migrating)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -396,9 +413,9 @@ colormap: a map of color to id of the strand</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.generate_species">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_species</code><span class="sig-paren">(</span><em class="sig-param">strandgraph</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reaction</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_species" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">generate_species</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strandgraph</span></em>, <em class="sig-param"><span class="n">specieslist</span></em>, <em class="sig-param"><span class="n">speciesidmap</span></em>, <em class="sig-param"><span class="n">reaction</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#generate_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.generate_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate a species</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -415,9 +432,9 @@ colormap: a map of color to id of the strand</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="src.species.species_explore.mono">
-<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">mono</code><span class="sig-paren">(</span><em class="sig-param">species</em>, <em class="sig-param">specieslist</em>, <em class="sig-param">speciesidmap</em>, <em class="sig-param">reactionlist</em>, <em class="sig-param">kinetics</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#mono"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.mono" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">src.species.species_explore.</code><code class="sig-name descname">mono</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">species</span></em>, <em class="sig-param"><span class="n">specieslist</span></em>, <em class="sig-param"><span class="n">speciesidmap</span></em>, <em class="sig-param"><span class="n">reactionlist</span></em>, <em class="sig-param"><span class="n">kinetics</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/species/species_explore.html#mono"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.species.species_explore.mono" title="Permalink to this definition">¶</a></dt>
 <dd><p>mono-molecule reaction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

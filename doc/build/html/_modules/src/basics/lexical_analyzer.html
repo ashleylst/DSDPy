@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -144,7 +144,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for src.basics.lexical_analyzer</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">src.strand</span> <span class="k">import</span> <span class="n">strand</span> <span class="k">as</span> <span class="n">sta</span>
+<span></span><span class="kn">from</span> <span class="nn">src.strand</span> <span class="kn">import</span> <span class="n">strand</span> <span class="k">as</span> <span class="n">sta</span>
+<span class="kn">from</span> <span class="nn">src.util</span> <span class="kn">import</span> <span class="n">cexception</span> <span class="k">as</span> <span class="n">ex</span>
 
 
 <div class="viewcode-block" id="lexer_strand"><a class="viewcode-back" href="../../../src.basics.html#src.basics.lexical_analyzer.lexer_strand">[docs]</a><span class="k">def</span> <span class="nf">lexer_strand</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">cnt</span><span class="p">):</span>
@@ -157,11 +158,16 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
 
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">SpeciesError</span><span class="p">(</span><span class="s2">&quot;illegal species text representation.&quot;</span><span class="p">)</span>
+
     <span class="n">strand</span> <span class="o">=</span> <span class="n">sta</span><span class="o">.</span><span class="n">Strand</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
         <span class="n">ch</span> <span class="o">=</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ch</span> <span class="o">!=</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">SpeciesError</span><span class="p">(</span><span class="s2">&quot;illegal species text representation.&quot;</span><span class="p">)</span>
             <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
             <span class="n">toehold</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">comp</span> <span class="o">=</span> <span class="kc">False</span>
@@ -212,6 +218,8 @@
             <span class="n">state</span> <span class="o">=</span> <span class="mi">4</span>
 
         <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ex</span><span class="o">.</span><span class="n">SpeciesError</span><span class="p">(</span><span class="s2">&quot;illegal species text representation.&quot;</span><span class="p">)</span>
             <span class="n">strand</span><span class="o">.</span><span class="n">add_color</span><span class="p">(</span><span class="n">cnt</span><span class="p">)</span>
             <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
 

@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -146,9 +146,17 @@
   <h1>Source code for src.basics.output</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pysb.simulator</span> <span class="k">import</span> <span class="n">ScipyOdeSimulator</span>
+<span class="kn">from</span> <span class="nn">pysb.simulator</span> <span class="kn">import</span> <span class="n">ScipyOdeSimulator</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pysb.bng</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">pysb.bng</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">matplotlib.backends.backend_qt5agg</span> <span class="kn">import</span> <span class="n">FigureCanvasQTAgg</span>
+
+
+<div class="viewcode-block" id="Canvas"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.Canvas">[docs]</a><span class="k">class</span> <span class="nc">Canvas</span><span class="p">(</span><span class="n">FigureCanvasQTAgg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">xmargin</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Canvas</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="generate_incidence_matrix"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.generate_incidence_matrix">[docs]</a><span class="k">def</span> <span class="nf">generate_incidence_matrix</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">):</span>
@@ -174,7 +182,7 @@
     <span class="k">return</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">matrix</span></div>
 
 
-<div class="viewcode-block" id="visualize_simulation_results"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.visualize_simulation_results">[docs]</a><span class="k">def</span> <span class="nf">visualize_simulation_results</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">filedir</span><span class="p">,</span> <span class="n">option</span><span class="o">=</span><span class="s1">&#39;bng&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="visualize_simulation_results"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.visualize_simulation_results">[docs]</a><span class="k">def</span> <span class="nf">visualize_simulation_results</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">filedir</span><span class="o">=</span><span class="s1">&#39;../output&#39;</span><span class="p">,</span> <span class="n">option</span><span class="o">=</span><span class="s1">&#39;bng&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    :param colormap: colormap setting</span>
@@ -201,7 +209,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Complexes&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.04</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filedir</span> <span class="o">+</span> <span class="s1">&#39;/simres.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span></div>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filedir</span> <span class="o">+</span> <span class="s1">&#39;/simres&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="output_network_txt"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.output_network_txt">[docs]</a><span class="k">def</span> <span class="nf">output_network_txt</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">,</span> <span class="n">filedir</span><span class="o">=</span><span class="s1">&#39;../output&#39;</span><span class="p">):</span>
@@ -213,30 +221,52 @@
 <span class="sd">    :param filedir: file directory to write the txt file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filedir</span> <span class="o">+</span> <span class="s1">&#39;/output.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;-----Species-----</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">specieslist</span><span class="p">:</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">generate_output</span><span class="p">())</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    file.write(&#39;-----Species-----\n&#39;)</span>
+<span class="sd">    for i in specieslist:</span>
+<span class="sd">        file.write(i.generate_output())</span>
+<span class="sd">        file.write(&#39;\n&#39;)</span>
 
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;-----Reactions-----</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reactionlist</span><span class="p">:</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">generate_output</span><span class="p">())</span>
-        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="sd">    file.write(&#39;-----Reactions-----\n&#39;)</span>
+<span class="sd">    for i in reactionlist:</span>
+<span class="sd">        file.write(i.generate_output())</span>
+<span class="sd">        file.write(&#39;\n&#39;)</span>
 
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;-----Incidence Matrix-----</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">rowlabels</span><span class="p">,</span> <span class="n">collabels</span><span class="p">,</span> <span class="n">incidencematrix</span> <span class="o">=</span> <span class="n">generate_incidence_matrix</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">)</span>
-    <span class="n">incidencematrix</span> <span class="o">=</span> <span class="n">incidencematrix</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="sd">    file.write(&#39;-----Incidence Matrix-----\n&#39;)</span>
+<span class="sd">    rowlabels, collabels, incidencematrix = generate_incidence_matrix(specieslist, reactionlist)</span>
+<span class="sd">    incidencematrix = incidencematrix.todense()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">collabels</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="sd">    print(*collabels, file=file)</span>
+<span class="sd">    np.set_printoptions(linewidth=90)</span>
 
-    <span class="k">for</span> <span class="n">rowlabel</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rowlabels</span><span class="p">,</span> <span class="n">incidencematrix</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%03s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rowlabel</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">)),</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
-
+<span class="sd">    for rowlabel, row in zip(rowlabels, incidencematrix):</span>
+<span class="sd">        print(&#39;%s %s&#39; % (&#39;%03s&#39; % rowlabel, &#39; &#39;.join(&#39;%s&#39; % i for i in row)), file=file)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">generate_text</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">))</span>
     <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="simulate_bng"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.simulate_bng">[docs]</a><span class="k">def</span> <span class="nf">simulate_bng</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">bngnetwork</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filedir</span><span class="o">=</span><span class="s1">&#39;../output&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="generate_text"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.generate_text">[docs]</a><span class="k">def</span> <span class="nf">generate_text</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;-----Species-----</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">specieslist</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">i</span><span class="o">.</span><span class="n">generate_output</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;-----Reactions-----</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reactionlist</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">i</span><span class="o">.</span><span class="n">generate_output</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;-----Incidence Matrix-----</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">rowlabels</span><span class="p">,</span> <span class="n">collabels</span><span class="p">,</span> <span class="n">incidencematrix</span> <span class="o">=</span> <span class="n">generate_incidence_matrix</span><span class="p">(</span><span class="n">specieslist</span><span class="p">,</span> <span class="n">reactionlist</span><span class="p">)</span>
+    <span class="n">incidencematrix</span> <span class="o">=</span> <span class="n">incidencematrix</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+    <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">collabels</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">rowlabel</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rowlabels</span><span class="p">,</span> <span class="n">incidencematrix</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">%03s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rowlabel</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="k">return</span> <span class="n">text</span></div>
+
+
+<div class="viewcode-block" id="simulate_bng"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.simulate_bng">[docs]</a><span class="k">def</span> <span class="nf">simulate_bng</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">bngnetwork</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    simulate the reaction network using BNG</span>
 
@@ -251,17 +281,22 @@
     <span class="k">if</span> <span class="n">bngnetwork</span><span class="p">:</span>
         <span class="n">network</span> <span class="o">=</span> <span class="n">generate_network</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
 
-    <span class="n">obslen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">observables</span><span class="p">)</span>
+    <span class="n">monomerlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">monomers</span><span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">run_ssa</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">t_end</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span>
 
-    <span class="n">visualize_simulation_results</span><span class="p">(</span><span class="n">output</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
-                                 <span class="n">output</span><span class="p">[:,</span> <span class="n">obslen</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">obslen</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span>
-                                 <span class="n">model</span><span class="o">.</span><span class="n">observables</span><span class="p">,</span> <span class="n">filedir</span><span class="p">,</span>
-                                 <span class="n">option</span><span class="o">=</span><span class="s1">&#39;bng&#39;</span><span class="p">,</span>
-                                 <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">)</span></div>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    visualize_simulation_results(output[:, 0],</span>
+<span class="sd">                                 output[:, monomerlen + 1: column],</span>
+<span class="sd">                                 model.observables, filedir,</span>
+<span class="sd">                                 option=&#39;bng&#39;,</span>
+<span class="sd">                                 colormap=colormap)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">output</span><span class="p">[:,</span> <span class="n">monomerlen</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">column</span><span class="p">],</span> <span class="n">model</span><span class="o">.</span><span class="n">observables</span></div>
 
 
 <div class="viewcode-block" id="simulate_scipy"><a class="viewcode-back" href="../../../src.basics.html#src.basics.output.simulate_scipy">[docs]</a><span class="k">def</span> <span class="nf">simulate_scipy</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">filedir</span><span class="o">=</span><span class="s1">&#39;../output&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">):</span>
@@ -278,12 +313,16 @@
     <span class="n">simres</span> <span class="o">=</span> <span class="n">ScipyOdeSimulator</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tspan</span><span class="o">=</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
     <span class="n">yout</span> <span class="o">=</span> <span class="n">simres</span><span class="o">.</span><span class="n">all</span>
 
-    <span class="n">visualize_simulation_results</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
-                                 <span class="n">yout</span><span class="p">,</span>
-                                 <span class="n">model</span><span class="o">.</span><span class="n">observables</span><span class="p">,</span>
-                                 <span class="n">filedir</span><span class="p">,</span>
-                                 <span class="n">option</span><span class="o">=</span><span class="s1">&#39;scipy&#39;</span><span class="p">,</span>
-                                 <span class="n">colormap</span><span class="o">=</span><span class="n">colormap</span><span class="p">)</span></div>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    visualize_simulation_results(t,</span>
+<span class="sd">                                 yout,</span>
+<span class="sd">                                 model.observables,</span>
+<span class="sd">                                 filedir,</span>
+<span class="sd">                                 option=&#39;scipy&#39;,</span>
+<span class="sd">                                 colormap=colormap)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">observables</span></div>
 </pre></div>
 
            </div>

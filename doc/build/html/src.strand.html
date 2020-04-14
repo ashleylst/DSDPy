@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -152,14 +152,14 @@
 </div>
 <div class="section" id="module-src.strand.bond">
 <span id="src-strand-bond-module"></span><h2>src.strand.bond module<a class="headerlink" href="#module-src.strand.bond" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.bond.Bond">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond.</code><code class="sig-name descname">Bond</code><span class="sig-paren">(</span><em class="sig-param">node1</em>, <em class="sig-param">node2</em>, <em class="sig-param">dom</em>, <em class="sig-param">dom2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond.html#Bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond.Bond" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond.</code><code class="sig-name descname">Bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span></em>, <em class="sig-param"><span class="n">node2</span></em>, <em class="sig-param"><span class="n">dom</span></em>, <em class="sig-param"><span class="n">dom2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond.html#Bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond.Bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of bonds between two domains</p>
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond.Bond.appenddom">
-<code class="sig-name descname">appenddom</code><span class="sig-paren">(</span><em class="sig-param">dom</em>, <em class="sig-param">dom2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond.html#Bond.appenddom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond.Bond.appenddom" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">appenddom</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dom</span></em>, <em class="sig-param"><span class="n">dom2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond.html#Bond.appenddom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond.Bond.appenddom" title="Permalink to this definition">¶</a></dt>
 <dd><p>append domain numbers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -171,31 +171,31 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond.Bond.dom">
 <code class="sig-name descname">dom</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond.Bond.dom" title="Permalink to this definition">¶</a></dt>
 <dd><p>domain of the startnode</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond.Bond.dom2">
 <code class="sig-name descname">dom2</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond.Bond.dom2" title="Permalink to this definition">¶</a></dt>
 <dd><p>domain of the endnode</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond.Bond.node1">
 <code class="sig-name descname">node1</code><em class="property"> = 0</em><a class="headerlink" href="#src.strand.bond.Bond.node1" title="Permalink to this definition">¶</a></dt>
 <dd><p>start node</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond.Bond.node2">
 <code class="sig-name descname">node2</code><em class="property"> = 0</em><a class="headerlink" href="#src.strand.bond.Bond.node2" title="Permalink to this definition">¶</a></dt>
 <dd><p>end node</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond.Bond.transform_E">
 <code class="sig-name descname">transform_E</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond.html#Bond.transform_E"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond.Bond.transform_E" title="Permalink to this definition">¶</a></dt>
 <dd><p>flatten the edges</p>
@@ -211,26 +211,26 @@
 </div>
 <div class="section" id="module-src.strand.bond_graph">
 <span id="src-strand-bond-graph-module"></span><h2>src.strand.bond_graph module<a class="headerlink" href="#module-src.strand.bond_graph" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.bond_graph.BondGraph">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond_graph.</code><code class="sig-name descname">BondGraph</code><span class="sig-paren">(</span><em class="sig-param">V</em>, <em class="sig-param">color</em>, <em class="sig-param">E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond_graph.</code><code class="sig-name descname">BondGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em>, <em class="sig-param"><span class="n">color</span></em>, <em class="sig-param"><span class="n">E</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of the bond graph, undirected graph with loops</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.E">
 <code class="sig-name descname">E</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.E" title="Permalink to this definition">¶</a></dt>
 <dd><p>edges</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.V">
 <code class="sig-name descname">V</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.V" title="Permalink to this definition">¶</a></dt>
 <dd><p>vertices</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.add_edges">
-<code class="sig-name descname">add_edges</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">d1</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.add_edges" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_edges</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v1</span></em>, <em class="sig-param"><span class="n">v2</span></em>, <em class="sig-param"><span class="n">d1</span></em>, <em class="sig-param"><span class="n">d2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.add_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.add_edges" title="Permalink to this definition">¶</a></dt>
 <dd><p>add edges to the bond graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,16 +244,16 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.adj">
 <code class="sig-name descname">adj</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.adj" title="Permalink to this definition">¶</a></dt>
 <dd><p>adjacency list</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.call_spanning">
-<code class="sig-name descname">call_spanning</code><span class="sig-paren">(</span><em class="sig-param">mark</em>, <em class="sig-param">edge</em>, <em class="sig-param">times</em>, <em class="sig-param">depth</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.call_spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.call_spanning" title="Permalink to this definition">¶</a></dt>
-<dd><p>find all spanning trees of the bond graph and store the loops existing in it</p>
+<code class="sig-name descname">call_spanning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mark</span></em>, <em class="sig-param"><span class="n">edge</span></em>, <em class="sig-param"><span class="n">times</span></em>, <em class="sig-param"><span class="n">depth</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.call_spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.call_spanning" title="Permalink to this definition">¶</a></dt>
+<dd><p>find a spanning forest of the bond graph and store the loops existing in it</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -266,9 +266,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.check_bonded">
-<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param">node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the node is bonded to another node</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -280,9 +280,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.check_in_loop">
-<code class="sig-name descname">check_in_loop</code><span class="sig-paren">(</span><em class="sig-param">startnode</em>, <em class="sig-param">endnode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_in_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_in_loop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_in_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startnode</span></em>, <em class="sig-param"><span class="n">endnode</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_in_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_in_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the two vertices are in the same loop</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,9 +297,26 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="src.strand.bond_graph.BondGraph.check_junction">
+<code class="sig-name descname">check_junction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startnode</span></em>, <em class="sig-param"><span class="n">endnode</span></em>, <em class="sig-param"><span class="n">toehold</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_junction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_junction" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the bond between startnode and endnode is a part of junction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>startnode</strong> – </p></li>
+<li><p><strong>endnode</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.check_strand_is_bonded">
-<code class="sig-name descname">check_strand_is_bonded</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_strand_is_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_strand_is_bonded" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_strand_is_bonded</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_strand_is_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_strand_is_bonded" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the strand is bonded</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -311,15 +328,15 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.color">
 <code class="sig-name descname">color</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.color" title="Permalink to this definition">¶</a></dt>
 <dd><p>inherit from StrandGraph</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.create_bond">
-<code class="sig-name descname">create_bond</code><span class="sig-paren">(</span><em class="sig-param">v1</em>, <em class="sig-param">v2</em>, <em class="sig-param">d1</em>, <em class="sig-param">d2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.create_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.create_bond" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v1</span></em>, <em class="sig-param"><span class="n">v2</span></em>, <em class="sig-param"><span class="n">d1</span></em>, <em class="sig-param"><span class="n">d2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.create_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.create_bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>create bond</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -336,15 +353,15 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.find_loops">
 <code class="sig-name descname">find_loops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.find_loops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.find_loops" title="Permalink to this definition">¶</a></dt>
 <dd><p>find loops in the bond graph</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.get_bond">
-<code class="sig-name descname">get_bond</code><span class="sig-paren">(</span><em class="sig-param">startstrand</em>, <em class="sig-param">endstrand</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_bond" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startstrand</span></em>, <em class="sig-param"><span class="n">endstrand</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the bond between the two vertices</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -359,9 +376,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.get_connection">
-<code class="sig-name descname">get_connection</code><span class="sig-paren">(</span><em class="sig-param">startnode</em>, <em class="sig-param">endstrand</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_connection" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_connection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startnode</span></em>, <em class="sig-param"><span class="n">endstrand</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_connection" title="Permalink to this definition">¶</a></dt>
 <dd><p>get connection nodes from the startnode to the endstrand</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -376,28 +393,37 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="src.strand.bond_graph.BondGraph.get_direction">
+<code class="sig-name descname">get_direction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startstrand</span></em>, <em class="sig-param"><span class="n">endstrand</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note that we don’t consider loops here.
+:param endstrand:
+:param startstrand:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.get_species">
 <code class="sig-name descname">get_species</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.get_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.get_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>get all species in one bondgraph</p>
 <p>:return:all species</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.hidden">
 <code class="sig-name descname">hidden</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.hidden" title="Permalink to this definition">¶</a></dt>
 <dd><p>hidden domains of strands</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.loop">
 <code class="sig-name descname">loop</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>loops in the graph</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes">
-<code class="sig-name descname">merge_bonds_ignoring_nodes</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">nodes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.merge_bonds_ignoring_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">merge_bonds_ignoring_nodes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">nodes</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.merge_bonds_ignoring_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.merge_bonds_ignoring_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>merge bonds on v ignoring bonds connected to nodes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -412,15 +438,15 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.search_path">
-<code class="sig-name descname">search_path</code><span class="sig-paren">(</span><em class="sig-param">startstrand</em>, <em class="sig-param">stack</em>, <em class="sig-param">endstrand</em>, <em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.search_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.search_path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startstrand</span></em>, <em class="sig-param"><span class="n">stack</span></em>, <em class="sig-param"><span class="n">endstrand</span></em>, <em class="sig-param"><span class="n">edge</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.search_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.search_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>search a path from the start node to the end node in the spanning tree</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.spanning">
-<code class="sig-name descname">spanning</code><span class="sig-paren">(</span><em class="sig-param">mark</em>, <em class="sig-param">edge</em>, <em class="sig-param">startstrand</em>, <em class="sig-param">times</em>, <em class="sig-param">depth</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.spanning" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">spanning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mark</span></em>, <em class="sig-param"><span class="n">edge</span></em>, <em class="sig-param"><span class="n">startstrand</span></em>, <em class="sig-param"><span class="n">times</span></em>, <em class="sig-param"><span class="n">depth</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.spanning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.spanning" title="Permalink to this definition">¶</a></dt>
 <dd><p>building a spanning tree of the bond graph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -435,19 +461,19 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.species">
 <code class="sig-name descname">species</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.species" title="Permalink to this definition">¶</a></dt>
 <dd><p>species of the graph</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.BondGraph.speciesnum">
 <code class="sig-name descname">speciesnum</code><em class="property"> = 0</em><a class="headerlink" href="#src.strand.bond_graph.BondGraph.speciesnum" title="Permalink to this definition">¶</a></dt>
 <dd><p>species number</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.store_hidden">
 <code class="sig-name descname">store_hidden</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.store_hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.store_hidden" title="Permalink to this definition">¶</a></dt>
 <dd><p>store all the hidden domains in hidden[]</p>
@@ -455,38 +481,38 @@
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.bond_graph.SubBondGraph">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond_graph.</code><code class="sig-name descname">SubBondGraph</code><span class="sig-paren">(</span><em class="sig-param">V</em>, <em class="sig-param">color</em>, <em class="sig-param">adj</em>, <em class="sig-param">Vp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#SubBondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.bond_graph.</code><code class="sig-name descname">SubBondGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em>, <em class="sig-param"><span class="n">color</span></em>, <em class="sig-param"><span class="n">adj</span></em>, <em class="sig-param"><span class="n">Vp</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#SubBondGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#src.strand.bond_graph.BondGraph" title="src.strand.bond_graph.BondGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.strand.bond_graph.BondGraph</span></code></a></p>
 <p>Subgraph of bondgraph</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.SubBondGraph.Vsub">
 <code class="sig-name descname">Vsub</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.Vsub" title="Permalink to this definition">¶</a></dt>
 <dd><p>vertices</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.SubBondGraph.adj">
 <code class="sig-name descname">adj</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.adj" title="Permalink to this definition">¶</a></dt>
 <dd><p>adjacency list</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.SubBondGraph.colormap">
 <code class="sig-name descname">colormap</code><em class="property"> = {}</em><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.colormap" title="Permalink to this definition">¶</a></dt>
 <dd><p>map colors to vertices</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.bond_graph.SubBondGraph.colorset">
 <code class="sig-name descname">colorset</code><em class="property"> = {}</em><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.colorset" title="Permalink to this definition">¶</a></dt>
 <dd><p>set of colors</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.bond_graph.SubBondGraph.map_colors">
-<code class="sig-name descname">map_colors</code><span class="sig-paren">(</span><em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#SubBondGraph.map_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.map_colors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">map_colors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#SubBondGraph.map_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.SubBondGraph.map_colors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -494,26 +520,26 @@
 </div>
 <div class="section" id="module-src.strand.strand">
 <span id="src-strand-strand-module"></span><h2>src.strand.strand module<a class="headerlink" href="#module-src.strand.strand" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.strand.Domain">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand.</code><code class="sig-name descname">Domain</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">toehold</em>, <em class="sig-param">comp</em>, <em class="sig-param">bond</em>, <em class="sig-param">bondname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand.</code><code class="sig-name descname">Domain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">toehold</span></em>, <em class="sig-param"><span class="n">comp</span></em>, <em class="sig-param"><span class="n">bond</span></em>, <em class="sig-param"><span class="n">bondname</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of the domain</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Domain.bond">
 <code class="sig-name descname">bond</code><em class="property"> = False</em><a class="headerlink" href="#src.strand.strand.Domain.bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>boolean variable indicating if the domain is bonded</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Domain.bondname">
 <code class="sig-name descname">bondname</code><em class="property"> = ''</em><a class="headerlink" href="#src.strand.strand.Domain.bondname" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of the bond, empty if not bonded</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand.Domain.check_same_domain">
-<code class="sig-name descname">check_same_domain</code><span class="sig-paren">(</span><em class="sig-param">domain1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain.check_same_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain.check_same_domain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_same_domain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain.check_same_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain.check_same_domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if domain1 is equivalent to the current domain</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -525,24 +551,24 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Domain.comp">
 <code class="sig-name descname">comp</code><em class="property"> = False</em><a class="headerlink" href="#src.strand.strand.Domain.comp" title="Permalink to this definition">¶</a></dt>
 <dd><p>boolean variable indicating if the domain is a complementary domain to some other domain</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Domain.name">
 <code class="sig-name descname">name</code><em class="property"> = ''</em><a class="headerlink" href="#src.strand.strand.Domain.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of the domain</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand.Domain.set_bond">
-<code class="sig-name descname">set_bond</code><span class="sig-paren">(</span><em class="sig-param">bondname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain.set_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain.set_bond" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bondname</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Domain.set_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Domain.set_bond" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Domain.toehold">
 <code class="sig-name descname">toehold</code><em class="property"> = False</em><a class="headerlink" href="#src.strand.strand.Domain.toehold" title="Permalink to this definition">¶</a></dt>
 <dd><p>boolean variable indicating if the domain is a toehold</p>
@@ -550,24 +576,24 @@
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.strand.Strand">
 <em class="property">class </em><code class="sig-prename descclassname">src.strand.strand.</code><code class="sig-name descname">Strand</code><a class="reference internal" href="_modules/src/strand/strand.html#Strand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of the strand</p>
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand.Strand.add_color">
-<code class="sig-name descname">add_color</code><span class="sig-paren">(</span><em class="sig-param">color</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.add_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.add_color" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_color</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.add_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.add_color" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand.Strand.add_domain">
-<code class="sig-name descname">add_domain</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.add_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.add_domain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_domain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.add_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.add_domain" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand.Strand.check_same_strand">
-<code class="sig-name descname">check_same_strand</code><span class="sig-paren">(</span><em class="sig-param">strand1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.check_same_strand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.check_same_strand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_same_strand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strand1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand.html#Strand.check_same_strand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand.Strand.check_same_strand" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if strand1 is equivalent to the current strand</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -579,13 +605,13 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Strand.color">
 <code class="sig-name descname">color</code><em class="property"> = 0</em><a class="headerlink" href="#src.strand.strand.Strand.color" title="Permalink to this definition">¶</a></dt>
 <dd><p>color of the strand</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand.Strand.domains">
 <code class="sig-name descname">domains</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand.Strand.domains" title="Permalink to this definition">¶</a></dt>
 <dd><p>domains of the strand</p>
@@ -596,32 +622,32 @@
 </div>
 <div class="section" id="module-src.strand.strand_graph">
 <span id="src-strand-strand-graph-module"></span><h2>src.strand.strand_graph module<a class="headerlink" href="#module-src.strand.strand_graph" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.strand.strand_graph.StrandGraph">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand_graph.</code><code class="sig-name descname">StrandGraph</code><span class="sig-paren">(</span><em class="sig-param">strands</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand_graph.</code><code class="sig-name descname">StrandGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of the strand graph</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.A">
 <code class="sig-name descname">A</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.A" title="Permalink to this definition">¶</a></dt>
 <dd><p>admissible edges, edges that bonds can exist in</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.E">
 <code class="sig-name descname">E</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.E" title="Permalink to this definition">¶</a></dt>
 <dd><p>actual edges, edges that already exist</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.V">
 <code class="sig-name descname">V</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.V" title="Permalink to this definition">¶</a></dt>
 <dd><p>vertices</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.anchored">
-<code class="sig-name descname">anchored</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.anchored"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.anchored" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">anchored</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.anchored"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.anchored" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if e is anchored</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -633,9 +659,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.anti_parallel">
-<code class="sig-name descname">anti_parallel</code><span class="sig-paren">(</span><em class="sig-param">node1</em>, <em class="sig-param">node2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.anti_parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.anti_parallel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">anti_parallel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span></em>, <em class="sig-param"><span class="n">node2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.anti_parallel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.anti_parallel" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the bond satisfies the anti-parallel schema</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -650,9 +676,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.available">
-<code class="sig-name descname">available</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.available"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.available" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">available</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.available"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.available" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if a binding is available for binding</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -664,21 +690,21 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.bondgraph">
 <code class="sig-name descname">bondgraph</code><em class="property"> = None</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.bondgraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>bond graph derived from this graph</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.build_bond_graph">
 <code class="sig-name descname">build_bond_graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.build_bond_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.build_bond_graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>build bond graph for the strand graph</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_bonded">
-<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param">strand1</em>, <em class="sig-param">strand2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_bonded</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strand1</span></em>, <em class="sig-param"><span class="n">strand2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_bonded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_bonded" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if strand1 is bonded to strand2</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -693,9 +719,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_candidate">
-<code class="sig-name descname">check_candidate</code><span class="sig-paren">(</span><em class="sig-param">e1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_candidate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_candidate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_candidate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_candidate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_candidate" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if e1 is a candidate for rule migration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -707,9 +733,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_complementary">
-<code class="sig-name descname">check_complementary</code><span class="sig-paren">(</span><em class="sig-param">domain1</em>, <em class="sig-param">domain2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_complementary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_complementary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_complementary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain1</span></em>, <em class="sig-param"><span class="n">domain2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_complementary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_complementary" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -723,9 +749,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_hidden_all">
-<code class="sig-name descname">check_hidden_all</code><span class="sig-paren">(</span><em class="sig-param">edge</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_hidden_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_hidden_all" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_hidden_all</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_hidden_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_hidden_all" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>edge</strong> – </p>
@@ -736,9 +762,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_switchable">
-<code class="sig-name descname">check_switchable</code><span class="sig-paren">(</span><em class="sig-param">notbond</em>, <em class="sig-param">tbr</em>, <em class="sig-param">i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_switchable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_switchable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_switchable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">notbond</span></em>, <em class="sig-param"><span class="n">tbr</span></em>, <em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_switchable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_switchable" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if it is possible to do 3-way migration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -753,9 +779,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_switchable_2">
-<code class="sig-name descname">check_switchable_2</code><span class="sig-paren">(</span><em class="sig-param">r1</em>, <em class="sig-param">tbr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_switchable_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_switchable_2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_switchable_2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">r1</span></em>, <em class="sig-param"><span class="n">tbr</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_switchable_2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_switchable_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if it is possible for 4-way migration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -770,9 +796,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.check_toehold">
-<code class="sig-name descname">check_toehold</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_toehold" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_toehold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.check_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.check_toehold" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the binding domains are toehold domains</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -784,20 +810,20 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.color">
 <code class="sig-name descname">color</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.color" title="Permalink to this definition">¶</a></dt>
 <dd><p>strand type</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.delete_edge">
-<code class="sig-name descname">delete_edge</code><span class="sig-paren">(</span><em class="sig-param">e</em>, <em class="sig-param">prevE</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_edge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em>, <em class="sig-param"><span class="n">prevE</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_edge" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.delete_edges_regarding_v">
-<code class="sig-name descname">delete_edges_regarding_v</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">prevE</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_edges_regarding_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_edges_regarding_v" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_edges_regarding_v</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">prevE</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_edges_regarding_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_edges_regarding_v" title="Permalink to this definition">¶</a></dt>
 <dd><p>delete a vertex v and all edges link to it in strandgraph</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -809,14 +835,19 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.delete_vertex">
-<code class="sig-name descname">delete_vertex</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_vertex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_vertex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.delete_vertex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.delete_vertex" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="src.strand.strand_graph.StrandGraph.find_mediated_toehold">
+<code class="sig-name descname">find_mediated_toehold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node</span></em>, <em class="sig-param"><span class="n">depth</span></em>, <em class="sig-param"><span class="n">visited</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.find_mediated_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.find_mediated_toehold" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.get_connect_toehold">
-<code class="sig-name descname">get_connect_toehold</code><span class="sig-paren">(</span><em class="sig-param">edge</em>, <em class="sig-param">notbond</em>, <em class="sig-param">potbondto</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_connect_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_connect_toehold" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_connect_toehold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em>, <em class="sig-param"><span class="n">notbond</span></em>, <em class="sig-param"><span class="n">potbondto</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_connect_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_connect_toehold" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the toeholds that connect the two domains of edge</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -832,14 +863,14 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.get_domain_comp">
-<code class="sig-name descname">get_domain_comp</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_domain_comp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_domain_comp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_domain_comp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_domain_comp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_domain_comp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.get_domain_obj">
-<code class="sig-name descname">get_domain_obj</code><span class="sig-paren">(</span><em class="sig-param">domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_domain_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_domain_obj" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_domain_obj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_domain_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_domain_obj" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>domain</strong> – </p>
@@ -850,9 +881,14 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="src.strand.strand_graph.StrandGraph.have_anchor">
+<code class="sig-name descname">have_anchor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startstrand</span></em>, <em class="sig-param"><span class="n">endstrand</span></em>, <em class="sig-param"><span class="n">domlow</span></em>, <em class="sig-param"><span class="n">domhigh</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.have_anchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.have_anchor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.hidden">
-<code class="sig-name descname">hidden</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.hidden" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hidden</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.hidden"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.hidden" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if domains in the bond are hidden in a cycle of strands</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -864,15 +900,15 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.length">
 <code class="sig-name descname">length</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.length" title="Permalink to this definition">¶</a></dt>
 <dd><p>length of the vertices (in length of domains)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.reconstruct">
-<code class="sig-name descname">reconstruct</code><span class="sig-paren">(</span><em class="sig-param">E</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.reconstruct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.reconstruct" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reconstruct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">E</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.reconstruct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.reconstruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>reconstruct the graph using the set of edges</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -881,9 +917,9 @@
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.same_species">
-<code class="sig-name descname">same_species</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.same_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.same_species" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">same_species</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.same_species"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.same_species" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the edge is from the same species</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -895,13 +931,13 @@
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.strands">
 <code class="sig-name descname">strands</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.strands" title="Permalink to this definition">¶</a></dt>
 <dd><p>strands in this graph</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.strand.strand_graph.StrandGraph.toehold">
 <code class="sig-name descname">toehold</code><em class="property"> = []</em><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.toehold" title="Permalink to this definition">¶</a></dt>
 <dd><p>a list of dictionaries to store if toehold exist in an edge</p>

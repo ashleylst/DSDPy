@@ -47,17 +47,17 @@ def get_kinetics(textls, pos):
 def get_outdir_simupara(textls, pos):
 
     outdir = ''
-    simupara = []
+    simupara = [100, 100]
     for i in range(pos+1, len(textls)):
         line = textls[i]
-        if line == '--':
+        line = line.split('=')
+        if line[0] == 'outdir':
+            outdir = line[1]
             continue
-
-        line = line.split(' ')
-        if len(line) == 1:
-            outdir = str(line[0])
-        else:
-            simupara = line
+        if line[0] == 'time':
+            simupara[0] = line[1]
+        if line[0] == 'time_step':
+            simupara[1] = line[1]
     return outdir, simupara
 
 

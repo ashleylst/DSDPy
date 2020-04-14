@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -144,12 +144,12 @@
            <div itemprop="articleBody">
             
   <h1>Source code for src.species.species_explore</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">src.strand</span> <span class="k">import</span> <span class="n">strand_graph</span> <span class="k">as</span> <span class="n">sg</span><span class="p">,</span> <span class="n">bond_graph</span> <span class="k">as</span> <span class="n">bg</span>
-<span class="kn">from</span> <span class="nn">src.basics</span> <span class="k">import</span> <span class="n">check_rules</span> <span class="k">as</span> <span class="n">cr</span>
-<span class="kn">from</span> <span class="nn">src.species</span> <span class="k">import</span> <span class="n">species</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="kn">from</span> <span class="nn">src.util</span> <span class="k">import</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">src.reaction</span> <span class="k">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">ra</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+<span></span><span class="kn">from</span> <span class="nn">src.strand</span> <span class="kn">import</span> <span class="n">strand_graph</span> <span class="k">as</span> <span class="n">sg</span><span class="p">,</span> <span class="n">bond_graph</span> <span class="k">as</span> <span class="n">bg</span>
+<span class="kn">from</span> <span class="nn">src.basics</span> <span class="kn">import</span> <span class="n">check_rules</span> <span class="k">as</span> <span class="n">cr</span>
+<span class="kn">from</span> <span class="nn">src.species</span> <span class="kn">import</span> <span class="n">species</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="kn">from</span> <span class="nn">src.util</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">src.reaction</span> <span class="kn">import</span> <span class="n">reaction</span> <span class="k">as</span> <span class="n">ra</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 
 
@@ -256,6 +256,20 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">miggroup</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_following_migration</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">miggroup</span><span class="p">:</span>
+
+            <span class="n">startv</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">sortdom</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_migrate_nodes</span><span class="p">(</span><span class="n">e3</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">startv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            endv = list(e3[x[0]][0] &amp; e3[x[0]][1])</span>
+<span class="sd">            p = prevSG.have_anchor(startv[0][0], endv[0][0], sortdom[0], sortdom[len(sortdom)-1])</span>
+<span class="sd">            if p != -1:</span>
+<span class="sd">                if p == -2:</span>
+<span class="sd">                    continue</span>
+<span class="sd">                elif p &gt;= 0:</span>
+<span class="sd">                    con = prevSG.bondgraph.get_connection((p, 0), endv[0][0])</span>
+<span class="sd">                    if len(con) == 0:</span>
+<span class="sd">                        continue</span>
+<span class="sd">            &#39;&#39;&#39;</span>
             <span class="n">reaction</span> <span class="o">=</span> <span class="n">ra</span><span class="o">.</span><span class="n">Reaction</span><span class="p">([</span><span class="n">species</span><span class="p">],</span> <span class="p">[])</span>
             <span class="n">E</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
             <span class="n">notbond</span> <span class="o">=</span> <span class="p">[]</span>
@@ -278,7 +292,17 @@
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
                 <span class="k">continue</span>
+
             <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+
+            <span class="n">anchor</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">startv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">sortdom</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">in</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="p">(</span><span class="n">startv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">sortdom</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sortdom</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="ow">in</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">anchored</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">]):</span>
+                        <span class="n">anchor</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">anchor</span><span class="p">:</span>
+                <span class="k">continue</span>
 
             <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span> <span class="o">=</span> \
                 <span class="n">generate_multiple_species</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">,</span> <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span><span class="p">)</span>
@@ -311,7 +335,7 @@
             <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
 
             <span class="c1"># check if there is a previous bond hidden</span>
-            <span class="c1">#if check_hidden_prevbond(prevE, strandgraph):</span>
+            <span class="c1"># if check_hidden_prevbond(prevE, strandgraph):</span>
             <span class="c1">#   continue</span>
 
             <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction2</span> <span class="o">=</span> \

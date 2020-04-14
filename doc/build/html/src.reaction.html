@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -152,50 +152,50 @@
 </div>
 <div class="section" id="module-src.reaction.reaction">
 <span id="src-reaction-reaction-module"></span><h2>src.reaction.reaction module<a class="headerlink" href="#module-src.reaction.reaction" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="src.reaction.reaction.Reaction">
-<em class="property">class </em><code class="sig-prename descclassname">src.reaction.reaction.</code><code class="sig-name descname">Reaction</code><span class="sig-paren">(</span><em class="sig-param">reactants</em>, <em class="sig-param">products</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.reaction.reaction.</code><code class="sig-name descname">Reaction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reactants</span></em>, <em class="sig-param"><span class="n">products</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure for a reaction in DSD system</p>
-<dl class="method">
+<dl class="py method">
 <dt id="src.reaction.reaction.Reaction.add_product">
-<code class="sig-name descname">add_product</code><span class="sig-paren">(</span><em class="sig-param">product</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_product" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_product</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">product</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_product" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.reaction.reaction.Reaction.add_rate">
-<code class="sig-name descname">add_rate</code><span class="sig-paren">(</span><em class="sig-param">rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_rate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rate</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_rate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.reaction.reaction.Reaction.add_rule">
-<code class="sig-name descname">add_rule</code><span class="sig-paren">(</span><em class="sig-param">rulename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_rule" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_rule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rulename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.add_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.add_rule" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="src.reaction.reaction.Reaction.generate_output">
 <code class="sig-name descname">generate_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/reaction/reaction.html#Reaction.generate_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.reaction.reaction.Reaction.generate_output" title="Permalink to this definition">¶</a></dt>
 <dd><p>generate string output for output txt file
 :return: string representation of the reaction. e.g. 1 + 2 –&gt; 3 rate=1</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.reaction.reaction.Reaction.products">
 <code class="sig-name descname">products</code><em class="property"> = []</em><a class="headerlink" href="#src.reaction.reaction.Reaction.products" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.reaction.reaction.Reaction.rate">
 <code class="sig-name descname">rate</code><em class="property"> = -1</em><a class="headerlink" href="#src.reaction.reaction.Reaction.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>reaction rate</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.reaction.reaction.Reaction.reactants">
 <code class="sig-name descname">reactants</code><em class="property"> = []</em><a class="headerlink" href="#src.reaction.reaction.Reaction.reactants" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="src.reaction.reaction.Reaction.rule">
 <code class="sig-name descname">rule</code><em class="property"> = ''</em><a class="headerlink" href="#src.reaction.reaction.Reaction.rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>the rule this reaction applies</p>

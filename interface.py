@@ -16,6 +16,7 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.procthread = None
         self.lock = None
         self.simuarg = None
+        self.simumode = 'bng'
         self.paused = False
         self.canvas = None
         self.setupUi(self)
@@ -48,23 +49,52 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
                                                           "./",
                                                           "All Files (*);;Text Files (*.txt)")
         if fname:
-            self.debugPrint("setting file directory: " + fname)
+            self.debugPrint("Reading File.")
             self.model.set_filename(fname)
             self.refresh()
 
     def runSlot(self):
-        self.pushButton_4.setEnabled(True)
-        self.pushButton_5.setEnabled(True)
-        self.pushButton_2.setEnabled(False)
+        pass
+
+    def in_generation(self):
+        self.pushButton_pause.setEnabled(True)
+        self.pushButton_stop.setEnabled(True)
+
+        self.pushButton_analyze.setEnabled(False)
+        self.pushButton_show.setEnabled(False)
+        self.pushButton_simu.setEnabled(False)
+        self.comboBox_simumode.setEnabled(False)
+
+    def out_of_generation(self):
+        self.pushButton_pause.setEnabled(False)
+        self.pushButton_stop.setEnabled(False)
+
+        self.pushButton_analyze.setEnabled(True)
+        self.pushButton_show.setEnabled(True)
+        self.pushButton_simu.setEnabled(True)
+        self.comboBox_simumode.setEnabled(True)
 
     def my_event(self):
-        self.debugPrint("Simulation Finished.")
-        self.pushButton_2.setEnabled(True)
-        self.pushButton_4.setEnabled(False)
-        self.pushButton_5.setEnabled(False)
+        self.debugPrint("Generation Finished.")
+        self.out_of_generation()
+        self.pushButton_simu.setEnabled(True)
+        self.comboBox_simumode.setEnabled(True)
         self.showSlot()
 
     def submitSlot(self):
+        if not self.procthread:
+            return
+        specieslist, speciesidmap, reactionlist, kinetics, indexlist, cursor, visited = self.procthread.get_arg_info()
+        initnames, concentrations, outdir, simupara, initlen = self.simuarg
+        try:
+            x, y, obs = graph_processor.simulation(specieslist, reactionlist, initlen, initnames,
+                                                               concentrations, outdir, simupara, self.simumode)
+        except:
+            self.debugPrint('Simulation Error.')
+            return
+        self.display_output_img(x, y, obs, option=self.simumode)
+
+    def analyzeSlot(self):
         # Take care of submitting more than once
         if self.procthread:
             if self.procthread.is_alive():
@@ -113,8 +143,12 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
                 file.close()
                 self.model.set_filename(self.model.fileName)
 
-        self.debugPrint("Submitted File")
-        info, initnames, concentrations, outdir, simupara, initlen = graph_processor.initiation(text=text)
+        self.debugPrint("Submitted File.")
+        try:
+            info, initnames, concentrations, outdir, simupara, initlen = graph_processor.initiation(text=text)
+        except:
+            self.debugPrint('Input Error.')
+            return
         self.simuarg = (initnames, concentrations, outdir, simupara, initlen)
 
         event = threading.Event()
@@ -122,6 +156,7 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.procthread.setDaemon(True)
         self.lock = self.procthread.get_lock()
         self.paused = False
+        self.in_generation()
 
         self.procthread.start()
 
@@ -138,8 +173,8 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         print("need to pause")
         self.lock.acquire()
         self.procthread.pause()
-        self.pushButton_4.setText('Resume')
-        self.pushButton_6.setEnabled(True)
+        self.pushButton_pause.setText('Resume')
+        self.pushButton_show.setEnabled(True)
         self.paused = True
 
     def resumeSlot(self):
@@ -150,30 +185,29 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
             self.lock.release()
         self.procthread.resume()
         self.paused = False
-        self.pushButton_4.setText("Pause")
-        self.pushButton_6.setEnabled(False)
+        self.pushButton_pause.setText("Pause")
+        self.pushButton_show.setEnabled(False)
 
     def stopSlot(self):
         if not self.procthread:
             return
         if not self.paused:
             self.lock.acquire()
-        self.pushButton_4.setText("Pause")
-        self.pushButton_4.setEnabled(False)
-        self.pushButton_5.setEnabled(False)
-        self.pushButton_6.setEnabled(True)
-        self.pushButton_2.setEnabled(True)
+        self.pushButton_pause.setText("Pause")
+        self.out_of_generation()
         self.procthread.stop()
 
     def showSlot(self):
         if not self.procthread:
             return
         specieslist, speciesidmap, reactionlist, kinetics, indexlist, cursor, visited = self.procthread.get_arg_info()
-        initnames, concentrations, outdir, simupara, initlen = self.simuarg
-        x, y, obs, text = graph_processor.post_enumeration(specieslist, reactionlist, initlen, initnames, concentrations, outdir, simupara)
+        try:
+            text = graph_processor.post_enumeration(specieslist, reactionlist)
+        except:
+            self.debugPrint('Generation Error.')
+            return
         self.display_output_txt(text)
-        self.display_output_img(x, y, obs)
-        self.pushButton_3.setEnabled(True)
+        self.pushButton_save.setEnabled(True)
 
     def saveSlot(self):
         text = self.debugTextBrowser.toPlainText()
@@ -188,6 +222,14 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
             file = open(fname, 'w+')
             file.write(text)
             file.close()
+
+    def simuSlot(self):
+        mode = self.comboBox_simumode.currentText()
+        if mode == 'Stochastic':
+            self.simumode = 'bng'
+        else:
+            self.simumode = 'scipy'
+        self.debugPrint('Simulation mode set to ' + mode)
 
     def debugPrint(self, msg):
         self.debugTextBrowser.append(msg)
@@ -235,6 +277,6 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     myWin = MyWindow()
-    myWin.setWindowTitle('DSDPy GUI')
+    myWin.setWindowTitle('DSDPy')
     myWin.show()
     sys.exit(app.exec_())

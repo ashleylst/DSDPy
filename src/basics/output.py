@@ -167,9 +167,13 @@ def simulate_scipy(model, time=1000, steps=100, filedir='../output', colormap='P
     simres = ScipyOdeSimulator(model, tspan=t).run()
     yout = simres.all
 
+    '''
     visualize_simulation_results(t,
                                  yout,
                                  model.observables,
                                  filedir,
                                  option='scipy',
                                  colormap=colormap)
+    '''
+
+    return t, yout, model.observables

@@ -21,7 +21,7 @@ def initiation(filedir=None, text=None):
     initlen = len(specieslist)
     if len(initnames) < initlen:
         for i in range(len(initnames), initlen):
-            initnames.append('ss_' + str(i + 1))
+            initnames.append('ss' + str(i + 1))
     elif len(initnames) > initlen:
         raise cexception.SpeciesError("there are more initial species names than the number of initial species")
 
@@ -66,19 +66,30 @@ def one_iteration(specieslist, speciesidmap, reactionlist, kinetics, indexlist, 
     return specieslist, speciesidmap, reactionlist, kinetics, indexlist, cursor, visited
 
 
-def post_enumeration(specieslist, reactionlist, initlen, initnames, concentrations, outdir, simupara):
+def post_enumeration(specieslist, reactionlist):
+
+    text = on.generate_text(specieslist, reactionlist)
+
+    return text
+
+
+def simulation(specieslist, reactionlist, initlen, initnames, concentrations, outdir, simupara, simumode):
     md = gp.generate_model(specieslist, reactionlist, initlen, initnames, concentrations)
 
     if len(md.rules) != 0:
         # example use for using Scipy ODE simulator:
         # on.simulate_scipy(md, filedir=outdir, time=simupara[0], steps=simupara[1])
-        x, y, obs = on.simulate_bng(md, time=simupara[0], steps=simupara[1])
+        if simumode == 'bng':
+            x, y, obs = on.simulate_bng(md, time=simupara[0], steps=simupara[1])
+        elif simumode == 'scipy':
+            x, y, obs = on.simulate_scipy(md, time=simupara[0], steps=simupara[1])
+        else:
+            # TODO: add exception
+            return
     else:
         return
 
-    text = on.generate_text(specieslist, reactionlist)
-
-    return x, y, obs, text
+    return x, y, obs
 
 
 def entry(filedir):
@@ -90,7 +101,7 @@ def entry(filedir):
     info, initnames, concentrations, outdir, simupara, initlen = initiation(filedir)
     while not info[6][info[5]]:
         info = one_iteration(*info)
-    post_enumeration(info[0], info[2], initlen, initnames, concentrations, outdir, simupara)
+    simulation(info[0], info[2], initlen, initnames, concentrations, outdir, simupara, 'bng')
 
 
 
