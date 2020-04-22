@@ -3,7 +3,7 @@ from src.util import util, cexception
 from src.basics import output as on, generate_pysbmodel as gp, initialize_system
 
 
-def start_processor(filedir='../res/input', threshold=10, window=None):
+def start_processor(filedir='../res/input', threshold=6, window=None):
     """
     the entry point to DSDPy
 
@@ -87,6 +87,6 @@ def start_processor(filedir='../res/input', threshold=10, window=None):
                           filedir=outdir)
 
 
-start_processor(filedir='../res/input')
+start_processor(filedir='../res/input5')
 
 

@@ -505,7 +505,7 @@ class StrandGraph:
                 return False
         return True
 
-    def get_connect_toehold(self, edge, notbond, potbondto):
+    def get_connect_toehold(self, notbond, potbondto):
         """
         get the toeholds that connect the two domains of edge
 
@@ -514,9 +514,8 @@ class StrandGraph:
         :param potbondto:
         :return:
         """
-        v, n = util.get_edge_info(edge)
-        strand1 = v[0]
-        strand2 = v[1]
+        strand1 = notbond[0][0]
+        strand2 = potbondto[0][0]
 
         pottoehold = []
         if strand1 != strand2:

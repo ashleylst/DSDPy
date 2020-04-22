@@ -136,14 +136,15 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
                 notbond += list(e3[x[i]][0] - e3[x[i]][1])
                 potbondto += list(e3[x[i]][0] & e3[x[i]][1])
 
-            target1, target2 = strandgraph.get_connect_toehold(e3[x[i]][0], notbond, potbondto)
+            '''
+            target1, target2 = strandgraph.get_connect_toehold(notbond, potbondto)
             if target1 is None or target2 is None:
-                continue
+                    continue
 
             closest1, closest2 = util.get_domains_on_2sides(target1, target2, notbond, potbondto)
             if not strandgraph.check_complementary(closest1, closest2):
                 continue
-
+            '''
             if not flag:
                 continue
 

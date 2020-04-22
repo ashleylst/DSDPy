@@ -210,7 +210,7 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.pushButton_save.setEnabled(True)
 
     def saveSlot(self):
-        text = self.debugTextBrowser.toPlainText()
+        text = self.reneTextBrowser.toPlainText()
         if len(text) == 0:
             return
 
