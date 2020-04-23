@@ -282,6 +282,77 @@ class BondGraph:
                     return i.node2, i.dom2[j]
         return None
 
+    def potential_junction(self, node1, node2):
+        """
+        Check if node1 and node2 can be a part of junction
+        :param node1:
+        :param node2:
+        :return:
+        """
+        q = queue.Queue()
+        visited = [False for _ in self.V]
+        flag = False
+
+        q.put(node1)
+
+        while not q.empty():
+            curstrand, curdomain = q.get()
+            visited[curstrand] = True
+
+            if curstrand == node2[0]:
+                if node2[1] + 1 == curdomain or node2[1] - 1 == curdomain:
+                    flag = True
+                    break
+
+            for i in self.adj[curstrand]:
+                if not visited[i.node2]:
+                    if curdomain + 1 in i.dom2:
+                        q.put((i.node2, curdomain + 1))
+                    elif curdomain - 1 in i.dom2:
+                        q.put((i.node2, curdomain - 1))
+                    else:
+                        continue
+
+        if not flag:
+            return False
+
+        return True
+
+    def check_following_migration(self, edges, p=0):
+        """
+
+        :param edges:
+        :return:
+        """
+        e = copy.copy(edges)
+        visited = [False for _ in e]
+        miggroup = []
+        cnt = -1
+        for i in range(0, len(e)):
+            if visited[i]:
+                continue
+            e[i] = list(e[i])
+            e[i][p] = list(e[i][p])
+            t1 = sorted(e[i][p], key=lambda tup: tup[0])
+
+            if not visited[i]:
+                visited[i] = True
+                miggroup.append([i])
+                cnt += 1
+
+            for j in range(0, len(e)):
+                if j != i and not visited[j]:
+                    e[j] = list(e[j])
+                    e[j][p] = list(e[j][p])
+                    t2 = sorted(e[j][p], key=lambda tup: tup[0])
+                    for num in range(0, len(miggroup[cnt])):
+                        t1 = sorted(e[miggroup[cnt][num]][p], key=lambda tup: tup[0])
+                        if self.potential_junction(t1[0], t2[0]):
+                            visited[j] = True
+                            miggroup[cnt].append(j)
+                            break
+        return miggroup
+
     def check_strand_is_bonded(self, v):
         """
         check if the strand is bonded

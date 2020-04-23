@@ -108,9 +108,11 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
 
     e3, e4 = cr.check_migration(prevSG)
     if len(e3) != 0:
-        miggroup = util.check_following_migration(e3)
+        miggroup = strandgraph.bondgraph.check_following_migration(e3)
+        '''
+        miggroup = util.check_following_migration(e3, p=0)
+        '''
         for x in miggroup:
-
             startv = list(e3[x[0]][0] - e3[x[0]][1])
             sortdom = util.get_migrate_nodes(e3, x, startv[0][0])
             '''

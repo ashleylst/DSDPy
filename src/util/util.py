@@ -82,7 +82,7 @@ def get_migrate_nodes(edges, indices, startstrand):
     return d
 
 
-def check_following_migration(edges):
+def check_following_migration(edges, p=0):
     """
 
     :param edges:
@@ -96,8 +96,8 @@ def check_following_migration(edges):
         if visited[i]:
             continue
         e[i] = list(e[i])
-        e[i][0] = list(e[i][0])
-        t1 = sorted(e[i][0], key=lambda tup: tup[0])
+        e[i][p] = list(e[i][p])
+        t1 = sorted(e[i][p], key=lambda tup: tup[0])
 
         if not visited[i]:
             visited[i] = True
@@ -107,12 +107,12 @@ def check_following_migration(edges):
         for j in range(0, len(e)):
             if j != i and not visited[j]:
                 e[j] = list(e[j])
-                e[j][0] = list(e[j][0])
-                t2 = sorted(e[j][0], key=lambda tup: tup[0])
+                e[j][p] = list(e[j][p])
+                t2 = sorted(e[j][p], key=lambda tup: tup[0])
                 if (t2[0][0] != t1[0][0]) or (t2[1][0] != t1[1][0]):
                     continue
                 for num in range(0, len(miggroup[cnt])):
-                    t1 = sorted(e[miggroup[cnt][num]][0], key=lambda tup: tup[0])
+                    t1 = sorted(e[miggroup[cnt][num]][p], key=lambda tup: tup[0])
                     if (t1[0][1] + 1 == t2[0][1] and t1[1][1] - 1 == t2[1][1]) \
                             or (t1[0][1] - 1 == t2[0][1] and t1[1][1] + 1 == t2[1][1]):
                         visited[j] = True

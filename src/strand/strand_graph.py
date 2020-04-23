@@ -475,6 +475,7 @@ class StrandGraph:
 
         prevE = copy.copy(self.E)
 
+        '''
         self.delete_edges_regarding_v(cdomain[0], prevE)
 
         if self.bondgraph.speciesnum > 2:
@@ -482,10 +483,11 @@ class StrandGraph:
             return False
 
         else:
-            if self.check_switchable(bdomain, tbr[1], r1):
-                if self.anchored(r1):
-                    self.reconstruct(prevE)
-                    return True
+        '''
+        if self.check_switchable(bdomain, tbr[1], r1):
+            if self.anchored(r1):
+                self.reconstruct(prevE)
+                return True
 
         self.reconstruct(prevE)
         return False
