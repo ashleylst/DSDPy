@@ -289,29 +289,34 @@ class BondGraph:
         :param node2:
         :return:
         """
+        if node1[0] == node2[0]:
+            if node1[1] + 1 == node2[1] or node1[1] - 1 == node2[1]:
+                return True
+            else:
+                return False
+
         q = queue.Queue()
         visited = [False for _ in self.V]
         flag = False
 
-        q.put(node1)
+        q.put((node1[0], node1[1], 0))
 
         while not q.empty():
-            curstrand, curdomain = q.get()
+            curstrand, curdomain, direction = q.get()
             visited[curstrand] = True
 
             if curstrand == node2[0]:
-                if node2[1] + 1 == curdomain or node2[1] - 1 == curdomain:
+                if (node2[1] + 1 == curdomain and direction == 0) or (node2[1] - 1 == curdomain and direction == 1):
                     flag = True
                     break
 
             for i in self.adj[curstrand]:
                 if not visited[i.node2]:
-                    if curdomain + 1 in i.dom2:
-                        q.put((i.node2, curdomain + 1))
-                    elif curdomain - 1 in i.dom2:
-                        q.put((i.node2, curdomain - 1))
-                    else:
-                        continue
+                    for j in range(len(i.dom)):
+                        if i.dom[j] == curdomain + 1:
+                            q.put((i.node2, i.dom2[j], 1))
+                        elif i.dom[j] == curdomain - 1:
+                            q.put((i.node2, i.dom2[j], 0))
 
         if not flag:
             return False
@@ -320,7 +325,7 @@ class BondGraph:
 
     def check_following_migration(self, edges, p=0):
         """
-
+        UNDER TESTING.
         :param edges:
         :return:
         """
@@ -342,12 +347,22 @@ class BondGraph:
 
             for j in range(0, len(e)):
                 if j != i and not visited[j]:
+                    flag = False
                     e[j] = list(e[j])
                     e[j][p] = list(e[j][p])
                     t2 = sorted(e[j][p], key=lambda tup: tup[0])
+
+                    for num in range(len(miggroup[cnt])):
+                        if e[miggroup[cnt][num]][1] == e[j][1] or set(e[miggroup[cnt][num]][0]) & set(e[j][0]) != set():
+                            flag = True
+                            break
+
+                    if flag:
+                        continue
+
                     for num in range(0, len(miggroup[cnt])):
                         t1 = sorted(e[miggroup[cnt][num]][p], key=lambda tup: tup[0])
-                        if self.potential_junction(t1[0], t2[0]):
+                        if self.potential_junction(t1[0], t2[0]) and self.potential_junction(t1[1], t2[1]):
                             visited[j] = True
                             miggroup[cnt].append(j)
                             break

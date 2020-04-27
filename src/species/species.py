@@ -61,6 +61,9 @@ class Species:
             if curlen < minlen:
                 minlen = curlen
                 minc = i
+            elif curlen == minlen:
+                if minc > i:
+                    minc = i
         '''
         minlen = 100000
         minv = -1

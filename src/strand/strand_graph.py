@@ -33,7 +33,7 @@ class StrandGraph:
     bondgraph = None
     '''bond graph derived from this graph'''
 
-    def __init__(self, strands):
+    def __init__(self, strands, merge=0):
         """
         build strand graph for strands
 
@@ -55,12 +55,27 @@ class StrandGraph:
 
         tableS = []
         i = 0
-        for s in strands:
-            j = 0
-            for d in s.domains:
-                tableS.append([(d.name, (i, j), d.comp, d.bond, d.bondname, d.toehold), False])
-                j += 1
-            i += 1
+        if merge == 0:
+            for s in strands:
+                j = 0
+                for d in s.domains:
+                    tableS.append([(d.name, (i, j), d.comp, d.bond, d.bondname, d.toehold), False])
+                    j += 1
+                i += 1
+        else:
+            for k in range(len(strands)):
+                s = strands[k]
+                j = 0
+                for d in s.domains:
+                    if d.bondname != '':
+                        if k < merge:
+                            tableS.append([(d.name, (i, j), d.comp, d.bond, 'i' + d.bondname, d.toehold), False])
+                        else:
+                            tableS.append([(d.name, (i, j), d.comp, d.bond, 'j' + d.bondname, d.toehold), False])
+                    else:
+                        tableS.append([(d.name, (i, j), d.comp, d.bond, d.bondname, d.toehold), False])
+                    j += 1
+                i += 1
 
         for i in range(0, len(tableS)):
             cur = tableS[i]

@@ -87,8 +87,8 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         specieslist, speciesidmap, reactionlist, kinetics, indexlist, cursor, visited = self.procthread.get_arg_info()
         initnames, concentrations, outdir, simupara, initlen = self.simuarg
         try:
-            x, y, obs = graph_processor.simulation(specieslist, reactionlist, initlen, initnames,
-                                                               concentrations, outdir, simupara, self.simumode)
+            x, y, obs = graph_processor.simulation(specieslist, reactionlist, initlen, initnames, concentrations,
+                                                   outdir, simupara, self.simumode)
         except:
             self.debugPrint('Simulation Error.')
             return

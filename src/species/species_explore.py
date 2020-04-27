@@ -109,9 +109,9 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
     e3, e4 = cr.check_migration(prevSG)
     if len(e3) != 0:
         miggroup = strandgraph.bondgraph.check_following_migration(e3)
-        '''
-        miggroup = util.check_following_migration(e3, p=0)
-        '''
+
+        #miggroup = util.check_following_migration(e3, p=0)
+
         for x in miggroup:
             startv = list(e3[x[0]][0] - e3[x[0]][1])
             sortdom = util.get_migrate_nodes(e3, x, startv[0][0])
@@ -159,6 +159,7 @@ def mono(species, specieslist, speciesidmap, reactionlist, kinetics):
                         anchor = True
                         break
             if not anchor:
+                strandgraph.reconstruct(prevE)
                 continue
 
             specieslist, speciesidmap, reaction = \
@@ -233,7 +234,7 @@ def bi(speciescomb, specieslist, speciesidmap, reactionlist, kinetics):
     species2 = specieslist[index2]
     len1 = len(species1.nodes)
 
-    strandgraph = sg.StrandGraph(species1.strands + species2.strands)
+    strandgraph = sg.StrandGraph(species1.strands + species2.strands, merge=len1)
 
     prevE = strandgraph.E
     prevSG = copy.copy(strandgraph)
