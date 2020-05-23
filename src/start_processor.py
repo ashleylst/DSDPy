@@ -1,6 +1,7 @@
 from src.species import species_explore as se
 from src.util import util, cexception
 from src.basics import output as on, generate_pysbmodel as gp, initialize_system
+import os
 
 
 def start_processor(filedir='../res/input', threshold=6, window=None):
@@ -16,7 +17,9 @@ def start_processor(filedir='../res/input', threshold=6, window=None):
         initialize_system.initialize(filedir)
 
     if outdir == '':
-        outdir = '../output'
+        outdir = 'output'
+        if not os.path.exists(outdir):
+            os.makedirs(outdir)
     if len(simupara) == 0:
         simupara = [100, 100]
     initlen = len(specieslist)
@@ -79,7 +82,7 @@ def start_processor(filedir='../res/input', threshold=6, window=None):
         x, y, obs = on.simulate_bng(md,
                         time=simupara[0],
                         steps=simupara[1])
-        on.visualize_simulation_results(x, y, obs)
+        on.visualize_simulation_results(x, y, obs, filedir=outdir)
 
     # output for GUI interface
     on.output_network_txt(specieslist,

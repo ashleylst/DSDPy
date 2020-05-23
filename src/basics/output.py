@@ -66,7 +66,7 @@ def visualize_simulation_results(x, y, obs, filedir='../output', option='bng', c
     plt.savefig(filedir + '/simres', bbox_inches='tight', pad_inches=0.5)
 
 
-def output_network_txt(specieslist, reactionlist, filedir='../output'):
+def output_network_txt(specieslist, reactionlist, filedir='output'):
     """
     Text file for GUI to visualize reaction network
 
@@ -74,6 +74,7 @@ def output_network_txt(specieslist, reactionlist, filedir='../output'):
     :param reactionlist: list of reactions
     :param filedir: file directory to write the txt file
     """
+
     file = open(filedir + '/output.txt', 'w+')
     '''
     file.write('-----Species-----\n')
