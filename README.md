@@ -68,7 +68,7 @@ that, you can test if the DSDPy works by running the following command
 from a Python interpreter:
 
     >>> from src import start_processor as sp
-    >>> sp.start_processor() 
+    >>> sp.start_processor(filedir='../res/input.txt') 
     RB: {(2, 0), (0, 3)} 
     R4: {(0, 2), (2, 1)} 
     R3: {(1, 0), (3, 1)} 
