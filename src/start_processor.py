@@ -87,6 +87,6 @@ def start_processor(filedir='../res/input', threshold=6, window=None):
                           filedir=outdir)
 
 
-start_processor(filedir='../res/input5')
+#start_processor(filedir='../res/input5')
 
 
