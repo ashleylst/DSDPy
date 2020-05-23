@@ -59,7 +59,7 @@ a DSD system analysis. One should be able to run the scripts if the
 required packages above have been installed to the current Python
 environment.
 
-DSDPy has a graphical user interface named *interface.py* in the main directory. To run this interface from command line, simply use:
+DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply use:
     
         python interface.py
         
@@ -74,21 +74,24 @@ that, you can test if the DSDPy works by running the following command
 from a Python interpreter:
 
     >>> from src import start_processor as sp
-    >>> sp.start_processor(filedir='../res/input.txt') 
-    RB: {(2, 0), (0, 3)} 
-    R4: {(0, 2), (2, 1)} 
-    R3: {(1, 0), (3, 1)} 
-    RU: {(2, 0), (0, 3)} 
-    R4: {(0, 2), (2, 1)} 
-    R3: {(1, 0), (3, 1)} 
-    RU: {(0, 1), (1, 2)} 
-    R4: {(1, 1), (0, 2)} 
-    RU: {(0, 1), (1, 2)} 
-    RB: {(0, 1), (2, 2)} 
+    >>> sp.start_processor(filedir='./res/input') 
+    RB: {(2, 0), (0, 3)}
+    R4: {(0, 2), (2, 1)}
+    R3: {(1, 0), (3, 1)}
+    RU: {(2, 0), (0, 3)}
+    R4: {(0, 2), (2, 1)}
+    R4: {(1, 1), (0, 2)}
+    R3: {(1, 0), (3, 1)}
+    RU: {(0, 1), (1, 2)}
+    R4: {(1, 1), (0, 2)}
+    RU: {(0, 1), (1, 2)}
+    R3: {(0, 0), (1, 1)}
     RB: {(0, 1), (2, 2)}
+    RB: {(0, 1), (2, 2)}
+    
 
 
-Note: This test input is res/input.txt.
+Note: This test input is res/input.
 
 ### Creating Your Own Input
 
