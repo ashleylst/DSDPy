@@ -59,11 +59,19 @@ a DSD system analysis. One should be able to run the scripts if the
 required packages above have been installed to the current Python
 environment.
 
+DSDPy has a graphical user interface named (*interface.py*) in the main directory. To run this interface from command line, simply use:
+    
+        python interface.py
+        
+Please make sure you have the Python package (*src*) in the same directory before you run the interface.
+
+### Interface 
+
 ### Start
 
 The entry point to the analysis of a DSD system is through
 [start_processor] function. To
-get test inputs for DSDPy, you need to download the *res* package. After
+get test inputs for DSDPy, you need to download the *res* package (In the case you would like to make your own input, simply pass the file directory accordingly to function [start_processor] as suggested). After
 that, you can test if the DSDPy works by running the following command
 from a Python interpreter:
 
