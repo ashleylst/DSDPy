@@ -59,7 +59,7 @@ a DSD system analysis. One should be able to run the scripts if the
 required packages above have been installed to the current Python
 environment.
 
-DSDPy has a graphical user interface named *interface.py* in the main directory. To run this interface from command line, simply use:
+DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply use:
     
         python interface.py
         
