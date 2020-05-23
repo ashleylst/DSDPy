@@ -52,7 +52,7 @@ in this documentation.
 
         conda install -c conda-forge matplotlib
 
-#### Installation
+### Use
 
 The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
@@ -65,7 +65,7 @@ DSDPy has a graphical user interface named *interface.py* in the main directory.
         
 Please make sure you have the Python package (*src*) in the same directory before you run the interface.
 
-### Start
+### Programmatic Use
 
 The entry point to the analysis of a DSD system is through
 [start_processor] function. To
