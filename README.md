@@ -58,9 +58,9 @@ in this documentation.
 
         conda install -c anaconda pyqt
         
-5.  **Bidict**
+6.  **Bidict**
 
-    [Bidict](https://bidict.readthedocs.io/en/master/) is the bidirectional mapping library for Python. One can one of the following commands to install:
+    [Bidict](https://bidict.readthedocs.io/en/master/) is the bidirectional mapping library for Python. One can use one of the following commands to install:
 
         conda install -c conda-forge bidict
         conda install -c conda-forge/label/gcc7 bidict
@@ -73,7 +73,7 @@ The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
 required packages above have been downloaded.
 
-DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply use:
+DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply do:
     
         python interface.py
         
