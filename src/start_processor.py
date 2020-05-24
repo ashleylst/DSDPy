@@ -4,7 +4,7 @@ from src.basics import output as on, generate_pysbmodel as gp, initialize_system
 import os
 
 
-def start_processor(filedir='../res/input', threshold=6, window=None):
+def start_processor(filedir='../res/input', threshold=10, window=None):
     """
     the entry point to DSDPy
 
@@ -13,6 +13,10 @@ def start_processor(filedir='../res/input', threshold=6, window=None):
     :param filedir: file directory to the input file
     """
     # initialization
+    if not os.path.exists(filedir):
+        print('Invalid file directory defined.')
+        quit()
+
     specieslist, speciesidmap, kinetics, initnames, concentrations, outdir, simupara = \
         initialize_system.initialize(filedir)
 
@@ -88,7 +92,6 @@ def start_processor(filedir='../res/input', threshold=6, window=None):
     on.output_network_txt(specieslist,
                           reactionlist,
                           filedir=outdir)
-
 
 #start_processor(filedir='../res/input')
 
