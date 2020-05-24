@@ -54,9 +54,18 @@ in this documentation.
         
 5.  **PyQt**
 
-    [PyQt](http://www.riverbankcomputing.co.uk/software/pyqt) a set of Python v2 and v3 bindings for The Qt Company's Qt application framework and runs on all platforms supported by Qt including Windows, macOS, Linux, iOS and Android. The installation command with Anaconda is:
+    [PyQt](http://www.riverbankcomputing.co.uk/software/pyqt) is a set of Python v2 and v3 bindings for The Qt Company's Qt application framework and runs on all platforms supported by Qt including Windows, macOS, Linux, iOS and Android. The installation command with Anaconda is:
 
         conda install -c anaconda pyqt
+        
+5.  **Bidict**
+
+    [Bidict](https://bidict.readthedocs.io/en/master/) is the bidirectional mapping library for Python. One can one of the following commands to install:
+
+        conda install -c conda-forge bidict
+        conda install -c conda-forge/label/gcc7 bidict
+        conda install -c conda-forge/label/cf201901 bidict
+        conda install -c conda-forge/label/cf202003 bidict
         
 ### Use
 
