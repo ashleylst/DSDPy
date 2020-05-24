@@ -79,7 +79,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">DSDPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
 </ul>
 
@@ -254,9 +254,11 @@
 
     <span class="n">e3</span><span class="p">,</span> <span class="n">e4</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">check_migration</span><span class="p">(</span><span class="n">prevSG</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">miggroup</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_following_migration</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">miggroup</span><span class="p">:</span>
+        <span class="n">miggroup</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">check_following_migration</span><span class="p">(</span><span class="n">e3</span><span class="p">)</span>
 
+        <span class="c1">#miggroup = util.check_following_migration(e3, p=0)</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">miggroup</span><span class="p">:</span>
             <span class="n">startv</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">sortdom</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_migrate_nodes</span><span class="p">(</span><span class="n">e3</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">startv</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
             <span class="sd">&#39;&#39;&#39;</span>
@@ -282,14 +284,15 @@
                 <span class="n">notbond</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">potbondto</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
 
-            <span class="n">target1</span><span class="p">,</span> <span class="n">target2</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">get_connect_toehold</span><span class="p">(</span><span class="n">e3</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">],</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">target1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">target2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            target1, target2 = strandgraph.get_connect_toehold(notbond, potbondto)</span>
+<span class="sd">            if target1 is None or target2 is None:</span>
+<span class="sd">                    continue</span>
 
-            <span class="n">closest1</span><span class="p">,</span> <span class="n">closest2</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_domains_on_2sides</span><span class="p">(</span><span class="n">target1</span><span class="p">,</span> <span class="n">target2</span><span class="p">,</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">check_complementary</span><span class="p">(</span><span class="n">closest1</span><span class="p">,</span> <span class="n">closest2</span><span class="p">):</span>
-                <span class="k">continue</span>
-
+<span class="sd">            closest1, closest2 = util.get_domains_on_2sides(target1, target2, notbond, potbondto)</span>
+<span class="sd">            if not strandgraph.check_complementary(closest1, closest2):</span>
+<span class="sd">                continue</span>
+<span class="sd">            &#39;&#39;&#39;</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">flag</span><span class="p">:</span>
                 <span class="k">continue</span>
 
@@ -302,6 +305,7 @@
                         <span class="n">anchor</span> <span class="o">=</span> <span class="kc">True</span>
                         <span class="k">break</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">anchor</span><span class="p">:</span>
+                <span class="n">strandgraph</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
                 <span class="k">continue</span>
 
             <span class="n">specieslist</span><span class="p">,</span> <span class="n">speciesidmap</span><span class="p">,</span> <span class="n">reaction</span> <span class="o">=</span> \
@@ -376,7 +380,7 @@
     <span class="n">species2</span> <span class="o">=</span> <span class="n">specieslist</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span>
     <span class="n">len1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">species1</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
 
-    <span class="n">strandgraph</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">StrandGraph</span><span class="p">(</span><span class="n">species1</span><span class="o">.</span><span class="n">strands</span> <span class="o">+</span> <span class="n">species2</span><span class="o">.</span><span class="n">strands</span><span class="p">)</span>
+    <span class="n">strandgraph</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">StrandGraph</span><span class="p">(</span><span class="n">species1</span><span class="o">.</span><span class="n">strands</span> <span class="o">+</span> <span class="n">species2</span><span class="o">.</span><span class="n">strands</span><span class="p">,</span> <span class="n">merge</span><span class="o">=</span><span class="n">len1</span><span class="p">)</span>
 
     <span class="n">prevE</span> <span class="o">=</span> <span class="n">strandgraph</span><span class="o">.</span><span class="n">E</span>
     <span class="n">prevSG</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">strandgraph</span><span class="p">)</span>

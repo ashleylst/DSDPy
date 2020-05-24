@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial &mdash; DSDPy  documentation</title>
+  <title>DSDPy &mdash; DSDPy  documentation</title>
   
 
   
@@ -81,30 +81,23 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisities">Prerequisities</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#required-packages">Required Packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DSDPy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisities">Prerequisities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-packages">Required Packages</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#start">Start</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-your-own-input">Creating Your Own Input</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#example-input1">Example input1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example-input2">Example input2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use">Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programmatic-use">Programmatic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-your-own-input">Creating Your Own Input</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-input">Example input</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#obtaining-the-output">Obtaining the Output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#text-file-on-the-reaction-network">Text File on the Reaction Network</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#an-example-output">An example output:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-the-output">Obtaining the Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#text-file-on-the-reaction-network">Text File on the Reaction Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#png-file-visualizing-the-bng-simulation-results">PNG File Visualizing the BNG Simulation Results</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#png-file-visualizing-the-bng-simulation-results">PNG File Visualizing the BNG Simulation Results</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">An example output:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#modify-the-documentation">Modify the Documentation</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -155,7 +148,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Tutorial</li>
+      <li>DSDPy</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,84 +167,131 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tutorial">
-<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="dsdpy">
+<h1>DSDPy<a class="headerlink" href="#dsdpy" title="Permalink to this headline">¶</a></h1>
+<p>DSDPy is a processor for DNA strand displacement systems. DSDPy
+generates the whole reaction network given the initial species and
+supports the simulation of such reaction network.</p>
+<p>The full documentation of DSDPy can be found at
+<a class="reference external" href="https://dsdpy.readthedocs.io/en/latest/">https://dsdpy.readthedocs.io/en/latest/</a>.</p>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="prerequisities">
-<h2>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this headline">¶</a></h2>
-<p>DSDPy (scripts in <em>src</em> package) is written in <a class="reference external" href="https://www.python.org/download/releases/3.0/">Python3</a>. The recommended way to install
-all the packages needed in <em>src</em> is through <a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a>. For those who are familiar with
-<code class="docutils literal notranslate"><span class="pre">pip</span></code> installation, note that the required packages can also be installed through standard
-way, but the details are not included in this documentation.</p>
+<h3>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this headline">¶</a></h3>
+<p>DSDPy (scripts in <em>src</em> package) is written in
+<a class="reference external" href="https://www.python.org/download/releases/3.0/">Python3</a>. The
+recommended way to install all the packages needed in <em>src</em> is through
+<a class="reference external" href="https://www.continuum.io/downloads">Anaconda</a>. For those who are
+familiar with <code class="docutils literal notranslate"><span class="pre">pip</span></code> installation, note that the required packages can
+also be installed through standard way, but the details are not included
+in this documentation.</p>
 <div class="section" id="required-packages">
-<h3>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h3>
+<h4>Required Packages<a class="headerlink" href="#required-packages" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p><strong>PySB</strong></p>
-<p><a class="reference external" href="http://pysb.org">PySB</a> is a framework for building mathematical rule-based models of biochemical systems
-as Python programs. The installation command with Anaconda is:</p>
+<p><a class="reference external" href="http://pysb.org">PySB</a> is a framework for building mathematical
+rule-based models of biochemical systems as Python programs. The
+installation command with Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">alubbock</span> <span class="n">pysb</span>
 </pre></div>
 </div>
 </li>
 <li><p><strong>Numpy</strong></p>
-<p><a class="reference external" href="https://www.numpy.org/">Numpy</a> is a fundamental package for scientific computing with Python.
-The installation command with Anaconda is:</p>
+<p><a class="reference external" href="https://www.numpy.org/">Numpy</a> is a fundamental package for
+scientific computing with Python. The installation command with
+Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">anaconda</span> <span class="n">numpy</span>
 </pre></div>
 </div>
 </li>
 <li><p><strong>Networkx</strong></p>
-<p><a class="reference external" href="https://networkx.github.io/">Networkx</a> is a Python package for the creation, manipulation, and study of the
-structure, dynamics, and functions of complex networks. This package is used in
-<em>src</em> for output incidence matrix.
-The installation command with Anaconda is:</p>
+<p><a class="reference external" href="https://networkx.github.io/">Networkx</a> is a Python package for
+the creation, manipulation, and study of the structure, dynamics, and
+functions of complex networks. This package is used in <em>src</em> for
+output incidence matrix. The installation command with Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">networkx</span>
 </pre></div>
 </div>
 </li>
 <li><p><strong>Matplotlib</strong></p>
-<p><a class="reference external" href="https://matplotlib.org">Matplotlib</a> is a Python 2D plotting library, used in <em>src</em> for visualization of the
-simulation results.
+<p><a class="reference external" href="https://matplotlib.org">Matplotlib</a> is a Python 2D plotting
+library, used in <em>src</em> for visualization of the simulation results.
 The installation command with Anaconda is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">matplotlib</span>
 </pre></div>
 </div>
 </li>
+<li><p><strong>PyQt</strong></p>
+<p><a class="reference external" href="http://www.riverbankcomputing.co.uk/software/pyqt">PyQt</a> is a set
+of Python v2 and v3 bindings for The Qt Company’s Qt application
+framework and runs on all platforms supported by Qt including
+Windows, macOS, Linux, iOS and Android. The installation command with
+Anaconda is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">anaconda</span> <span class="n">pyqt</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Bidict</strong></p>
+<p><a class="reference external" href="https://bidict.readthedocs.io/en/master/">Bidict</a> is the
+bidirectional mapping library for Python. One can use one of the
+following commands to install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">bidict</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">label</span><span class="o">/</span><span class="n">gcc7</span> <span class="n">bidict</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">label</span><span class="o">/</span><span class="n">cf201901</span> <span class="n">bidict</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="o">/</span><span class="n">label</span><span class="o">/</span><span class="n">cf202003</span> <span class="n">bidict</span>
+</pre></div>
+</div>
+</li>
 </ol>
 </div>
-<div class="section" id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p>The software is a Python package (<em>src</em>) that includes scripts to run a DSD system analysis.
-One should be able to run the scripts if the required packages above have been installed to the
-current Python environment.</p>
 </div>
+<div class="section" id="use">
+<h3>Use<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h3>
+<p>The core is a Python package (<em>src</em>) that includes scripts to run a DSD
+system analysis. One should be able to run the scripts if the required
+packages above have been downloaded.</p>
+<p>DSDPy has a graphical user interface implemented as <em>interface.py</em> in
+the project root directory. To run this interface from command line
+interface, simply do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">interface</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
 </div>
-<div class="section" id="start">
-<h2>Start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h2>
-<p>The entry point to the analysis of a DSD system is through <a class="reference external" href="src.html#module-src.start_processor">start_processor</a> function.
-To get test inputs for DSDPy, you need to download the <cite>res</cite> package. After that, you can test
-if the DSDPy works by running the following command from a Python interpreter:</p>
+<p>Please make sure you have the Python package (<em>src</em>) in the same
+directory before you run the interface.</p>
+</div>
+<div class="section" id="programmatic-use">
+<h3>Programmatic Use<a class="headerlink" href="#programmatic-use" title="Permalink to this headline">¶</a></h3>
+<p>The entry point to the analysis of a DSD system is through
+[start_processor] function. To get test inputs for DSDPy, you need to
+download the <em>res</em> package (In the case you would like to make your own
+input, simply pass the file directory accordingly to function
+[start_processor] as suggested). After that, you can test if the DSDPy
+works by running the following command from a Python interpreter:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">src</span> <span class="kn">import</span> <span class="n">start_processor</span> <span class="k">as</span> <span class="n">sp</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">start_processor</span><span class="p">(</span><span class="n">filedir</span><span class="o">=</span><span class="s1">&#39;./res/input&#39;</span><span class="p">)</span>
 <span class="go">RB: {(2, 0), (0, 3)}</span>
 <span class="go">R4: {(0, 2), (2, 1)}</span>
 <span class="go">R3: {(1, 0), (3, 1)}</span>
 <span class="go">RU: {(2, 0), (0, 3)}</span>
 <span class="go">R4: {(0, 2), (2, 1)}</span>
+<span class="go">R4: {(1, 1), (0, 2)}</span>
 <span class="go">R3: {(1, 0), (3, 1)}</span>
 <span class="go">RU: {(0, 1), (1, 2)}</span>
 <span class="go">R4: {(1, 1), (0, 2)}</span>
 <span class="go">RU: {(0, 1), (1, 2)}</span>
+<span class="go">R3: {(0, 0), (1, 1)}</span>
 <span class="go">RB: {(0, 1), (2, 2)}</span>
 <span class="go">RB: {(0, 1), (2, 2)}</span>
 </pre></div>
 </div>
-<p>Note: This test input is <cite>res/input.txt</cite>.</p>
+<p>Note: This test input is res/input.</p>
 </div>
 <div class="section" id="creating-your-own-input">
-<h2>Creating Your Own Input<a class="headerlink" href="#creating-your-own-input" title="Permalink to this headline">¶</a></h2>
-<p>The ideal way to generate the input to DSDPy is through a GUI interface which enables a quickstart for
-people with DSD systems to test. However, such interface is now under development and one needs to
-manually type the input for DSDPy.</p>
+<h3>Creating Your Own Input<a class="headerlink" href="#creating-your-own-input" title="Permalink to this headline">¶</a></h3>
+<p>The ideal way to generate the input to DSDPy is through a GUI interface
+which enables a quickstart for people with DSD systems to test. However,
+such interface is now under development and one needs to manually type
+the input for DSDPy.</p>
 <p>An input for DSDPy needs at least <strong>three</strong> sections:</p>
 <ol class="arabic">
 <li><p><strong>Species</strong></p>
@@ -273,15 +313,15 @@ manually type the input for DSDPy.</p>
 </div>
 </li>
 <li><p><strong>Information on Species</strong></p>
-<p>Names of the initial species (order corresponds to the order of species above) and their initial copies.
-An example format:</p>
+<p>Names of the initial species (order corresponds to the order of
+species above) and their initial copies. An example format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SomeName</span> <span class="mi">1000</span>
 </pre></div>
 </div>
 </li>
 <li><p><strong>Kinetics</strong></p>
-<p>Rates of the reactions, includes 3-way migration, 4-way migration, binding and unbinding (R3, R4, RB and RU).
-An example format:</p>
+<p>Rates of the reactions, includes 3-way migration, 4-way migration,
+binding and unbinding (R3, R4, RB and RU). An example format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RB</span> <span class="mf">1e6</span>
 <span class="n">RU</span> <span class="mf">1.2</span>
 <span class="n">R3</span> <span class="mf">78.12</span>
@@ -290,26 +330,9 @@ An example format:</p>
 </div>
 </li>
 </ol>
-<p>Additionally, the input can include the following sections:</p>
-<ol class="arabic" start="4">
-<li><p><strong>Output directory</strong></p>
-<p>The directory for output files.
-An example format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">../</span><span class="n">output</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Simulation settings</strong></p>
-<p>Simulation time and time steps.
-An example format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1000</span> <span class="mi">100</span>
-</pre></div>
-</div>
-</li>
-</ol>
 <p>Note that the sections are all seperated by –.</p>
-<div class="section" id="example-input1">
-<h3>Example input1<a class="headerlink" href="#example-input1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="example-input">
+<h4>Example input<a class="headerlink" href="#example-input" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;L T2^!i2 X*!i1 T1^&gt;
 &lt;A X!i1 T2^*!i2&gt;
 //
@@ -327,54 +350,31 @@ R4 5.6e-3
 </pre></div>
 </div>
 </div>
-<div class="section" id="example-input2">
-<h3>Example input2<a class="headerlink" href="#example-input2" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;f1^ x!1&gt;
-&lt;to^* x*!1&gt;
-//
-&lt;b!2 tx^!3&gt;
-&lt;to^*!4 x*!5 tx^*!3 b*!2 tb^*&gt;
-&lt;x!5 to^!4&gt;
-//
-&lt;tx^ x&gt;
-//
-&lt;tb^ b&gt;
---
-ss1 100
-ss2 100
-ss3 10
-ss4 10
---
-RB 1e6
-RU 1.2
-R3 78.12
-R4 5.6e-3
---
-../output
---
-1000 100
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="obtaining-the-output">
-<h2>Obtaining the Output<a class="headerlink" href="#obtaining-the-output" title="Permalink to this headline">¶</a></h2>
-<p>The output files includes a text file containing the information of the reaction network
-and a png file visualizing the <a class="reference external" href="https://www.csb.pitt.edu/Faculty/Faeder/?page_id=409">BNG</a> simulation results. These files can be found under
-the <cite>output</cite> directory or an user defined output directory.</p>
+<h3>Obtaining the Output<a class="headerlink" href="#obtaining-the-output" title="Permalink to this headline">¶</a></h3>
+<p>The output files includes a text file containing the information of the
+reaction network and a png file visualizing the
+<a class="reference external" href="https://www.csb.pitt.edu/Faculty/Faeder/?page_id=409">BNG</a>
+simulation results. These files can be found under the output directory
+or an user defined output directory.</p>
 <div class="section" id="text-file-on-the-reaction-network">
-<h3>Text File on the Reaction Network<a class="headerlink" href="#text-file-on-the-reaction-network" title="Permalink to this headline">¶</a></h3>
+<h4>Text File on the Reaction Network<a class="headerlink" href="#text-file-on-the-reaction-network" title="Permalink to this headline">¶</a></h4>
 <p>The file contains three parts of information:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>A species list that includes all the possible species in the network.</p></li>
-<li><p>A reaction list that includes all the possible reactions in the network.</p></li>
-<li><p>An incidence matrix based on the reaction network. (Its row denotes species and its column denotes the edge from one species to another)</p></li>
+<li><p>A species list that includes all the possible species in the
+network.</p></li>
+<li><p>A reaction list that includes all the possible reactions in the
+network.</p></li>
+<li><p>An incidence matrix based on the reaction network. (Its row
+denotes species and its column denotes the edge from one species
+to another)</p></li>
 </ol>
 </div></blockquote>
 <div class="section" id="an-example-output">
-<h4>An example output:<a class="headerlink" href="#an-example-output" title="Permalink to this headline">¶</a></h4>
-<p>Based on the example input1</p>
+<h5>An example output:<a class="headerlink" href="#an-example-output" title="Permalink to this headline">¶</a></h5>
+<p>Based on the example input :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>-----Species-----
 1
 &lt;L T2^!1 X*!2 T1^&gt;
@@ -428,60 +428,69 @@ the <cite>output</cite> directory or an user defined output directory.</p>
 &lt;X*!2 A*!1&gt;
 
 -----Reactions-----
-RB 1 + 2 --&gt; 3 rate=1000000.0
+RB 1 + 2 --&gt; 3 rate=0.0003
 
-R3 3 --&gt; 4 + 5 rate=78.12
+R3 3 --&gt; 4 + 5 rate=20.0
 
-R4 3 --&gt; 6 rate=0.0056
+R4 3 --&gt; 6 rate=20.0
 
-RU 3 --&gt; 1 + 2 rate=1.2
+RU 3 --&gt; 1 + 2 rate=0.1126
 
-R4 4 --&gt; 7 rate=0.0056
+R4 4 --&gt; 7 rate=20.0
 
-R3 6 --&gt; 7 + 5 rate=78.12
+R3 6 --&gt; 7 + 5 rate=20.0
 
-RU 6 --&gt; 8 + 9 rate=1.2
+R4 6 --&gt; 3 rate=20.0
 
-R4 7 --&gt; 4 rate=0.0056
+RU 6 --&gt; 8 + 9 rate=0.1126
 
-RU 7 --&gt; 8 + 10 rate=1.2
+R4 7 --&gt; 4 rate=20.0
 
-RB 8 + 9 --&gt; 6 rate=1000000.0
+RU 7 --&gt; 8 + 10 rate=0.1126
 
-RB 8 + 10 --&gt; 7 rate=1000000.0
+R3 9 --&gt; 10 + 5 rate=20.0
+
+RB 8 + 9 --&gt; 6 rate=0.0003
+
+RB 8 + 10 --&gt; 7 rate=0.0003
 
 -----Incidence Matrix-----
-[1, 3] [2, 3] [3, 4] [3, 5] [3, 6] [3, 1] [3, 2] [4, 7] [6, 7] [6, 5] [6, 8] [6, 9] [7, 4] [7, 8] [7, 10] [8, 6] [9, 6] [8, 7] [10, 7]
-  1 [[ 1.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
-  2 [[ 0.  1.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
-  3 [[-1. -1.  1.  1.  1.  1.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
-  4 [[ 0.  0. -1.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.]]
-  5 [[ 0.  0.  0. -1.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
-  6 [[ 0.  0.  0.  0. -1.  0.  0.  0.  1.  1.  1.  1.  0.  0.  0. -1.  0. -1.  0.]]
-  7 [[ 0.  0.  0.  0.  0.  0.  0. -1. -1.  0.  0.  0.  1.  1.  1.  0. -1.  0. -1.]]
-  8 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0. -1.  0.  1.  1.  0.  0.]]
-  9 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  1.  0.]]
- 10 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  1.]]
+[1, 3] [2, 3] [3, 4] [3, 5] [3, 6] [3, 1] [3, 2] [4, 7] [6, 7] [6, 5] [6, 3] [6, 8] [6, 9] [7, 4] [7, 8] [7, 10] [9, 10] [9, 5] [8, 6] [9, 6] [8, 7] [10, 7]
+  1 [[ 1.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
+   0.  0.  0.  0.]]
+  2 [[ 0.  1.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
+   0.  0.  0.  0.]]
+  3 [[-1. -1.  1.  1.  1.  1.  1.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.
+   0.  0.  0.  0.]]
+  4 [[ 0.  0. -1.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.
+   0.  0.  0.  0.]]
+  5 [[ 0.  0.  0. -1.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.
+   0. -1.  0.  0.]]
+  6 [[ 0.  0.  0.  0. -1.  0.  0.  0.  1.  1.  1.  1.  1.  0.  0.  0. -1.  0.
+   0.  0. -1.  0.]]
+  7 [[ 0.  0.  0.  0.  0.  0.  0. -1. -1.  0.  0.  0.  0.  1.  1.  1.  0. -1.
+   0.  0.  0. -1.]]
+  8 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0. -1.  0.  1.  1.
+   0.  0.  0.  0.]]
+  9 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.
+   1.  1.  1.  0.]]
+ 10 [[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.
+  -1.  0.  0.  1.]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="png-file-visualizing-the-bng-simulation-results">
-<h3>PNG File Visualizing the BNG Simulation Results<a class="headerlink" href="#png-file-visualizing-the-bng-simulation-results" title="Permalink to this headline">¶</a></h3>
+<h4>PNG File Visualizing the BNG Simulation Results<a class="headerlink" href="#png-file-visualizing-the-bng-simulation-results" title="Permalink to this headline">¶</a></h4>
 <div class="section" id="id1">
-<h4>An example output:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>Based on the example input1</p>
-<div class="figure align-default">
-<img alt="_images/simres.png" src="_images/simres.png" />
+<h5>An example output:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>Based on the example input</p>
+<div class="figure align-default" id="id2">
+<img alt="alt text" src="https://github.com/ashleylst/DSDPy/blob/master/output/simres.png" />
+<p class="caption"><span class="caption-text">alt text</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="modify-the-documentation">
-<h2>Modify the Documentation<a class="headerlink" href="#modify-the-documentation" title="Permalink to this headline">¶</a></h2>
-<p>The documentation uses <a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>. One can modify this documentation using command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>
-under path <em>doc</em> .</p>
-<div class="toctree-wrapper compound">
 </div>
 </div>
 </div>

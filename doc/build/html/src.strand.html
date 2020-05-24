@@ -79,7 +79,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">DSDPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modulesref.html">DSDPy</a></li>
 </ul>
 
@@ -281,6 +281,14 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="src.strand.bond_graph.BondGraph.check_following_migration">
+<code class="sig-name descname">check_following_migration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edges</span></em>, <em class="sig-param"><span class="n">p</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_following_migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_following_migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>UNDER TESTING.
+:param edges:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.strand.bond_graph.BondGraph.check_in_loop">
 <code class="sig-name descname">check_in_loop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">startnode</span></em>, <em class="sig-param"><span class="n">endnode</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.check_in_loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.check_in_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>check if the two vertices are in the same loop</p>
@@ -436,6 +444,15 @@
 <dd class="field-even"><p>bonds</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.strand.bond_graph.BondGraph.potential_junction">
+<code class="sig-name descname">potential_junction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">node1</span></em>, <em class="sig-param"><span class="n">node2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/bond_graph.html#BondGraph.potential_junction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.bond_graph.BondGraph.potential_junction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if node1 and node2 can be a part of junction
+:param node1:
+:param node2:
+:return:</p>
 </dd></dl>
 
 <dl class="py method">
@@ -624,7 +641,7 @@
 <span id="src-strand-strand-graph-module"></span><h2>src.strand.strand_graph module<a class="headerlink" href="#module-src.strand.strand_graph" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="src.strand.strand_graph.StrandGraph">
-<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand_graph.</code><code class="sig-name descname">StrandGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">src.strand.strand_graph.</code><code class="sig-name descname">StrandGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strands</span></em>, <em class="sig-param"><span class="n">merge</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data structure of the strand graph</p>
 <dl class="py attribute">
@@ -847,7 +864,7 @@
 
 <dl class="py method">
 <dt id="src.strand.strand_graph.StrandGraph.get_connect_toehold">
-<code class="sig-name descname">get_connect_toehold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">edge</span></em>, <em class="sig-param"><span class="n">notbond</span></em>, <em class="sig-param"><span class="n">potbondto</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_connect_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_connect_toehold" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_connect_toehold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">notbond</span></em>, <em class="sig-param"><span class="n">potbondto</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/strand/strand_graph.html#StrandGraph.get_connect_toehold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.strand.strand_graph.StrandGraph.get_connect_toehold" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the toeholds that connect the two domains of edge</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

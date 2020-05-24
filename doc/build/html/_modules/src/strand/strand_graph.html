@@ -79,7 +79,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">DSDPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../modulesref.html">DSDPy</a></li>
 </ul>
 
@@ -179,7 +179,7 @@
     <span class="n">bondgraph</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="sd">&#39;&#39;&#39;bond graph derived from this graph&#39;&#39;&#39;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strands</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strands</span><span class="p">,</span> <span class="n">merge</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        build strand graph for strands</span>
 
@@ -201,12 +201,27 @@
 
         <span class="n">tableS</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strands</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">domains</span><span class="p">:</span>
-                <span class="n">tableS</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">comp</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bond</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">toehold</span><span class="p">),</span> <span class="kc">False</span><span class="p">])</span>
-                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">merge</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strands</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">domains</span><span class="p">:</span>
+                    <span class="n">tableS</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">comp</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bond</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">toehold</span><span class="p">),</span> <span class="kc">False</span><span class="p">])</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strands</span><span class="p">)):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">strands</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">domains</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">merge</span><span class="p">:</span>
+                            <span class="n">tableS</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">comp</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bond</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span> <span class="o">+</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">toehold</span><span class="p">),</span> <span class="kc">False</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">tableS</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">comp</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bond</span><span class="p">,</span> <span class="s1">&#39;j&#39;</span> <span class="o">+</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">toehold</span><span class="p">),</span> <span class="kc">False</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tableS</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">d</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">comp</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bond</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bondname</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">toehold</span><span class="p">),</span> <span class="kc">False</span><span class="p">])</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tableS</span><span class="p">)):</span>
             <span class="n">cur</span> <span class="o">=</span> <span class="n">tableS</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -621,17 +636,19 @@
 
         <span class="n">prevE</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">E</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">delete_edges_regarding_v</span><span class="p">(</span><span class="n">cdomain</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">prevE</span><span class="p">)</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        self.delete_edges_regarding_v(cdomain[0], prevE)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bondgraph</span><span class="o">.</span><span class="n">speciesnum</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">False</span>
+<span class="sd">        if self.bondgraph.speciesnum &gt; 2:</span>
+<span class="sd">            self.reconstruct(prevE)</span>
+<span class="sd">            return False</span>
 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_switchable</span><span class="p">(</span><span class="n">bdomain</span><span class="p">,</span> <span class="n">tbr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">anchored</span><span class="p">(</span><span class="n">r1</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
-                    <span class="k">return</span> <span class="kc">True</span>
+<span class="sd">        else:</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_switchable</span><span class="p">(</span><span class="n">bdomain</span><span class="p">,</span> <span class="n">tbr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">r1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">anchored</span><span class="p">(</span><span class="n">r1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">reconstruct</span><span class="p">(</span><span class="n">prevE</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span></div>
@@ -651,7 +668,7 @@
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="StrandGraph.get_connect_toehold"><a class="viewcode-back" href="../../../src.strand.html#src.strand.strand_graph.StrandGraph.get_connect_toehold">[docs]</a>    <span class="k">def</span> <span class="nf">get_connect_toehold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">):</span>
+<div class="viewcode-block" id="StrandGraph.get_connect_toehold"><a class="viewcode-back" href="../../../src.strand.html#src.strand.strand_graph.StrandGraph.get_connect_toehold">[docs]</a>    <span class="k">def</span> <span class="nf">get_connect_toehold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notbond</span><span class="p">,</span> <span class="n">potbondto</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the toeholds that connect the two domains of edge</span>
 
@@ -660,9 +677,8 @@
 <span class="sd">        :param potbondto:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_edge_info</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-        <span class="n">strand1</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">strand2</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">strand1</span> <span class="o">=</span> <span class="n">notbond</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">strand2</span> <span class="o">=</span> <span class="n">potbondto</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="n">pottoehold</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">strand1</span> <span class="o">!=</span> <span class="n">strand2</span><span class="p">:</span>
