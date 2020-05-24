@@ -73,7 +73,7 @@ The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
 required packages above have been downloaded.
 
-DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply do:
+DSDPy has a graphical user interface implemented as *interface.py* in the project root directory. To run this interface from command line interface, simply do:
     
         python interface.py
         
