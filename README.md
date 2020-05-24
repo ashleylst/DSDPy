@@ -51,13 +51,18 @@ in this documentation.
     results. The installation command with Anaconda is:
 
         conda install -c conda-forge matplotlib
+        
+5.  **PyQt**
 
+    [PyQt](http://www.riverbankcomputing.co.uk/software/pyqt) a set of Python v2 and v3 bindings for The Qt Company's Qt application framework and runs on all platforms supported by Qt including Windows, macOS, Linux, iOS and Android. The installation command with Anaconda is:
+
+        conda install -c anaconda pyqt
+        
 ### Use
 
 The core is a Python package (*src*) that includes scripts to run
 a DSD system analysis. One should be able to run the scripts if the
-required packages above have been installed to the current Python
-environment.
+required packages above have been downloaded.
 
 DSDPy has a graphical user interface named *interface.py* in the project root directory. To run this interface from command line, simply use:
     
