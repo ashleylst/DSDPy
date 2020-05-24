@@ -360,7 +360,4 @@ An example output:
 Based on the example input
 
 .. figure:: https://github.com/ashleylst/DSDPy/blob/master/output/simres.png
-   :alt: alt text
-
-   alt text
 
