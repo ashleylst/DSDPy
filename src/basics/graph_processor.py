@@ -5,11 +5,18 @@ from src.basics import output as on, generate_pysbmodel as gp, initialize_system
 
 def initiation(filedir=None, text=None):
     if filedir:
-        specieslist, speciesidmap, kinetics, initnames, concentrations, outdir, simupara = \
+        try:
+            specieslist, speciesidmap, kinetics, initnames, concentrations, outdir, simupara = \
             initialize_system.initialize(filedir)
+        except Exception as ex:
+            raise ex
+
     elif text:
-        specieslist, speciesidmap, kinetics, initnames, concentrations, outdir, simupara = \
+        try:
+            specieslist, speciesidmap, kinetics, initnames, concentrations, outdir, simupara = \
             initialize_system_str.initialize(text)
+        except Exception as ex:
+            raise ex
     else:
         # TODO: Define error
         return

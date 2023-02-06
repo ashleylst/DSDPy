@@ -256,8 +256,8 @@ def bi(speciescomb, specieslist, speciesidmap, reactionlist, kinetics):
             #    continue
 
             specieslist, speciesidmap, reaction = generate_species(strandgraph, specieslist, speciesidmap, reaction)
-            reaction.add_rule('RB')
-            reaction.add_rate(kinetics['RB'])
+            reaction.add_rule('RB_2')
+            reaction.add_rate(kinetics['RB_2'])
             reactionlist.append(reaction)
 
     return specieslist, speciesidmap, reactionlist

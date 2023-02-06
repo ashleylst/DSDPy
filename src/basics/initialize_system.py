@@ -181,31 +181,15 @@ def initialize(filedir):
 
     # error handling
     try:
-        if len(kinetics) != 4:
+        if len(kinetics) < 4:
             raise ex.KineticsError("not sufficient types of reaction rates defined.")
     except NameError:
         raise ex.KineticsError("reaction rates undefined.")
 
-    try:
-        if kinetics['RB'] == 0.:
-            print("binding rate is set to 0.")
-    except KeyError:
-        raise ex.KineticsError("binding rate undefined.")
-    try:
-        if kinetics['RU'] == 0.:
-            print("unbinding rate is set to 0.")
-    except KeyError:
-        raise ex.KineticsError("unbinding rate undefined")
-    try:
-        if kinetics['R3'] == 0.:
-            print("3-way migration rate is set to 0.")
-    except KeyError:
-        raise ex.KineticsError("3-way migration rate undefined.")
-    try:
-        if kinetics['R4'] == 0.:
-            print("4-way migration rate is set to 0.")
-    except KeyError:
-        raise ex.KineticsError("4-way migration rate undefined.")
+    for r in ['RB', 'RU', 'R3', 'R4', 'RB_2']:
+        if kinetics[r] == 0.:
+            print(r + " is set to 0.")
+            raise KeyError(r + " is not defined correctly")
 
 
 

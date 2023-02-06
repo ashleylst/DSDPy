@@ -89,8 +89,8 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         try:
             x, y, obs = graph_processor.simulation(specieslist, reactionlist, initlen, initnames, concentrations,
                                                    outdir, simupara, self.simumode)
-        except:
-            self.debugPrint('Simulation Error.')
+        except Exception as ex:
+            self.debugPrint(str(ex))
             return
         self.display_output_img(x, y, obs, option=self.simumode)
 
@@ -146,8 +146,8 @@ class MyWindow(QMainWindow, uiwindow.Ui_MainWindow):
         self.debugPrint("Submitted File.")
         try:
             info, initnames, concentrations, outdir, simupara, initlen = graph_processor.initiation(text=text)
-        except:
-            self.debugPrint('Input Error.')
+        except Exception as ex:
+            self.debugPrint(str(ex))
             return
         self.simuarg = (initnames, concentrations, outdir, simupara, initlen)
 
